@@ -1,0 +1,61 @@
+define host {
+<% unless @use.empty? -%>
+        use <%= @use %>
+<% end -%>
+        host_name <%= @host_name %>
+<% unless @real_address.empty? -%>
+        address <%= @real_address %>
+<% end -%>
+<% unless @hostgroups.empty? -%>
+        hostgroups <%= @hostgroups.join(",") %>
+<% end -%>
+<% unless @host_alias.empty? -%>
+        alias <%= @host_alias %>
+<% end -%>
+<% unless @contact_groups.empty? -%>
+        contact_groups <%= @contact_groups.join(",") %>
+<% end -%>
+<% unless @parents.empty? -%>
+        parents <%= @parents.join(",") %>
+<% end -%>
+<% unless @notifications_enabled.empty? -%>
+        notifications_enabled <%= @notifications_enabled %>
+<% end -%>
+<% unless @event_handler_enabled.empty? -%>
+        event_handler_enabled <%= @event_handler_enabled %>
+<% end -%>
+<% unless @flap_detection_enabled.empty? -%>
+        flap_detection_enabled <%= @flap_detection_enabled %>
+<% end -%>
+<% unless @failure_prediction_enabled.empty? -%>
+        failure_prediction_enabled <%= @failure_prediction_enabled %>
+<% end -%>
+<% unless @process_perf_data.empty? -%>
+        process_perf_data <%= @process_perf_data %>
+<% end -%>
+<% unless @retain_status_information.empty? -%>
+        retain_status_information <%= @retain_status_information %>
+<% end -%>
+<% unless @retain_nonstatus_information.empty? -%>
+        retain_nonstatus_information <%= @retain_nonstatus_information %>
+<% end -%>
+<% unless @check_command.empty? -%>
+        check_command <%= @check_command %>
+<% end -%>
+<% unless @max_check_attempts.empty? -%>
+        max_check_attempts <%= @max_check_attempts %>
+<% end -%>
+<% unless @notification_interval.empty? -%>
+        notification_interval <%= @notification_interval %>
+<% end -%>
+<% unless @notification_period.empty? -%>
+        notification_period <%= @notification_period %>
+<% end -%>
+<% unless @notification_options.empty? -%>
+        notification_options <%= @notification_options %>
+<% end -%>
+<% unless @register.empty? -%>
+        register <%= @register %>
+<% end -%>
+}
+

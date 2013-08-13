@@ -1,0 +1,9 @@
+define contactgroup {
+	contactgroup_name <%= @contactgroup_name %>
+<% unless @contactgroup_alias.empty? -%>
+	alias <%= @contactgroup_alias %>
+<% end -%>
+<% unless @members.empty? -%>
+	members <%= @members.join(",") %>
+<% end -%>
+}

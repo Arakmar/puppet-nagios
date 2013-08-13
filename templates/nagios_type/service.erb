@@ -1,0 +1,86 @@
+define service {
+        use <%= @use %>
+<% unless @service_description.empty? -%>
+        service_description <%= @service_description %>
+<% end -%>
+<% unless @host_name.empty? -%>
+        host_name <%= @host_name %>
+<% end -%>
+        check_command <%= @real_check_command %>
+<% unless @check_period.empty? -%>
+        check_period <%= @check_period %>
+<% end -%>
+<% unless @check_interval.empty? -%>
+        check_interval <%= @check_interval %>
+<% end -%>
+<% unless @normal_check_interval.empty? -%>
+        normal_check_interval <%= @normal_check_interval %>
+<% end -%>
+<% unless @retry_check_interval.empty? -%>
+        retry_check_interval <%= @retry_check_interval %>
+<% end -%>
+<% unless @max_check_attempts.empty? -%>
+        max_check_attempts <%= @max_check_attempts %>
+<% end -%>
+<% unless @notification_interval.empty? -%>
+        notification_interval <%= @notification_interval %>
+<% end -%>
+<% unless @notification_period.empty? -%>
+        notification_period <%= @notification_period %>
+<% end -%>
+<% unless @notification_options.empty? -%>
+        notification_options <%= @notification_options %>
+<% end -%>
+<% unless @first_notification_delay.empty? -%>
+        first_notification_delay <%= @first_notification_delay %>
+<% end -%>
+<% unless @contacts.empty? -%>
+        contacts <%= @contacts.join(",") %>
+<% end -%>
+<% unless @contact_groups.empty? -%>
+        contact_groups <%= @contact_groups.join(",") %>
+<% end -%>
+<% unless @active_checks_enabled.empty? -%>
+        active_checks_enabled <%= @active_checks_enabled %>
+<% end -%>
+<% unless @passive_checks_enabled.empty? -%>
+        passive_checks_enabled <%= @passive_checks_enabled %>
+<% end -%>
+<% unless @parallelize_check.empty? -%>
+        parallelize_check <%= @parallelize_check %>
+<% end -%>
+<% unless @obsess_over_service.empty? -%>
+        obsess_over_service <%= @obsess_over_service %>
+<% end -%>
+<% unless @check_freshness.empty? -%>
+        check_freshness <%= @check_freshness %>
+<% end -%>
+<% unless @notifications_enabled.empty? -%>
+        notifications_enabled <%= @notifications_enabled %>
+<% end -%>
+<% unless @event_handler_enabled.empty? -%>
+        event_handler_enabled <%= @event_handler_enabled %>
+<% end -%>
+<% unless @flap_detection_enabled.empty? -%>
+        flap_detection_enabled <%= @flap_detection_enabled %>
+<% end -%>
+<% unless @failure_prediction_enabled.empty? -%>
+        failure_prediction_enabled <%= @failure_prediction_enabled %>
+<% end -%>
+<% unless @process_perf_data.empty? -%>
+        process_perf_data <%= @process_perf_data %>
+<% end -%>
+<% unless @retain_status_information.empty? -%>
+        retain_status_information <%= @retain_status_information %>
+<% end -%>
+<% unless @retain_nonstatus_information.empty? -%>
+        retain_nonstatus_information <%= @retain_nonstatus_information %>
+<% end -%>
+<% unless @is_volatile.empty? -%>
+        is_volatile <%= @is_volatile %>
+<% end -%>
+<% unless @register.empty? -%>
+        register <%= @register %>
+<% end -%>
+}
+

@@ -1,0 +1,30 @@
+define contact {
+        contact_name <%= @contact_name %>
+<% unless @use.empty? -%>
+        use <%= @use %>
+<% end -%>
+<% unless @contact_alias.empty? -%>
+        alias <%= @contact_alias %>
+<% end -%>
+<% unless @service_notification_period.empty? -%>
+        service_notification_period <%= @service_notification_period %>
+<% end -%>
+<% unless @host_notification_period.empty? -%>
+        host_notification_period <%= @host_notification_period %>
+<% end -%>
+<% unless @service_notification_options.empty? -%>
+        service_notification_options <%= @service_notification_options %>
+<% end -%>
+<% unless @host_notification_options.empty? -%>
+        host_notification_options <%= @host_notification_options %>
+<% end -%>
+<% unless @service_notification_commands.empty? -%>
+        service_notification_commands <%= @service_notification_commands %>
+<% end -%>
+<% unless @host_notification_commands.empty? -%>
+        host_notification_commands <%= @host_notification_commands %>
+<% end -%>
+<% unless @email.empty? -%>
+        email <%= @email %>
+<% end -%>
+}

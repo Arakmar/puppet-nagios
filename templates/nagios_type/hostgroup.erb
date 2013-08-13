@@ -1,0 +1,13 @@
+define hostgroup {
+	hostgroup_name <%= @hostgroup_name %>
+<% unless @hostgroup_alias.empty? %>
+	alias <%= @hostgroup_alias %>
+<% end -%>
+<% unless @use.empty? -%>
+	use <%= use %>
+<% end -%>
+<% unless @members.empty? -%>
+	members <%= members.join(",") %>
+<% end -%>
+}
+
