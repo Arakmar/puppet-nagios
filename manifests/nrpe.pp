@@ -46,10 +46,6 @@ class nagios::nrpe(
 	    owner => root, group => 0, mode => 644;
     }
     
-    file { "${cfgdir}/nrpe.d/basic_nrpe_command.cfg":
-        ensure => "absent"
-    }
-
     # default commands
     nagios::nrpe::command { "basic_nrpe":
         source => [ "puppet:///modules/site-nagios/configs/nrpe/nrpe_commands.${fqdn}.cfg",
