@@ -8,6 +8,6 @@ define nagios::nrpe::plugin(
 		owner   => root,
 		group   => root,
 		mode    => '0755',
-		notify  => Service["nrpe"];
+		notify  => Service["nagios-nrpe-server"];
 	}
 }
