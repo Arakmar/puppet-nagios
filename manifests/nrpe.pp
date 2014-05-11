@@ -5,7 +5,7 @@ class nagios::nrpe(
     $group = 'nagios',
     $cfgdir = '/etc/nagios',
     $log_facility = 'daemon',
-    $pid_file = '/var/run/nrpe/nrpe.pid',
+    $pid_file = '/var/run/nagios/nrpe.pid',
     $server_port = '5666',
     $server_address = 'UNSET',
     $allowed_hosts = ['127.0.0.1'],
