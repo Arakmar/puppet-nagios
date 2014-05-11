@@ -67,8 +67,7 @@ class nagios::nrpe(
     service { "nagios-nrpe-server":
 	    ensure    => running,
 	    enable    => true,
-	    hasstatus  => false,
-	    pattern   => "nrpe",
+	    hasstatus  => true,
 	    subscribe => File["$cfgfile"],
             require   => Package["nagios-nrpe-server"],
     }
