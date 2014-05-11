@@ -23,6 +23,7 @@ class nagios::base {
                         "puppet:///modules/nagios/configs/${::operatingsystem}/nagios.cfg",
                         "puppet:///modules/nagios/configs/nagios.cfg" ],
             notify => Service['nagios'],
+            require => Package['nagios'],
             mode => 0644, owner => root, group => root;
     }
 
@@ -35,6 +36,7 @@ class nagios::base {
                     "puppet:///modules/nagios/configs/cgi.cfg" ],
         mode => '0644', owner => 'root', group => 0,
         notify => Service['apache'],
+        require => Package['nagios'],
     }
 
     file { 'nagios_htpasswd':
@@ -45,23 +47,16 @@ class nagios::base {
                 "puppet:///modules/nagios/configs/${::operatingsystem}/htpasswd.users",
                 "puppet:///modules/nagios/configs/htpasswd.users" ],
         require => Package['nagios'],
+        notify => Service['apache'],
         mode => 0640, owner => root, group => apache;
     }
 
-    file { 'nagios_private':
-        path => "${nagios::defaults::vars::int_cfgdir}/private/",
-        ensure => directory,
-        purge => true,
-        recurse => true,
-        notify => Service['nagios'],
-        mode => '0750', owner => root, group => nagios;
-    }
-
-    file { 'nagios_private_resource_cfg':
-        path => "${nagios::defaults::vars::int_cfgdir}/private/resource.cfg",
+    file { 'nagios_resource_cfg':
+        path => "${nagios::defaults::vars::int_cfgdir}/resource.cfg",
         source => [ "puppet:///modules/site-nagios/configs/${::operatingsystem}/private/resource.cfg.${::architecture}",
                     "puppet:///modules/nagios/configs/${::operatingsystem}/private/resource.cfg.${::architecture}" ],
         notify => Service['nagios'],
+        require => Package['nagios'],
         owner => root, group => nagios, mode => '0640';
     }
 
@@ -71,6 +66,7 @@ class nagios::base {
         purge => true,
         recurse => true,
         notify => Service['nagios'],
+        require => Package['nagios'],
         mode => '0750', owner => root, group => nagios;
     }
 
@@ -101,6 +97,7 @@ class nagios::base {
         recurse => true,
         purge => true,
         notify => Service['nagios'],
+        require => Package['nagios'],
         mode => 0755, owner => root, group => root;
     }
 }
