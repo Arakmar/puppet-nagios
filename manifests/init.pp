@@ -17,8 +17,6 @@
 # manage nagios
 class nagios(
   $allow_external_cmd = false,
-  $manage_shorewall = false,
-  $manage_munin = false,
   $server_name = "default"
 ) {
   case $::operatingsystem {
@@ -31,8 +29,5 @@ class nagios(
       include nagios::debian
     }
     default: { fail("No such operatingsystem: ${::operatingsystem} yet defined") }
-  }
-  if $manage_munin {
-    include nagios::munin
   }
 }

@@ -16,8 +16,7 @@ define nagios::service::http(
     $server_name = "default"
 ){
 
-        case $ssl_mode {
-                'force',true,'only': {
+        if $ssl_mode {
                         if $use_auth {
                                 nagios::type::service{"https_${name}_${check_string}":
                                         host_name => $::fqdn,
@@ -38,10 +37,15 @@ define nagios::service::http(
                                         check_command => "check_https_string!${check_domain}!${check_url}!'${check_string}'",
                                 }
                         }
-                }
-        }
-        case $ssl_mode {
-                false,true: {
+                        nagios::type::service{"https_${name}_${check_string}_cert":
+                                        host_name => $::fqdn,
+                                        ensure => $ensure,
+                                        use => $use,
+                                        service_description => "Check cert of ${check_domain}${check_url}",
+                                        server_name => $server_name,
+                                        check_command => "check_https_cert!${check_domain}!${check_url}",
+                        }
+        } else {
                         if $use_auth {
                                 nagios::type::service{"http_${name}_${check_string}":
                                         host_name => $::fqdn,
@@ -62,6 +66,5 @@ define nagios::service::http(
                                         check_command => "check_http_string!${check_domain}!${check_url}!'${check_string}'",
                                 }
                         }
-                }
         }
 }

@@ -35,7 +35,6 @@ class nagios::base {
                     "puppet:///modules/nagios/configs/${::operatingsystem}/cgi.cfg",
                     "puppet:///modules/nagios/configs/cgi.cfg" ],
         mode => '0644', owner => 'root', group => 0,
-        notify => Service['apache'],
         require => Package['nagios'],
     }
 
@@ -47,7 +46,6 @@ class nagios::base {
                 "puppet:///modules/nagios/configs/${::operatingsystem}/htpasswd.users",
                 "puppet:///modules/nagios/configs/htpasswd.users" ],
         require => Package['nagios'],
-        notify => Service['apache'],
         mode => 0640, owner => root, group => apache;
     }
 

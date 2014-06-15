@@ -4,10 +4,10 @@ define hostgroup {
 	alias <%= @hostgroup_alias %>
 <% end -%>
 <% unless @use.empty? -%>
-	use <%= use %>
+	use <%= @use %>
 <% end -%>
 <% unless @members.empty? -%>
-	members <%= members.join(",") %>
+	members <%= @members.join(",") %>
 <% end -%>
 }
 

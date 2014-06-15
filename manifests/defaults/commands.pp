@@ -19,9 +19,6 @@ class nagios::defaults::commands
           check_dummy:
             server_name => $server_name,
             command_line => '$USER1$/check_dummy $ARG1$';
-          check_https_cert:
-            server_name => $server_name,
-            command_line => '$USER1$/check_http --ssl -C 20 -H $HOSTADDRESS$ -I $HOSTADDRESS$';
           check_http_url:
             server_name => $server_name,
             command_line => '$USER1$/check_http -H $ARG1$ -u $ARG2$';
