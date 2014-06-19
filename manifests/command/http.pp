@@ -5,22 +5,22 @@ class nagios::command::http(
 
     nagios::type::command {"http_string":
         command_name => "check_http_string",
-        command_line => '$USER1$/check_http -I $HOSTADDRESS$ -H $ARG1$ -u $ARG2$ -s $ARG3$',
+        command_line => '$USER1$/check_http -I $HOSTADDRESS$ -H $ARG1$ -u $ARG2$ -s $ARG3$ -f $ARG4$',
         server_name => $server_name
     }
     nagios::type::command {"http_auth_string":
         command_name => "check_http_auth_string",
-        command_line => '$USER1$/check_http -I $HOSTADDRESS$ -H $ARG1$ -u $ARG2$ -s $ARG3$ -a $ARG4$:$ARG5$',
+        command_line => '$USER1$/check_http -I $HOSTADDRESS$ -H $ARG1$ -u $ARG2$ -s $ARG3$ -a $ARG4$:$ARG5$ -f $ARG6$',
         server_name => $server_name
     }
     nagios::type::command {"https_string":
         command_name => "check_https_string",
-        command_line => '$USER1$/check_http --ssl --sni -I $HOSTADDRESS$ -H $ARG1$ -u $ARG2$ -s $ARG3$',
+        command_line => '$USER1$/check_http --ssl --sni -I $HOSTADDRESS$ -H $ARG1$ -u $ARG2$ -s $ARG3$ -f $ARG4$',
         server_name => $server_name
     }
     nagios::type::command {"https_auth_string":
         command_name => "check_https_auth_string",
-        command_line => '$USER1$/check_http --ssl --sni -I $HOSTADDRESS$ -H $ARG1$ -u $ARG2$ -s $ARG3$ -a $ARG4$:$ARG5$',
+        command_line => '$USER1$/check_http --ssl --sni -I $HOSTADDRESS$ -H $ARG1$ -u $ARG2$ -s $ARG3$ -a $ARG4$:$ARG5$ -f $ARG6$',
         server_name => $server_name
     }
     nagios::type::command {"https_cert":
