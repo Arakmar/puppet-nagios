@@ -31,6 +31,7 @@ define nagios::type::service (
 	$is_volatile = '',
 	$register = '',
 	$use_nrpe = '',
+        $nrpe_port = '5666',
 	$nrpe_args = '',
 	$server_name = "default"
 )
@@ -39,10 +40,10 @@ define nagios::type::service (
 	if ($use_nrpe == 'true') {
 
 		if ($nrpe_args != '') {
-			$real_check_command = "check_nrpe!${check_command}!\"${nrpe_args}\""
+			$real_check_command = "check_nrpe_port!${check_command}!${nrpe_port}!\"${nrpe_args}\""
 		}
 		else {
-			$real_check_command = "check_nrpe_1arg!$check_command"
+			$real_check_command = "check_nrpe_1arg_port!$check_command!${nrpe_port}"
 		}
 	}
 	else {
