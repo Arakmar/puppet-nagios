@@ -37,7 +37,7 @@ define nagios::type::service (
 )
 {
 
-	if ($use_nrpe == 'true') {
+	if ($use_nrpe) {
 
 		if ($nrpe_args != '') {
 			$real_check_command = "check_nrpe_port!${check_command}!${nrpe_port}!\"${nrpe_args}\""
