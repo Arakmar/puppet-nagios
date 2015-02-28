@@ -33,6 +33,7 @@ define nagios::type::service (
 	$use_nrpe = '',
         $nrpe_port = '5666',
 	$nrpe_args = '',
+        $nrpe_timeout = '',
 	$server_name = "default"
 )
 {
@@ -40,10 +41,21 @@ define nagios::type::service (
 	if ($use_nrpe) {
 
 		if ($nrpe_args != '') {
-			$real_check_command = "check_nrpe_port!${check_command}!${nrpe_port}!\"${nrpe_args}\""
+			if ($nrpe_timeout != '') {
+				$real_check_command = "check_nrpe_timeout_port!${nrpe_timeout}!${check_command}!${nrpe_port}!\"${nrpe_args}\""
+			}
+			else {
+				$real_check_command = "check_nrpe_port!${check_command}!${nrpe_port}!\"${nrpe_args}\""
+			}
 		}
 		else {
-			$real_check_command = "check_nrpe_1arg_port!$check_command!${nrpe_port}"
+			if ($nrpe_timeout != '') {
+				$real_check_command = "check_nrpe_1arg_timeout_port!${nrpe_timeout}!${check_command}!${nrpe_port}"
+			}
+			else {
+				$real_check_command = "check_nrpe_1arg_port!$check_command!${nrpe_port}"
+			}
+			
 		}
 	}
 	else {
