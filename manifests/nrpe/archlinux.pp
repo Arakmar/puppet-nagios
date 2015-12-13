@@ -1,14 +1,17 @@
 class nagios::nrpe::archlinux {
     package { 
-        "nrpe": ensure => present;
+        "nagios-nrpe-server":
+            name => "nrpe",
+            ensure => present;
         "monitoring-plugins": ensure => present;
     }
 
-    service { "nrpe":
+    service { "nagios-nrpe-server":
+            name      => "nrpe",
 	    ensure    => running,
 	    enable    => true,
 	    hasstatus  => true,
 	    subscribe => File["${nagios::nrpe::cfgfile}"],
-            require   => Package["nrpe"],
+            require   => Package["nagios-nrpe-server"],
     }
 }
