@@ -17,19 +17,15 @@ class nagios::nrpe(
     $allow_weak_random_seed = 'UNSET',
     $includecfg = 'UNSET'
 ) {
-    package { 
-        "nagios-nrpe-server": ensure => present;
-        "nagios-plugins-basic": ensure => present;
-        "libwww-perl": ensure => present;   # for check_apache
-    }
-    
-    package {
-        "nagios-plugins-standard": ensure => present;
-    }
-
-    # Special-case lenny. the package doesn't exist
-    if $lsbdistcodename != 'lenny' {
-        package { "libnagios-plugin-perl": ensure => present; }
+  
+    case $::operatingsystem {
+        'archlinux': {
+          include nagios::nrpe::archlinux
+        }
+        'debian': {
+          include nagios::nrpe::debian
+        }
+        default: { fail("No such operatingsystem: ${::operatingsystem} yet defined") }
     }
     
     file { 
@@ -62,13 +58,5 @@ class nagios::nrpe(
     $critical_15_threshold = 8 * $processorcount
     nagios::nrpe::command { "check_load":
         command_line => "${nagios_plugin_dir}/check_load -w ${warning_1_threshold},${warning_5_threshold},${warning_15_threshold} -c ${critical_1_threshold},${critical_5_threshold},${critical_15_threshold}",
-    }
-
-    service { "nagios-nrpe-server":
-	    ensure    => running,
-	    enable    => true,
-	    hasstatus  => true,
-	    subscribe => File["$cfgfile"],
-            require   => Package["nagios-nrpe-server"],
     }
 }
