@@ -1,4 +1,4 @@
-class nagios::nrpe::debian {
+class nagios::nrpe::archlinux {
     package { 
         "nrpe": ensure => present;
         "monitoring-plugins": ensure => present;
