@@ -18,7 +18,7 @@ class nagios::nrpe::debian {
 	    ensure    => running,
 	    enable    => true,
 	    hasstatus  => true,
-	    subscribe => File["$cfgfile"],
+	    subscribe => File["${nagios::nrpe::cfgfile}"],
             require   => Package["nagios-nrpe-server"],
     }
 }

@@ -8,7 +8,7 @@ class nagios::nrpe::archlinux {
 	    ensure    => running,
 	    enable    => true,
 	    hasstatus  => true,
-	    subscribe => File["$cfgfile"],
+	    subscribe => File["${nagios::nrpe::cfgfile}"],
             require   => Package["nrpe"],
     }
 }
