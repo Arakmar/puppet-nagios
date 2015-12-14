@@ -3,7 +3,6 @@ class nagios::nrpe(
     $processorcount = '1',
     $user = 'nagios',
     $group = 'nagios',
-    $cfgdir = '/etc/nagios',
     $log_facility = 'daemon',
     $pid_file = '/var/run/nagios/nrpe.pid',
     $server_port = '5666',
@@ -20,9 +19,11 @@ class nagios::nrpe(
   
     case $::operatingsystem {
         'archlinux': {
+          $cfgdir = '/etc/nrpe'
           include nagios::nrpe::archlinux
         }
         'debian': {
+          $cfgdir = '/etc/nagios'
           include nagios::nrpe::debian
         }
         default: { fail("No such operatingsystem: ${::operatingsystem} yet defined") }
