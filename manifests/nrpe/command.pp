@@ -1,9 +1,10 @@
 define nagios::nrpe::command (
     $ensure = present,
-    $command_line = '',
+    $command = '',
+    $arguments = '',
     $source = '' )
 {
-    if ($command_line == '' and $source == '') {
+    if ($command == '' and $source == '') {
         fail ( "Either one of 'command_line' or 'source' must be given to nagios::nrpe::command." )
     }
 

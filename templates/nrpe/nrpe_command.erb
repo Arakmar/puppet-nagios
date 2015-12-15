@@ -1,4 +1,4 @@
 ########################################
 # PUPPET MANAGED
 ########################################
-command[<%= @name %>] = <%= @command_line %> 
+command[<%= @name %>] = <%= scope.lookupvar('nagios::nrpe::plugindir') %>/<%= @command %> <%= arguments %>
