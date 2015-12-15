@@ -1,6 +1,6 @@
 define nagios::nrpe::plugin(
 	$plugin=$name,
-	$plugindir="/usr/lib/nagios/plugins",
+	$plugindir="${nagios::nrpe::plugindir}",
 	$source="puppet:///modules/nrpe/plugins/${plugin}"
 ) {
 	file { "${plugindir}/${plugin}":

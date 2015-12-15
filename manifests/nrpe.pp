@@ -1,5 +1,4 @@
 class nagios::nrpe(
-    $cfgfile = '/etc/nagios/nrpe.cfg',
     $processorcount = '1',
     $user = 'nagios',
     $group = 'nagios',
@@ -20,10 +19,14 @@ class nagios::nrpe(
     case $::operatingsystem {
         'archlinux': {
           $cfgdir = '/etc/nrpe'
+          $cfgfile = '/etc/nrpe/nrpe.cfg',
+          $plugindir = '/usr/lib/monitoring-plugins'
           include nagios::nrpe::archlinux
         }
         'debian': {
           $cfgdir = '/etc/nagios'
+          $cfgfile = '/etc/nagios/nrpe.cfg',
+          $plugindir = '/usr/lib/nagios/plugins'
           include nagios::nrpe::debian
         }
         default: { fail("No such operatingsystem: ${::operatingsystem} yet defined") }
