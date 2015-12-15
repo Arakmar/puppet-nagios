@@ -3,7 +3,7 @@ class nagios::command::nrpe_timeout(
 ) {
   nagios::type::command {
     'check_nrpe_timeout':
-       command_line => "${nagios::nrpe::plugindir}/check_nrpe -t $ARG1$ -H $HOSTADDRESS$ -c $ARG2$ -a $ARG3$,
+       command_line => "${nagios::nrpe::plugindir}/check_nrpe -t $ARG1$ -H $HOSTADDRESS$ -c $ARG2$ -a $ARG3$",
        server_name => $server_name
   }
   
