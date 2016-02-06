@@ -2,6 +2,7 @@ define nagios::nrpe::command (
     $ensure = present,
     $command = '',
     $arguments = '',
+    $expand_plugindir = "true",
     $source = '' )
 {
     if ($command == '' and $source == '') {
