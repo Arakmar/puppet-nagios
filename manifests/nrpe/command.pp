@@ -2,7 +2,7 @@ define nagios::nrpe::command (
     $ensure = present,
     $command = '',
     $arguments = '',
-    $expand_plugindir = "true",
+    $expand_plugindir = true,
     $source = '' )
 {
     if ($command == '' and $source == '') {
@@ -17,7 +17,7 @@ define nagios::nrpe::command (
                     ensure => $ensure,
                     mode => 644, owner => root, group => 0,
                     notify => Service['nagios-nrpe-server'],
-                    require => File [ "$nagios_nrpe_cfgdir/nrpe.d" ]
+                    require => File["$nagios_nrpe_cfgdir/nrpe.d"]
     }
 
     case $source {

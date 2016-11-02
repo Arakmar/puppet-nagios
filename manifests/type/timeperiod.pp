@@ -4,7 +4,6 @@ define nagios::type::timeperiod (
 	$timeperiod_alias = '',
 	$monday = '',
 	$tuesday = '',
-	$monday = '',
 	$wednesday = '',
 	$thursday = '',
 	$friday = '',
