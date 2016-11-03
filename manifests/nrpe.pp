@@ -43,7 +43,7 @@ class nagios::nrpe(
 
     file { "$cfgfile":
 	    content => template('nagios/nrpe/nrpe.cfg'),
-	    owner => root, group => 0, mode => 644;
+	    owner => root, group => 0, mode => '644';
     }
     
     # default commands

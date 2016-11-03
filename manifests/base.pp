@@ -26,7 +26,7 @@ class nagios::base {
                         "puppet:///modules/nagios/configs/nagios.cfg" ],
             notify => Service['nagios'],
             require => Package['nagios'],
-            mode => 0644, owner => root, group => root;
+            mode => '0644', owner => root, group => root;
     }
 
     file { 'nagios_cgi_cfg':
@@ -52,7 +52,7 @@ class nagios::base {
                 "puppet:///modules/nagios/configs/${::operatingsystem}/htpasswd.users",
                 "puppet:///modules/nagios/configs/htpasswd.users" ],
         require => Package['nagios'],
-        mode => 0640, owner => root, group => apache;
+        mode => '0640', owner => root, group => apache;
     }
 
     file { 'nagios_resource_cfg':
@@ -102,6 +102,6 @@ class nagios::base {
         purge => true,
         notify => Service['nagios'],
         require => Package['nagios'],
-        mode => 0755, owner => root, group => root;
+        mode => '0755', owner => root, group => root;
     }
 }

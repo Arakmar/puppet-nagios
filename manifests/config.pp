@@ -14,7 +14,7 @@ define nagios::config (
         ensure => $ensure,
         path => $real_destination,
         notify => Service[nagios],
-        owner => root, group => 0, mode => 0644;
+        owner => root, group => 0, mode => '0644';
     }
     
     case $ensure {

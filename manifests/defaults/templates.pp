@@ -9,6 +9,6 @@ class nagios::defaults::templates {
       "puppet:///modules/nagios/configs/${::operatingsystem}/nagios_templates.cfg",
       "puppet:///modules/nagios/configs/nagios_templates.cfg" ],
     notify => Service['nagios'],
-    mode => 0644, owner => root, group => root;
+    mode => '0644', owner => root, group => root;
   }
 }

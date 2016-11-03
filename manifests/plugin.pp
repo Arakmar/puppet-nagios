@@ -11,6 +11,6 @@ define nagios::plugin(
     },
     tag => 'nagios_plugin',
     require => Package['nagios-plugins'],
-    owner => root, group => 0, mode => 0755;
+    owner => root, group => 0, mode => '0755';
   }
 }
