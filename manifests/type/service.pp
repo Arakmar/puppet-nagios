@@ -30,7 +30,7 @@ define nagios::type::service (
 	$retain_nonstatus_information = '',
 	$is_volatile = '',
 	$register = '',
-	$use_nrpe = '',
+	$use_nrpe = false,
         $nrpe_port = '5666',
 	$nrpe_args = '',
         $nrpe_timeout = '',
