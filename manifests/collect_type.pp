@@ -21,7 +21,7 @@ define nagios::collect_type (
 	concat{ "${destdir}/nagios_${name}.cfg":
 		owner => root, 
 		group => root, 
-		mode => 0644,
+		mode => '0644',
 		notify => Service["nagios"]
 	}
 }
