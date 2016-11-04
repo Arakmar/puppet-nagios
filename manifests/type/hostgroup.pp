@@ -1,5 +1,4 @@
 define nagios::type::hostgroup (
-	$ensure = "present",
 	$hostgroup_alias = "",
 	$hostgroup_name = "$name",
 	$use = '',
@@ -12,7 +11,6 @@ define nagios::type::hostgroup (
 			target => '/etc/nagios3/conf.d/nagios_hostgroup.cfg',
 			content => template("nagios/nagios_type/hostgroup.erb"),
 			tag => 'nagios_hostgroup',
-			ensure => $ensure,
 		}
 	}
 	else {
@@ -21,7 +19,6 @@ define nagios::type::hostgroup (
 			target => '/etc/nagios3/conf.d/nagios_hostgroup.cfg',
 			content => template("nagios/nagios_type/hostgroup.erb"),
 			tag => $tableau,
-			ensure => $ensure,
 		}
 	}
 }

@@ -1,5 +1,4 @@
 define nagios::type::timeperiod (
-	$ensure = "present",
 	$timeperiod_name = "$name",
 	$timeperiod_alias = '',
 	$monday = '',
@@ -17,7 +16,6 @@ define nagios::type::timeperiod (
 			target => '/etc/nagios3/conf.d/nagios_timeperiod.cfg',
 			content => template("nagios/nagios_type/timeperiod.erb"),
 			tag => 'nagios_timeperiod',
-			ensure => $ensure,
 		}
 	}
 	else {
@@ -26,7 +24,6 @@ define nagios::type::timeperiod (
 			target => '/etc/nagios3/conf.d/nagios_timeperiod.cfg',
 			content => template("nagios/nagios_type/timeperiod.erb"),
 			tag => $tableau,
-			ensure => $ensure,
 		}
 	}
 }

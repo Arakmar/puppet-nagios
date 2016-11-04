@@ -1,5 +1,4 @@
 define nagios::type::host (
-	$ensure = "present",
 	$use = 'generic-host',
 	$host_name = $::fqdn,
 	$address = '',
@@ -37,7 +36,6 @@ define nagios::type::host (
 			target => '/etc/nagios3/conf.d/nagios_hosts.cfg',
 			content => template("nagios/nagios_type/host.erb"),
 			tag => 'nagios_hosts',
-			ensure => $ensure,
 		}
 	}
 	else {
@@ -46,7 +44,6 @@ define nagios::type::host (
 			target => '/etc/nagios3/conf.d/nagios_hosts.cfg',
 			content => template("nagios/nagios_type/host.erb"),
 			tag => $tableau,
-			ensure => $ensure,
 		}
 	}
 }

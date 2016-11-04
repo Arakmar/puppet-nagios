@@ -1,5 +1,4 @@
 define nagios::type::service (
-	$ensure = "present",
 	$host_name = '',
 	$hostgroup_name = [],
 	$check_command = '',
@@ -67,7 +66,6 @@ define nagios::type::service (
 			target => '/etc/nagios3/conf.d/nagios_service.cfg',
 			content => template("nagios/nagios_type/service.erb"),
 			tag => 'nagios_service',
-			ensure => $ensure,
 		}
 	}
 	else {
@@ -76,7 +74,6 @@ define nagios::type::service (
 			target => '/etc/nagios3/conf.d/nagios_service.cfg',
 			content => template("nagios/nagios_type/service.erb"),
 			tag => $tableau,
-			ensure => $ensure,
 		}
 	}
 }

@@ -11,7 +11,6 @@ define nagios::type::contactgroup (
 			target => '/etc/nagios3/conf.d/nagios_contactgroup.cfg',
 			content => template("nagios/nagios_type/contactgroup.erb"),
 			tag => 'nagios_contactgroup',
-			ensure => $ensure,
 		}
 	}
 	else {
@@ -20,7 +19,6 @@ define nagios::type::contactgroup (
 			target => '/etc/nagios3/conf.d/nagios_contactgroup.cfg',
 			content => template("nagios/nagios_type/contactgroup.erb"),
 			tag => $tableau,
-			ensure => $ensure,
 		}
 	}
 }

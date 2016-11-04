@@ -1,5 +1,4 @@
 define nagios::type::contact (
-	$ensure = "present",
 	$contact_name = "$name",
 	$use = 'generic-contact',
 	$contact_alias = '',
@@ -18,7 +17,6 @@ define nagios::type::contact (
 			target => '/etc/nagios3/conf.d/nagios_contact.cfg',
 			content => template("nagios/nagios_type/contact.erb"),
 			tag => 'nagios_contact',
-			ensure => $ensure,
 		}
 	}
 	else {
@@ -27,7 +25,6 @@ define nagios::type::contact (
 			target => '/etc/nagios3/conf.d/nagios_contact.cfg',
 			content => template("nagios/nagios_type/contact.erb"),
 			tag => $tableau,
-			ensure => $ensure,
 		}
 	}
 }

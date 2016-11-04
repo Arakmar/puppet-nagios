@@ -1,5 +1,4 @@
 define nagios::type::command (
-	$ensure = "present",
 	$command_name = "$name",
 	$command_line,
 	$use = '',
@@ -11,7 +10,6 @@ define nagios::type::command (
 			target => '/etc/nagios3/conf.d/nagios_command.cfg',
 			content => template("nagios/nagios_type/command.erb"),
 			tag => 'nagios_command',
-			ensure => $ensure,
 		}
 	}
 	else {
@@ -20,7 +18,6 @@ define nagios::type::command (
 			target => '/etc/nagios3/conf.d/nagios_command.cfg',
 			content => template("nagios/nagios_type/command.erb"),
 			tag => $tableau,
-			ensure => $ensure,
 		}
 	}
 }

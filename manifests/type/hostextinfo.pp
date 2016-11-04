@@ -1,5 +1,4 @@
  define nagios::type::hostextinfo (
-	$ensure = "present",
 	$use = '',
 	$host_name = '',
 	$hostgroup_name = '',
@@ -16,7 +15,6 @@
 			target => '/etc/nagios3/conf.d/nagios_hostextinfo.cfg',
 			content => template("nagios/nagios_type/hostextinfo.erb"),
 			tag => 'nagios_hostextinfo',
-			ensure => $ensure,
 		}
 	}
 	else {
@@ -25,7 +23,6 @@
 			target => '/etc/nagios3/conf.d/nagios_hostextinfo.cfg',
 			content => template("nagios/nagios_type/hostextinfo.erb"),
 			tag => $tableau,
-			ensure => $ensure,
 		}
 	}
 }
