@@ -48,8 +48,8 @@ class nagios::nrpe(
     
     # default commands
     nagios::nrpe::command { "basic_nrpe":
-        source => [ "puppet:///modules/site-nagios/configs/nrpe/nrpe_commands.${fqdn}.cfg",
-                    "puppet:///modules/site-nagios/configs/nrpe/nrpe_commands.cfg",
+        source => [ "puppet:///modules/site_nagios/configs/nrpe/nrpe_commands.${fqdn}.cfg",
+                    "puppet:///modules/site_nagios/configs/nrpe/nrpe_commands.cfg",
                     "puppet:///modules/nagios/nrpe/nrpe_commands.cfg" ],
     }
     # the check for load should be customized for each server based on number

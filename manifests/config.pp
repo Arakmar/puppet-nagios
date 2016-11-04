@@ -26,10 +26,10 @@ define nagios::config (
                 'absent': {
                     $real_source = $source ? {
                         'absent' => [
-                            "puppet:///modules/site-nagios/configs/${::fqdn}/${name}",
-                            "puppet:///modules/site-nagios/configs/${::operatingsystem}.${::lsbdistcodename}/${name}",
-                            "puppet:///modules/site-nagios/configs/${::operatingsystem}/${name}",
-                            "puppet:///modules/site-nagios/configs/${name}",
+                            "puppet:///modules/site_nagios/configs/${::fqdn}/${name}",
+                            "puppet:///modules/site_nagios/configs/${::operatingsystem}.${::lsbdistcodename}/${name}",
+                            "puppet:///modules/site_nagios/configs/${::operatingsystem}/${name}",
+                            "puppet:///modules/site_nagios/configs/${name}",
                             "puppet:///modules/nagios/configs/${::operatingsystem}.${::lsbdistcodename}/${name}",
                             "puppet:///modules/nagios/configs/${::operatingsystem}/${name}",
                             "puppet:///modules/nagios/configs/${name}"
