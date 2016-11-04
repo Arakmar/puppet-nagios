@@ -2,7 +2,7 @@
 # PUPPET MANAGED
 ########################################
 <% if @expand_plugindir -%>
-command[<%= @name %>] = <%= scope.lookupvar('nagios::nrpe::plugindir') %>/<%= @command %> <%= @arguments %>
+command[<%= @name %>] =  <% if @use_sudo -%>sudo <% end -%><%= scope.lookupvar('nagios::nrpe::plugindir') %>/<%= @command %> <%= @arguments %>
 <% else -%>
-command[<%= @name %>] = <%= @command %> <%= @arguments %>
+command[<%= @name %>] =  <% if @use_sudo -%>sudo <% end -%><%= @command %> <%= @arguments %>
 <% end -%>

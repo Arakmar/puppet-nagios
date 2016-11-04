@@ -3,7 +3,9 @@ define nagios::nrpe::command (
     $command = '',
     $arguments = '',
     $expand_plugindir = true,
-    $source = '' )
+    $use_sudo = false,
+    $source = ''
+)
 {
     if ($command == '' and $source == '') {
         fail ( "Either one of 'command_line' or 'source' must be given to nagios::nrpe::command." )
