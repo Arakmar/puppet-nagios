@@ -21,6 +21,7 @@ define nagios::type::service (
 	$obsess_over_service = '',
 	$check_freshness = '',
 	$notifications_enabled = '',
+	$event_handler = '',
 	$event_handler_enabled = '',
 	$flap_detection_enabled = '',
 	$failure_prediction_enabled = '',

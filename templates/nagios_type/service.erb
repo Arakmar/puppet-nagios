@@ -61,6 +61,9 @@ define service {
 <% unless @event_handler_enabled.empty? -%>
         event_handler_enabled <%= @event_handler_enabled %>
 <% end -%>
+<% unless @event_handler.empty? -%>
+        event_handler <%= @event_handler %>
+<% end -%>
 <% unless @flap_detection_enabled.empty? -%>
         flap_detection_enabled <%= @flap_detection_enabled %>
 <% end -%>
