@@ -78,17 +78,6 @@ the current node:
       nrpe_args => "-t 60"
     }
 
-NRPE Commands
--------------
-
-To be able to call NRPE commands on a host, one needs to define that command
-and what it is going to execute:
-
-    nagios::nrpe::command { 'debsums':
-      check_command => '/usr/lib/nagios/plugins/check_debsums openssh-server'
-    }
-
-
 Upgrade Notes
 =============
 
