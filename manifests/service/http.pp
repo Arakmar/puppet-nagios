@@ -13,7 +13,7 @@ define nagios::service::http(
     $auth_name = "",
     $auth_password = "",
     $redirect_status = 'ok',
-    $server_name = "default"
+    $server_name = undef
 ){
 
         if $ssl_mode {

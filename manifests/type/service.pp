@@ -34,7 +34,7 @@ define nagios::type::service (
         $nrpe_port = '5666',
 	$nrpe_args = '',
         $nrpe_timeout = '',
-	$server_name = "default"
+	$server_name = undef
 )
 {
 
@@ -62,14 +62,13 @@ define nagios::type::service (
 		$real_check_command = "$check_command"
 	}
 
-	if ($server_name == "") {
+	if ! ($server_name) {
 		@@concat::fragment{ "nagios_service_${name}_${::fqdn}":
 			target => '/etc/nagios3/conf.d/nagios_service.cfg',
 			content => template("nagios/nagios_type/service.erb"),
 			tag => 'nagios_service',
 		}
-	}
-	else {
+	} else {
 		$tableau = prepend_array("nagios_service_", $server_name)
 		@@concat::fragment{ "nagios_service_${name}_${server_name}_${::fqdn}":
 			target => '/etc/nagios3/conf.d/nagios_service.cfg',

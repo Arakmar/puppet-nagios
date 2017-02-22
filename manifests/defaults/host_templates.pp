@@ -1,6 +1,6 @@
 class nagios::defaults::host_templates
 (
-    $server_name = "default",
+    $server_name = undef,
     $contact_groups = ['admins']
 ) {
 

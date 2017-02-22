@@ -1,6 +1,6 @@
 class nagios::defaults::hostgroups
 (
-    $server_name = "default"
+    $server_name = undef
 ) {
   nagios::type::hostgroup {
     'all':

@@ -1,6 +1,6 @@
 class nagios::defaults::contactgroups
 (
-    $server_name = "default"
+    $server_name = undef
 ) {
     nagios::type::contactgroup {
         'admins':

@@ -17,7 +17,7 @@
 # manage nagios
 class nagios(
   $allow_external_cmd = false,
-  $server_name = "default"
+  $server_name = undef
 ) {
   case $::operatingsystem {
     'centos': {

@@ -1,5 +1,5 @@
 class nagios::command::nrpe(
-    $server_name = "default"
+    $server_name = undef
 ) {
 
   # this command runs a program $ARG1$ with arguments $ARG2$

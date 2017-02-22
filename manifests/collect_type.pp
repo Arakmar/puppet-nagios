@@ -1,13 +1,13 @@
 define nagios::collect_type (
 	$destdir = '/etc/nagios3/conf.d',
-	$server_name = ''
+	$server_name = undef
 )
 {
 	Concat::Fragment <<| tag == "nagios_${name}" |>> {
 		target => "${destdir}/nagios_${name}.cfg",
 		order => 20
 	}
-	if ($server_name != "") {
+	if ! ($server_name) {
 		Concat::Fragment <<| tag == "nagios_${name}_${server_name}" |>> {
 			target => "${destdir}/nagios_${name}.cfg",
 			order => 30

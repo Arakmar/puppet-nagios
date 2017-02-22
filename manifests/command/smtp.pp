@@ -1,5 +1,5 @@
 class nagios::command::smtp(
-    $server_name = "default"
+    $server_name = undef
 ) {
   case $operatingsystem {
     debian,ubuntu: { }  # Debian/Ubuntu already define those checks

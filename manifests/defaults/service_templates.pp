@@ -1,6 +1,6 @@
 class nagios::defaults::service_templates
 (
-    $server_name = "default"
+    $server_name = undef
 ) {
 
     # this inoperative for the moment, see :

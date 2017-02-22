@@ -1,6 +1,6 @@
 class nagios::defaults::contacts
 (
-    $server_name = "default"
+    $server_name = undef
 ) {
     nagios::type::contact {
         'root':

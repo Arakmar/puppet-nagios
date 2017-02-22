@@ -7,17 +7,16 @@
 	$icon_image_alt = '',
 	$vrml_image = '',
 	$statusmap_image = '',
-	$server_name = ""
+	$server_name = undef
 )
 {
-	if ($server_name == "") {
+	if ! ($server_name) {
 		@@concat::fragment{ "nagios_hostextinfo_${name}_${::fqdn}":
 			target => '/etc/nagios3/conf.d/nagios_hostextinfo.cfg',
 			content => template("nagios/nagios_type/hostextinfo.erb"),
 			tag => 'nagios_hostextinfo',
 		}
-	}
-	else {
+	} else {
 		$tableau = prepend_array("nagios_hostextinfo_", $server_name)
 		@@concat::fragment{ "nagios_hostextinfo_${name}_${server_name}_${::fqdn}":
 			target => '/etc/nagios3/conf.d/nagios_hostextinfo.cfg',

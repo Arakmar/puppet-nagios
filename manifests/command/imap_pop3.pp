@@ -1,5 +1,5 @@
 class nagios::command::imap_pop3(
-    $server_name = "default"
+    $server_name = undef
 ) {
   case $operatingsystem {
     debian,ubuntu: { }  # Debian/Ubuntu already define those checks

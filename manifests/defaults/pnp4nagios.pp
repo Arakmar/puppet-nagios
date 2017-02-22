@@ -1,6 +1,6 @@
 class nagios::defaults::pnp4nagios
 (
-    $server_name = "default"
+    $server_name = undef
 ) {
     # performance data cmds
     # http://docs.pnp4nagios.org/de/pnp-0.6/config#bulk_mode_mit_npcd

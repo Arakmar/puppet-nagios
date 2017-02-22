@@ -1,6 +1,6 @@
 class nagios::defaults::timeperiods
 (
-    $server_name = "default"
+    $server_name = undef
 ) {
     nagios::type::timeperiod {
         '24x7':

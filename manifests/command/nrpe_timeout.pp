@@ -1,5 +1,5 @@
 class nagios::command::nrpe_timeout(
-    $server_name = "default"
+    $server_name = undef
 ) {
   nagios::type::command {
     'check_nrpe_timeout':

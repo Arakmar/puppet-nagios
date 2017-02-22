@@ -1,6 +1,6 @@
 class nagios::defaults::commands
 (
-    $server_name = "default"
+    $server_name = undef
 ) {
 
   class {
