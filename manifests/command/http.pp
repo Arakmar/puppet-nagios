@@ -1,5 +1,5 @@
 class nagios::command::http(
-    $server_name = undef
+    $server_name = undef,
     $ssl_warning_delay = '5',
 ) {
 
