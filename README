@@ -18,15 +18,6 @@ puppetmaster.
 You need to be running verison 0.25 or later of puppet. 
 
 
-Monitor
--------
-
-On one node the "nagios" class has to be included. By default this installs
-apache using the "apache" module. To use lighttpd instead, include
-"nagios::lighttpd", or, if the web server is not to be managed by puppet,
-include "nagios::headless".
-
-
 Hosts
 -----
 
@@ -98,17 +89,6 @@ nagios::target::fqdn instead of nagios::target
 has been changed to 'address'
 
 
-IRC bot
-=======
-
-Notifications can easily be sent to an IRC channel by using a bot. To do so,
-simply include 'nagios::irc_bot' on the nagios server and define the right
-$nagios_nsa_* variables (see the 'Variables' section below).
-
-You can then use the notification commands 'notify-by-irc' and
-'host-notify-by-irc' with service and host definitions to make them report
-state changes over IRC.
-
 Caveats
 =======
 
@@ -150,42 +130,6 @@ Options to change the behavior of the nagios class:
                       daemon can write to the external command file. You 
                       may also need to flip "check_external_commands" in
                       "nagios.cfg" to enable this functionality.
-
-For the irc_bot class:
-
-- nsa_socket: This optional variable can be used to specify the path to
-              the socket file that the IRC daemon should use.
-
-- nsa_server: When using the IRC bot, this defines the server address of
-              the IRC network on which the bot will connect.
-
-- nsa_port: Defines the port number on the IRC server on which the bot
-            should connect. When this variable is not set, the port used
-            by default is 6667.
-
-- nsa_nickname: This is the nickname that the IRC bot will take.
-
-- nsa_password: Some networks require a password to connect to them.
-                This defines such a password.
-
-- nsa_channel: The name of the channel that the IRC bot will join and
-               will post notifications to.
-
-- nsa_pidfile: This optional variable can be used to define the path to
-               the file that will contain the process ID of the IRC bot
-               daemon.
-- nsa_realname: The IRC bot user's real name that will be displayed. By
-                default, the real name is 'Nagios'.
-
-- nsa_usenotices: The IRC bot will by default "say" to the channel the
-                  nagios message, but you can switch this variable to
-                  'notice' if you would prefer them to be sent as IRC
-                  NOTICE messages.
-
-PNP4Nagios integration
-======================
-
-For PNP4Nagios integration information, please see README.pnp4nagios
 
 Examples
 ========
