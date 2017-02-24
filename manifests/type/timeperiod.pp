@@ -14,5 +14,6 @@ define nagios::type::timeperiod (
 		target  => "${nagios::cfgdir}/conf.d/nagios_timeperiod.cfg",
 		content => template("nagios/nagios_type/timeperiod.erb"),
 		tag     => 'nagios_timeperiod',
+		order  => '30'
 	}
 }

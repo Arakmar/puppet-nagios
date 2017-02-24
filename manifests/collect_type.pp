@@ -9,12 +9,12 @@ define nagios::collect_type (
   if ($exported) {
     Concat::Fragment <<| tag == "nagios_${name}" |>> {
       target => "${destdir}/nagios_${name}.cfg",
-      order  => 20
+      order  => '20'
     }
     if !($server_name) {
       Concat::Fragment <<| tag == "nagios_${name}_${server_name}" |>> {
         target => "${destdir}/nagios_${name}.cfg",
-        order  => 30
+        order  => '30'
       }
     }
   }
@@ -22,7 +22,7 @@ define nagios::collect_type (
 	concat::fragment {"type_header_${name}":
 		target => "${destdir}/nagios_${name}.cfg",
 		content => template("nagios/nagios_type/type_header.erb"),
-		order => 05,
+		order => '05',
 	}
   
 	concat{ "${destdir}/nagios_${name}.cfg":

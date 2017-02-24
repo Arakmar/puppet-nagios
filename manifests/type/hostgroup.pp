@@ -9,5 +9,6 @@ define nagios::type::hostgroup (
 		target  => "${nagios::cfgdir}/conf.d/nagios_hostgroup.cfg",
 		content => template("nagios/nagios_type/hostgroup.erb"),
 		tag     => 'nagios_hostgroup',
+		order  => '30'
 	}
 }

@@ -8,5 +8,6 @@ define nagios::type::command (
 		target  => "${nagios::cfgdir}/conf.d/nagios_command.cfg",
 		content => template("nagios/nagios_type/command.erb"),
 		tag     => 'nagios_command',
+		order  => '30'
 	}
 }

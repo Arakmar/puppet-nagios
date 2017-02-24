@@ -8,5 +8,6 @@ define nagios::type::contactgroup (
 		target  => "${nagios::cfgdir}/conf.d/nagios_contactgroup.cfg",
 		content => template("nagios/nagios_type/contactgroup.erb"),
 		tag     => 'nagios_contactgroup',
+		order  => '30'
 	}
 }
