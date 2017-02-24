@@ -42,7 +42,7 @@ define nagios::type::service (
 	if (empty($server_names)) {
 		$tagArray = ['nagios_service']
 	} else {
-		$tagArray = prefix("nagios_service_", $server_names)
+		$tagArray = prefix($server_names, "nagios_service_")
 	}
 
 	if ($use_nrpe) {

@@ -15,7 +15,7 @@
 	if (empty($server_names)) {
 		$tagArray = ['nagios_hostextinfo']
 	} else {
-		$tagArray = prefix("nagios_hostextinfo_", $server_names)
+		$tagArray = prefix($server_names, "nagios_hostextinfo_")
 	}
 
 	@@concat::fragment { "nagios_hostextinfo_${name}_${::fqdn}":

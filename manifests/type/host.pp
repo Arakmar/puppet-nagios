@@ -32,7 +32,7 @@ define nagios::type::host (
 	if (empty($server_names)) {
 		$tagArray = ['nagios_hosts']
 	} else {
-		$tagArray = prefix("nagios_hosts_", $server_names)
+		$tagArray = prefix($server_names, "nagios_hosts_")
 	}
 
 	@@concat::fragment { "nagios_host_${name}_${::fqdn}":
