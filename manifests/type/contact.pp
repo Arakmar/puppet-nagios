@@ -1,5 +1,5 @@
 define nagios::type::contact (
-	$contact_name = "$name",
+	$contact_name = $name,
 	$use = 'generic-contact',
 	$contact_alias = '',
 	$service_notification_period = '',

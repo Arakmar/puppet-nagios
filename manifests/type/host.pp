@@ -22,13 +22,9 @@ define nagios::type::host (
 	$server_name = undef
 )
 {
-        $real_address = $address ? {
-                "" => $host_name,
-                default => $address
-        }
-	$nagios_custom_hostgroups = $nagios_custom_hostgroups ? {
-		"" => [],
-		default => $nagios_custom_hostgroups
+	$real_address = $address ? {
+		""      => $host_name,
+		default => $address
 	}
 
 	if ! ($server_name) {

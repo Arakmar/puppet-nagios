@@ -1,5 +1,5 @@
 define nagios::type::command (
-	$command_name = "$name",
+	$command_name = $name,
 	$command_line,
 	$use = '',
 	$server_name = undef

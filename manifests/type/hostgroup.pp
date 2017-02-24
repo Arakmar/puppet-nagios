@@ -1,6 +1,6 @@
 define nagios::type::hostgroup (
 	$hostgroup_alias = "",
-	$hostgroup_name = "$name",
+	$hostgroup_name = $name,
 	$use = '',
 	$members = [],
 	$server_name = undef

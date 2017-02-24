@@ -1,6 +1,5 @@
 define nagios::type::contactgroup (
-	$ensure = "present",
-	$contactgroup_name = "$name",
+	$contactgroup_name = $name,
 	$contactgroup_alias = '',
 	$members = [],
 	$server_name = undef

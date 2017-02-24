@@ -1,5 +1,5 @@
 define nagios::type::timeperiod (
-	$timeperiod_name = "$name",
+	$timeperiod_name = $name,
 	$timeperiod_alias = '',
 	$monday = '',
 	$tuesday = '',
