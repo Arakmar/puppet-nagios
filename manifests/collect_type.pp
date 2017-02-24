@@ -11,7 +11,7 @@ define nagios::collect_type (
       target => "${destdir}/nagios_${name}.cfg",
       order  => '20'
     }
-    if !($server_name) {
+    if ($server_name) {
       Concat::Fragment <<| tag == "nagios_${name}_${server_name}" |>> {
         target => "${destdir}/nagios_${name}.cfg",
         order  => '30'
