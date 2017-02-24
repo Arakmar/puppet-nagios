@@ -1,15 +1,15 @@
 define host {
-<% unless @use.empty? -%>
+<% if @use -%>
         use <%= @use %>
 <% end -%>
         host_name <%= @host_name %>
-<% unless @real_address.empty? -%>
+<% if @real_address -%>
         address <%= @real_address %>
 <% end -%>
 <% unless @hostgroups.empty? -%>
         hostgroups <%= @hostgroups.join(",") %>
 <% end -%>
-<% unless @host_alias.empty? -%>
+<% if @host_alias -%>
         alias <%= @host_alias %>
 <% end -%>
 <% unless @contact_groups.empty? -%>
@@ -18,43 +18,43 @@ define host {
 <% unless @parents.empty? -%>
         parents <%= @parents.join(",") %>
 <% end -%>
-<% unless @notifications_enabled.empty? -%>
+<% if @notifications_enabled -%>
         notifications_enabled <%= @notifications_enabled %>
 <% end -%>
-<% unless @event_handler_enabled.empty? -%>
+<% if @event_handler_enabled -%>
         event_handler_enabled <%= @event_handler_enabled %>
 <% end -%>
-<% unless @flap_detection_enabled.empty? -%>
+<% if @flap_detection_enabled -%>
         flap_detection_enabled <%= @flap_detection_enabled %>
 <% end -%>
-<% unless @failure_prediction_enabled.empty? -%>
+<% if @failure_prediction_enabled -%>
         failure_prediction_enabled <%= @failure_prediction_enabled %>
 <% end -%>
-<% unless @process_perf_data.empty? -%>
+<% if @process_perf_data -%>
         process_perf_data <%= @process_perf_data %>
 <% end -%>
-<% unless @retain_status_information.empty? -%>
+<% if @retain_status_information -%>
         retain_status_information <%= @retain_status_information %>
 <% end -%>
-<% unless @retain_nonstatus_information.empty? -%>
+<% if @retain_nonstatus_information -%>
         retain_nonstatus_information <%= @retain_nonstatus_information %>
 <% end -%>
-<% unless @check_command.empty? -%>
+<% if @check_command -%>
         check_command <%= @check_command %>
 <% end -%>
-<% unless @max_check_attempts.empty? -%>
+<% if @max_check_attempts -%>
         max_check_attempts <%= @max_check_attempts %>
 <% end -%>
-<% unless @notification_interval.empty? -%>
+<% if @notification_interval -%>
         notification_interval <%= @notification_interval %>
 <% end -%>
-<% unless @notification_period.empty? -%>
+<% if @notification_period -%>
         notification_period <%= @notification_period %>
 <% end -%>
-<% unless @notification_options.empty? -%>
+<% if @notification_options -%>
         notification_options <%= @notification_options %>
 <% end -%>
-<% unless @register.empty? -%>
+<% if @register -%>
         register <%= @register %>
 <% end -%>
 }

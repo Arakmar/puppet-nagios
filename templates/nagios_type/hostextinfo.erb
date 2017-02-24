@@ -5,22 +5,22 @@ define hostextinfo {
 <% unless @hostgroup_name.empty? -%>
 	hostgroup_name <%= @hostgroup_name.join(",") %>
 <% end -%>
-<% unless @use.empty? -%>
+<% if @use -%>
 	use <%= @use %>
 <% end -%>
-<% unless @notes.empty? -%>
+<% if @notes -%>
 	notes <%= @notes %>
 <% end -%>
-<% unless @icon_image.empty? -%>
+<% if @icon_image -%>
 	icon_image <%= @icon_image %>
 <% end -%>
-<% unless @icon_image_alt.empty? -%>
+<% if @icon_image_alt -%>
 	icon_image_alt <%= @icon_image_alt %>
 <% end -%>
-<% unless @vrml_image.empty? -%>
+<% if @vrml_image -%>
 	vrml_image <%= @vrml_image %>
 <% end -%>
-<% unless @statusmap_image.empty? -%>
+<% if @statusmap_image -%>
 	statusmap_image <%= @statusmap_image %>
 <% end -%>
 }

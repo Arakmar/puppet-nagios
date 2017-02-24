@@ -1,6 +1,6 @@
 define contactgroup {
 	contactgroup_name <%= @contactgroup_name %>
-<% unless @contactgroup_alias.empty? -%>
+<% if @contactgroup_alias -%>
 	alias <%= @contactgroup_alias %>
 <% end -%>
 <% unless @members.empty? -%>

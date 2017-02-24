@@ -1,12 +1,12 @@
  define nagios::type::hostextinfo (
-	$use = '',
-	$host_name = '',
-	$hostgroup_name = '',
-	$notes = '',
-	$icon_image = '',
-	$icon_image_alt = '',
-	$vrml_image = '',
-	$statusmap_image = '',
+	$use = undef,
+	$host_name = undef,
+	$hostgroup_name = undef,
+	$notes = undef,
+	$icon_image = undef,
+	$icon_image_alt = undef,
+	$vrml_image = undef,
+	$statusmap_image = undef,
 	$server_names = []
 )
 {

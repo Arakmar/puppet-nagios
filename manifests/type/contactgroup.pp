@@ -1,6 +1,6 @@
 define nagios::type::contactgroup (
 	$contactgroup_name = $name,
-	$contactgroup_alias = '',
+	$contactgroup_alias = undef,
 	$members = [],
 )
 {

@@ -1,7 +1,7 @@
 define nagios::type::command (
 	$command_name = $name,
 	$command_line,
-	$use = ''
+	$use = undef
 )
 {
 	concat::fragment { "nagios_command_${name}":

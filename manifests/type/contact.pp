@@ -1,13 +1,13 @@
 define nagios::type::contact (
 	$contact_name = $name,
 	$use = 'generic-contact',
-	$contact_alias = '',
-	$service_notification_period = '',
-	$host_notification_period = '',
-	$service_notification_options = '',
-	$host_notification_options = '',
-	$service_notification_commands = '',
-	$host_notification_commands = '',
+	$contact_alias = undef,
+	$service_notification_period = undef,
+	$host_notification_period = undef,
+	$service_notification_options = undef,
+	$host_notification_options = undef,
+	$service_notification_commands = undef,
+	$host_notification_commands = undef,
 	$email = 'root@localhost',
 )
 {

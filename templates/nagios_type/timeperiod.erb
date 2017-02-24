@@ -1,27 +1,27 @@
 define timeperiod {
 	timeperiod_name <%= @timeperiod_name %>
-<% unless @timeperiod_alias.empty? -%>
+<% if @timeperiod_alias -%>
 	alias <%= @timeperiod_alias %>
 <% end -%>
-<% unless @monday.empty? -%>
+<% if @monday -%>
 	monday <%= @monday %>
 <% end -%>
-<% unless @tuesday.empty? -%>
+<% if @tuesday -%>
 	tuesday <%= @tuesday %>
 <% end -%>
-<% unless @wednesday.empty? -%>
+<% if @wednesday -%>
 	wednesday <%= @wednesday %>
 <% end -%>
-<% unless @thursday.empty? -%>
+<% if @thursday -%>
 	thursday <%= @thursday %>
 <% end -%>
-<% unless @friday.empty? -%>
+<% if @friday -%>
 	friday <%= @friday %>
 <% end -%>
-<% unless @saturday.empty? -%>
+<% if @saturday -%>
 	saturday <%= @saturday %>
 <% end -%>
-<% unless @sunday.empty? -%>
+<% if @sunday -%>
 	sunday <%= @sunday %>
 <% end -%>
 

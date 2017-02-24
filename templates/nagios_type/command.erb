@@ -1,7 +1,7 @@
 define command {
 	command_name <%= @command_name %>
 	command_line <%= @command_line %>
-<% unless @use.empty? -%>
+<% if @use -%>
 	use <%= @use %>
 <% end -%>
 }

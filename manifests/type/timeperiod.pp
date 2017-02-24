@@ -1,13 +1,13 @@
 define nagios::type::timeperiod (
 	$timeperiod_name = $name,
-	$timeperiod_alias = '',
-	$monday = '',
-	$tuesday = '',
-	$wednesday = '',
-	$thursday = '',
-	$friday = '',
-	$saturday = '',
-	$sunday = ''
+	$timeperiod_alias = undef,
+	$monday = undef,
+	$tuesday = undef,
+	$wednesday = undef,
+	$thursday = undef,
+	$friday = undef,
+	$saturday = undef,
+	$sunday = undef
 )
 {
 	concat::fragment { "nagios_timeperiod_${name}_${::fqdn}":

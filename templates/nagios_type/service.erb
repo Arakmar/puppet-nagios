@@ -1,37 +1,37 @@
 define service {
         use <%= @use %>
-<% unless @service_description.empty? -%>
+<% if @service_description -%>
         service_description <%= @service_description %>
 <% end -%>
-<% unless @host_name.empty? -%>
+<% if @host_name -%>
         host_name <%= @host_name %>
 <% end -%>
         check_command <%= @real_check_command %>
-<% unless @check_period.empty? -%>
+<% if @check_period -%>
         check_period <%= @check_period %>
 <% end -%>
-<% unless @check_interval.empty? -%>
+<% if @check_interval -%>
         check_interval <%= @check_interval %>
 <% end -%>
-<% unless @normal_check_interval.empty? -%>
+<% if @normal_check_interval -%>
         normal_check_interval <%= @normal_check_interval %>
 <% end -%>
-<% unless @retry_check_interval.empty? -%>
+<% if @retry_check_interval -%>
         retry_check_interval <%= @retry_check_interval %>
 <% end -%>
-<% unless @max_check_attempts.empty? -%>
+<% if @max_check_attempts -%>
         max_check_attempts <%= @max_check_attempts %>
 <% end -%>
-<% unless @notification_interval.empty? -%>
+<% if @notification_interval -%>
         notification_interval <%= @notification_interval %>
 <% end -%>
-<% unless @notification_period.empty? -%>
+<% if @notification_period -%>
         notification_period <%= @notification_period %>
 <% end -%>
-<% unless @notification_options.empty? -%>
+<% if @notification_options -%>
         notification_options <%= @notification_options %>
 <% end -%>
-<% unless @first_notification_delay.empty? -%>
+<% if @first_notification_delay -%>
         first_notification_delay <%= @first_notification_delay %>
 <% end -%>
 <% unless @contacts.empty? -%>
@@ -40,49 +40,49 @@ define service {
 <% unless @contact_groups.empty? -%>
         contact_groups <%= @contact_groups.join(",") %>
 <% end -%>
-<% unless @active_checks_enabled.empty? -%>
+<% if @active_checks_enabled -%>
         active_checks_enabled <%= @active_checks_enabled %>
 <% end -%>
-<% unless @passive_checks_enabled.empty? -%>
+<% if @passive_checks_enabled -%>
         passive_checks_enabled <%= @passive_checks_enabled %>
 <% end -%>
-<% unless @parallelize_check.empty? -%>
+<% if @parallelize_check -%>
         parallelize_check <%= @parallelize_check %>
 <% end -%>
-<% unless @obsess_over_service.empty? -%>
+<% if @obsess_over_service -%>
         obsess_over_service <%= @obsess_over_service %>
 <% end -%>
-<% unless @check_freshness.empty? -%>
+<% if @check_freshness -%>
         check_freshness <%= @check_freshness %>
 <% end -%>
-<% unless @notifications_enabled.empty? -%>
+<% if @notifications_enabled -%>
         notifications_enabled <%= @notifications_enabled %>
 <% end -%>
-<% unless @event_handler_enabled.empty? -%>
+<% if @event_handler_enabled -%>
         event_handler_enabled <%= @event_handler_enabled %>
 <% end -%>
-<% unless @event_handler.empty? -%>
+<% if @event_handler -%>
         event_handler <%= @event_handler %>
 <% end -%>
-<% unless @flap_detection_enabled.empty? -%>
+<% if @flap_detection_enabled -%>
         flap_detection_enabled <%= @flap_detection_enabled %>
 <% end -%>
-<% unless @failure_prediction_enabled.empty? -%>
+<% if @failure_prediction_enabled -%>
         failure_prediction_enabled <%= @failure_prediction_enabled %>
 <% end -%>
-<% unless @process_perf_data.empty? -%>
+<% if @process_perf_data -%>
         process_perf_data <%= @process_perf_data %>
 <% end -%>
-<% unless @retain_status_information.empty? -%>
+<% if @retain_status_information -%>
         retain_status_information <%= @retain_status_information %>
 <% end -%>
-<% unless @retain_nonstatus_information.empty? -%>
+<% if @retain_nonstatus_information -%>
         retain_nonstatus_information <%= @retain_nonstatus_information %>
 <% end -%>
-<% unless @is_volatile.empty? -%>
+<% if @is_volatile -%>
         is_volatile <%= @is_volatile %>
 <% end -%>
-<% unless @register.empty? -%>
+<% if @register -%>
         register <%= @register %>
 <% end -%>
 }

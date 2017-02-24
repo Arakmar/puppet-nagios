@@ -1,9 +1,9 @@
 define hostgroup {
 	hostgroup_name <%= @hostgroup_name %>
-<% unless @hostgroup_alias.empty? %>
+<% if @hostgroup_alias %>
 	alias <%= @hostgroup_alias %>
 <% end -%>
-<% unless @use.empty? -%>
+<% if @use -%>
 	use <%= @use %>
 <% end -%>
 <% unless @members.empty? -%>
