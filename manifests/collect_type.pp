@@ -1,5 +1,5 @@
 define nagios::collect_type (
-	$destdir = '/etc/nagios3/conf.d',
+	$destdir = "${nagios::cfgdir}/conf.d",
 	$server_name = undef,
   $exported = true
 )

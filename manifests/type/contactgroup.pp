@@ -5,7 +5,7 @@ define nagios::type::contactgroup (
 )
 {
 	concat::fragment { "nagios_contactgroup_${name}_${::fqdn}":
-		target  => '/etc/nagios3/conf.d/nagios_contactgroup.cfg',
+		target  => "${nagios::cfgdir}/conf.d/nagios_contactgroup.cfg",
 		content => template("nagios/nagios_type/contactgroup.erb"),
 		tag     => 'nagios_contactgroup',
 	}

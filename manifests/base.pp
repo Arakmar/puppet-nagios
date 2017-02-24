@@ -17,12 +17,8 @@ class nagios::base {
     # this file should contain all the nagios_puppet-paths:
     file { 'nagios_main_cfg':
             path => "${nagios::defaults::vars::int_cfgdir}/nagios.cfg",
-            source => [ "puppet:///modules/site_nagios/configs/${::fqdn}/nagios.cfg",
-                        "puppet:///modules/site_nagios/configs/${::operatingsystem}/${::lsbdistcodename}/nagios.cfg",
-                        "puppet:///modules/site_nagios/configs/${::operatingsystem}/nagios.cfg",
-                        "puppet:///modules/site_nagios/configs/nagios.cfg",
-                        "puppet:///modules/nagios/configs/${::operatingsystem}/${::lsbdistcodename}/nagios.cfg",
-                        "puppet:///modules/nagios/configs/${::operatingsystem}/nagios.cfg",
+            source => [ "puppet:///modules/nagios/configs/${::osfamily}/${::operatingsystemmajrelease}/nagios.cfg",
+                        "puppet:///modules/nagios/configs/${::osfamily}/nagios.cfg",
                         "puppet:///modules/nagios/configs/nagios.cfg" ],
             notify => Service['nagios'],
             require => Package['nagios'],
@@ -31,34 +27,16 @@ class nagios::base {
 
     file { 'nagios_cgi_cfg':
         path => "${nagios::defaults::vars::int_cfgdir}/cgi.cfg",
-        source => [ "puppet:///modules/site_nagios/configs/${::fqdn}/cgi.cfg",
-                    "puppet:///modules/site_nagios/configs/${::operatingsystem}/${::lsbdistcodename}/cgi.cfg",
-                    "puppet:///modules/site_nagios/configs/${::operatingsystem}/cgi.cfg",
-                    "puppet:///modules/site_nagios/configs/cgi.cfg",
-                    "puppet:///modules/nagios/configs/${::operatingsystem}/${::lsbdistcodename}/cgi.cfg",
-                    "puppet:///modules/nagios/configs/${::operatingsystem}/cgi.cfg",
+        source => [ "puppet:///modules/nagios/configs/${::osfamily}/${::operatingsystemmajrelease}/cgi.cfg",
+                    "puppet:///modules/nagios/configs/${::osfamily}/cgi.cfg",
                     "puppet:///modules/nagios/configs/cgi.cfg" ],
         mode => '0644', owner => 'root', group => 0,
         require => Package['nagios'],
     }
 
-    file { 'nagios_htpasswd':
-        path => "${nagios::defaults::vars::int_cfgdir}/htpasswd.users",
-        source => [ "puppet:///modules/site_nagios/configs/${::fqdn}/htpasswd.users",
-                "puppet:///modules/site_nagios/configs/${::operatingsystem}/${::lsbdistcodename}/htpasswd.users",
-                "puppet:///modules/site_nagios/configs/${::operatingsystem}/htpasswd.users",
-                "puppet:///modules/site_nagios/configs/htpasswd.users",
-                "puppet:///modules/nagios/configs/${::operatingsystem}/${::lsbdistcodename}/htpasswd.users",
-                "puppet:///modules/nagios/configs/${::operatingsystem}/htpasswd.users",
-                "puppet:///modules/nagios/configs/htpasswd.users" ],
-        require => Package['nagios'],
-        mode => '0640', owner => root, group => apache;
-    }
-
     file { 'nagios_resource_cfg':
-        path => "${nagios::defaults::vars::int_cfgdir}/resource.cfg",
-        source => [ "puppet:///modules/site_nagios/configs/${::operatingsystem}/private/resource.cfg.${::architecture}",
-                    "puppet:///modules/nagios/configs/${::operatingsystem}/private/resource.cfg.${::architecture}" ],
+        path => $nagios::defaults::vars::resource_cfgpath,
+        source => [ "puppet:///modules/nagios/configs/${::osfamily}/private/resource.cfg.${::architecture}" ],
         notify => Service['nagios'],
         require => Package['nagios'],
         owner => root, group => nagios, mode => '0640';

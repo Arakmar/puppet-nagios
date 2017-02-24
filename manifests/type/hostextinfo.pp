@@ -19,8 +19,8 @@
 	}
 
 	@@concat::fragment { "nagios_hostextinfo_${name}_${::fqdn}":
-		target  => '/etc/nagios3/conf.d/nagios_hostextinfo.cfg',
+		target  => "${nagios::cfgdir}/conf.d/nagios_hostextinfo.cfg",
 		content => template("nagios/nagios_type/hostextinfo.erb"),
-		tag     => $tagArray,
+		tag     => $tagArray
 	}
 }

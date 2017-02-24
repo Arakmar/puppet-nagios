@@ -1,8 +1,7 @@
 ###########################################################################
 #
-# RESOURCE.CFG - Sample Resource File for Nagios 2.9
+# RESOURCE.CFG - Sample Resource File for Nagios 4.2.4
 #
-# Last Modified: 09-10-2003
 #
 # You can define $USERx$ macros in this file, which can in turn be used
 # in command definitions in your host config file(s).  $USERx$ macros are
@@ -31,4 +30,3 @@ $USER1$=/usr/lib64/nagios/plugins
 # Store some usernames and passwords (hidden from the CGIs)
 #$USER3$=someuser
 #$USER4$=somepassword
-

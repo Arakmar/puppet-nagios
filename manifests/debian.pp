@@ -7,7 +7,7 @@ class nagios::debian inherits nagios::base {
         hasstatus => true,
     }
 
-    File['nagios_htpasswd', 'nagios_cgi_cfg'] { group => 'www-data' }
+    File['nagios_cgi_cfg'] { group => 'www-data' }
 
     file { 'nagios_commands_cfg':
             path   => "${nagios::defaults::vars::int_cfgdir}/commands.cfg",

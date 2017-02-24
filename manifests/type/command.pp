@@ -5,7 +5,7 @@ define nagios::type::command (
 )
 {
 	concat::fragment { "nagios_command_${name}":
-		target  => '/etc/nagios3/conf.d/nagios_command.cfg',
+		target  => "${nagios::cfgdir}/conf.d/nagios_command.cfg",
 		content => template("nagios/nagios_type/command.erb"),
 		tag     => 'nagios_command',
 	}

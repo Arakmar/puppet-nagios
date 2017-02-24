@@ -13,7 +13,7 @@ define nagios::type::contact (
 {
 
 	concat::fragment { "nagios_contact_${name}_${::fqdn}":
-		target  => '/etc/nagios3/conf.d/nagios_contact.cfg',
+		target  => "${nagios::cfgdir}/conf.d/nagios_contact.cfg",
 		content => template("nagios/nagios_type/contact.erb"),
 		tag     => 'nagios_contact'
 	}
