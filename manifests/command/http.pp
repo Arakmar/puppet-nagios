@@ -1,11 +1,18 @@
 class nagios::command::http(
     $ssl_warning_delay = '5',
 ) {
+    case $::osfamily {
+        'debian': {}
+        default: {
+            nagios::type::command {
+                check_http:
+                  command_line => '$USER1$/check_http -H $HOSTADDRESS$ -I $HOSTADDRESS$';
+                check_https:
+                  command_line => '$USER1$/check_http --ssl -H $HOSTADDRESS$ -I $HOSTADDRESS$';
+            }
+        }
+    }
     nagios::type::command {
-        check_http:
-          command_line => '$USER1$/check_http -H $HOSTADDRESS$ -I $HOSTADDRESS$';
-        check_https:
-          command_line => '$USER1$/check_http --ssl -H $HOSTADDRESS$ -I $HOSTADDRESS$';
         http_port:
           command_line => '$USER1$/check_http -p $ARG1$ -H $HOSTADDRESS$ -I $HOSTADDRESS$';
         check_http_port_url_content:

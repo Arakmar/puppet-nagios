@@ -21,8 +21,8 @@ class nagios(
 ) {
   validate_string($server_name)
 
-  case $::operatingsystem {
-    'centos': {
+  case $::osfamily {
+    'redhat': {
       include nagios::centos
     }
     'debian': {
