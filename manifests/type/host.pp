@@ -38,11 +38,11 @@ define nagios::type::host (
 			tag => 'nagios_hosts',
 		}
 	} else {
-		$tableau = prepend_array("nagios_hosts_", $server_name)
-		@@concat::fragment{ "nagios_host_${name}_${server_name}_${::fqdn}":
+		$tagArray = prefix("nagios_hosts_", $server_name)
+		@@concat::fragment{ "nagios_host_${name}_${::fqdn}":
 			target => '/etc/nagios3/conf.d/nagios_hosts.cfg',
 			content => template("nagios/nagios_type/host.erb"),
-			tag => $tableau,
+			tag => $tagArray,
 		}
 	}
 }

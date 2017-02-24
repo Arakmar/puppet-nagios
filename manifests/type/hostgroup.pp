@@ -13,11 +13,11 @@ define nagios::type::hostgroup (
 			tag => 'nagios_hostgroup',
 		}
 	} else {
-		$tableau = prepend_array("nagios_hostgroup_", $server_name)
-		@@concat::fragment{ "nagios_hostgroup_${name}_${server_name}_${::fqdn}":
+		$tagArray = prefix("nagios_hostgroup_", $server_name)
+		@@concat::fragment{ "nagios_hostgroup_${name}_${::fqdn}":
 			target => '/etc/nagios3/conf.d/nagios_hostgroup.cfg',
 			content => template("nagios/nagios_type/hostgroup.erb"),
-			tag => $tableau,
+			tag => $tagArray,
 		}
 	}
 }

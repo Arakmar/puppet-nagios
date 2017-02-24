@@ -17,11 +17,11 @@
 			tag => 'nagios_hostextinfo',
 		}
 	} else {
-		$tableau = prepend_array("nagios_hostextinfo_", $server_name)
-		@@concat::fragment{ "nagios_hostextinfo_${name}_${server_name}_${::fqdn}":
+		$tagArray = prefix("nagios_hostextinfo_", $server_name)
+		@@concat::fragment{ "nagios_hostextinfo_${name}_${::fqdn}":
 			target => '/etc/nagios3/conf.d/nagios_hostextinfo.cfg',
 			content => template("nagios/nagios_type/hostextinfo.erb"),
-			tag => $tableau,
+			tag => $tagArray,
 		}
 	}
 }

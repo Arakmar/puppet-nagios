@@ -69,11 +69,11 @@ define nagios::type::service (
 			tag => 'nagios_service',
 		}
 	} else {
-		$tableau = prepend_array("nagios_service_", $server_name)
-		@@concat::fragment{ "nagios_service_${name}_${server_name}_${::fqdn}":
+		$tagArray = prefix("nagios_service_", $server_name)
+		@@concat::fragment{ "nagios_service_${name}_${::fqdn}":
 			target => '/etc/nagios3/conf.d/nagios_service.cfg',
 			content => template("nagios/nagios_type/service.erb"),
-			tag => $tableau,
+			tag => $tagArray,
 		}
 	}
 }

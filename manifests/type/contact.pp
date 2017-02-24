@@ -19,11 +19,11 @@ define nagios::type::contact (
 			tag => 'nagios_contact',
 		}
 	} else {
-		$tableau = prepend_array("nagios_contact_", $server_name)
-		@@concat::fragment{ "nagios_contact_${name}_${server_name}_${::fqdn}":
+		$tagArray = prefix("nagios_contact_", $server_name)
+		@@concat::fragment{ "nagios_contact_${name}_${::fqdn}":
 			target => '/etc/nagios3/conf.d/nagios_contact.cfg',
 			content => template("nagios/nagios_type/contact.erb"),
-			tag => $tableau,
+			tag => $tagArray,
 		}
 	}
 }
