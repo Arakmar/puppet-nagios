@@ -39,31 +39,9 @@ class nagios::defaults::commands {
       command_line => '$USER1$/check_ssh -p $ARG1$ $HOSTADDRESS$';
     check_ssh_port_host:
       command_line => '$USER1$/check_ssh -p $ARG1$ $ARG2$';
-    check_http:
-      command_line => '$USER1$/check_http -H $HOSTADDRESS$ -I $HOSTADDRESS$';
-    check_https:
-      command_line => '$USER1$/check_http --ssl -H $HOSTADDRESS$ -I $HOSTADDRESS$';
-    check_https_cert:
-      command_line => '$USER1$/check_http --ssl -C 20 -H $HOSTADDRESS$ -I $HOSTADDRESS$';
     check_mysql:
       command_line => '$USER1$/check_mysql -H $ARG1$ -P $ARG2$ -u $ARG3$ -p $ARG4$';
   }
-
-    # commands for services defined by other modules
-
-    nagios::type::command {
-        # from apache module
-        http_port:
-            command_line => '$USER1$/check_http -p $ARG1$ -H $HOSTADDRESS$ -I $HOSTADDRESS$';
-        check_http_port_url_content:
-            command_line => '$USER1$/check_http -H $ARG1$ -p $ARG2$ -u $ARG3$ -s $ARG4$';
-        check_https_port_url_content:
-            command_line => '$USER1$/check_http --ssl -H $ARG1$ -p $ARG2$ -u $ARG3$ -s $ARG4$';
-        check_http_url_content:
-            command_line => '$USER1$/check_http -H $ARG1$ -u $ARG2$ -s $ARG3$';
-        check_https_url_content:
-            command_line => '$USER1$/check_http --ssl -H $ARG1$ -u $ARG2$ -s $ARG3$';
-    }
 
     # notification commands
 
