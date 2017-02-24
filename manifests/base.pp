@@ -75,23 +75,33 @@ class nagios::base {
     }
 
     nagios::collect_type {
-        "command": destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
-                server_name => $nagios::defaults::vars::int_server_name;
-        "contact": destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
-                server_name => $nagios::defaults::vars::int_server_name;
-        "contactgroup": destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
-                server_name => $nagios::defaults::vars::int_server_name;
-        "hosts": destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
-                server_name => $nagios::defaults::vars::int_server_name;
-        "service": destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
-                server_name => $nagios::defaults::vars::int_server_name;
-        "hostgroup": destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
-                server_name => $nagios::defaults::vars::int_server_name;
-        "hostextinfo": destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
-                server_name => $nagios::defaults::vars::int_server_name;
-        "timeperiod": destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
-                server_name => $nagios::defaults::vars::int_server_name;
+        "command":
+            destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
+            exported => false;
+        "contact":
+            destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
+            exported => false;
+        "contactgroup":
+            destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
+            exported => false;
+        "hosts":
+            destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
+            server_name => $nagios::defaults::vars::int_server_name;
+        "service":
+            destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
+            server_name => $nagios::defaults::vars::int_server_name;
+        "hostgroup":
+            destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
+            exported => false;
+        "hostextinfo":
+            destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
+            server_name => $nagios::defaults::vars::int_server_name;
+        "timeperiod":
+            destdir => "${nagios::defaults::vars::int_cfgdir}/conf.d",
+            exported => false;
     }
+
+
 
     # manage nagios cfg files
     # must be defined after exported resource overrides and cfg file defs

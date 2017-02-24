@@ -7,21 +7,20 @@
 	$icon_image_alt = '',
 	$vrml_image = '',
 	$statusmap_image = '',
-	$server_name = undef
+	$server_names = []
 )
 {
-	if ! ($server_name) {
-		@@concat::fragment{ "nagios_hostextinfo_${name}_${::fqdn}":
-			target => '/etc/nagios3/conf.d/nagios_hostextinfo.cfg',
-			content => template("nagios/nagios_type/hostextinfo.erb"),
-			tag => 'nagios_hostextinfo',
-		}
+	validate_array($server_names)
+
+	if (empty($server_names)) {
+		$tagArray = ['nagios_hostextinfo']
 	} else {
-		$tagArray = prefix("nagios_hostextinfo_", $server_name)
-		@@concat::fragment{ "nagios_hostextinfo_${name}_${::fqdn}":
-			target => '/etc/nagios3/conf.d/nagios_hostextinfo.cfg',
-			content => template("nagios/nagios_type/hostextinfo.erb"),
-			tag => $tagArray,
-		}
+		$tagArray = prefix("nagios_hostextinfo_", $server_names)
+	}
+
+	@@concat::fragment { "nagios_hostextinfo_${name}_${::fqdn}":
+		target  => '/etc/nagios3/conf.d/nagios_hostextinfo.cfg',
+		content => template("nagios/nagios_type/hostextinfo.erb"),
+		tag     => $tagArray,
 	}
 }

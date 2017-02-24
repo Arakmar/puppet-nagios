@@ -1,29 +1,22 @@
-class nagios::command::imap_pop3(
-    $server_name = undef
-) {
-  case $operatingsystem {
-    debian,ubuntu: { }  # Debian/Ubuntu already define those checks
+class nagios::command::imap_pop3 {
+  case $::osfamily {
+    'debian': { }  # Debian/Ubuntu already define those checks
     default: {
       nagios::type::command {
         'check_imap':
-          command_line => '$USER1$/check_imap -H $ARG1$ -p $ARG2$',
-          server_name => $server_name;
+          command_line => '$USER1$/check_imap -H $ARG1$ -p $ARG2$'
       }
     }
   }
 
   nagios::type::command {
     'check_imap_ssl':
-      command_line => '$USER1$/check_imap -H $ARG1$ -p $ARG2$ -S',
-      server_name => $server_name;
+      command_line => '$USER1$/check_imap -H $ARG1$ -p $ARG2$ -S';
     'check_pop3':
-      command_line => '$USER1$/check_pop -H $ARG1$ -p $ARG2$',
-      server_name => $server_name;
+      command_line => '$USER1$/check_pop -H $ARG1$ -p $ARG2$';
     'check_pop3_ssl':
-      command_line => '$USER1$/check_pop -H $ARG1$ -p $ARG2$ -S',
-      server_name => $server_name;
+      command_line => '$USER1$/check_pop -H $ARG1$ -p $ARG2$ -S';
     'check_managesieve':
-      command_line => '$USER1$/check_tcp -H $ARG1$ -p 2000',
-      server_name => $server_name;
+      command_line => '$USER1$/check_tcp -H $ARG1$ -p 2000';
   }
 }

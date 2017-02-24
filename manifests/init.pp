@@ -19,6 +19,8 @@ class nagios(
   $allow_external_cmd = false,
   $server_name = undef
 ) {
+  validate_string($server_name)
+
   case $::operatingsystem {
     'centos': {
       $cfgdir = '/etc/nagios'

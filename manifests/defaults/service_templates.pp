@@ -1,14 +1,11 @@
-class nagios::defaults::service_templates
-(
-    $server_name = undef
-) {
+class nagios::defaults::service_templates {
 
     # this inoperative for the moment, see :
     # http://projects.reductivelabs.com/issues/1180
 
     nagios::type::service {
         'generic-service':
-            server_name => $server_name,
+            server_name => $nagios::defaults::vars::int_server_name,
             active_checks_enabled           => '1',
             passive_checks_enabled          => '1',
             parallelize_check               => '1',

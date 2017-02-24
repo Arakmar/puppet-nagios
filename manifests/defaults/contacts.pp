@@ -1,10 +1,6 @@
-class nagios::defaults::contacts
-(
-    $server_name = undef
-) {
+class nagios::defaults::contacts {
     nagios::type::contact {
         'root':
-            server_name => $server_name,
             contact_alias                   => 'Root',
             service_notification_period     => '24x7',
             host_notification_period        => '24x7',

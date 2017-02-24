@@ -19,7 +19,7 @@ define nagios::type::host (
 	$notification_period = '',
 	$notification_options = '',
 	$register = '',
-	$server_name = undef
+	$server_names = []
 )
 {
 	$real_address = $address ? {
@@ -27,18 +27,17 @@ define nagios::type::host (
 		default => $address
 	}
 
-	if ! ($server_name) {
-		@@concat::fragment{ "nagios_host_${name}_${::fqdn}":
-			target => '/etc/nagios3/conf.d/nagios_hosts.cfg',
-			content => template("nagios/nagios_type/host.erb"),
-			tag => 'nagios_hosts',
-		}
+	validate_array($server_names)
+
+	if (empty($server_names)) {
+		$tagArray = ['nagios_hosts']
 	} else {
-		$tagArray = prefix("nagios_hosts_", $server_name)
-		@@concat::fragment{ "nagios_host_${name}_${::fqdn}":
-			target => '/etc/nagios3/conf.d/nagios_hosts.cfg',
-			content => template("nagios/nagios_type/host.erb"),
-			tag => $tagArray,
-		}
+		$tagArray = prefix("nagios_hosts_", $server_names)
+	}
+
+	@@concat::fragment { "nagios_host_${name}_${::fqdn}":
+		target  => '/etc/nagios3/conf.d/nagios_hosts.cfg',
+		content => template("nagios/nagios_type/host.erb"),
+		tag     => $tagArray,
 	}
 }

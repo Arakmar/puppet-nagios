@@ -9,21 +9,12 @@ define nagios::type::contact (
 	$service_notification_commands = '',
 	$host_notification_commands = '',
 	$email = 'root@localhost',
-	$server_name = undef
 )
 {
-	if ! ($server_name) {
-		@@concat::fragment{ "nagios_contact_${name}_${::fqdn}":
-			target => '/etc/nagios3/conf.d/nagios_contact.cfg',
-			content => template("nagios/nagios_type/contact.erb"),
-			tag => 'nagios_contact',
-		}
-	} else {
-		$tagArray = prefix("nagios_contact_", $server_name)
-		@@concat::fragment{ "nagios_contact_${name}_${::fqdn}":
-			target => '/etc/nagios3/conf.d/nagios_contact.cfg',
-			content => template("nagios/nagios_type/contact.erb"),
-			tag => $tagArray,
-		}
+
+	concat::fragment { "nagios_contact_${name}_${::fqdn}":
+		target  => '/etc/nagios3/conf.d/nagios_contact.cfg',
+		content => template("nagios/nagios_type/contact.erb"),
+		tag     => 'nagios_contact'
 	}
 }
