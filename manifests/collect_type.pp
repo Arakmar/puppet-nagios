@@ -7,12 +7,13 @@ define nagios::collect_type (
 	validate_string($server_name)
 
   if ($exported) {
-    Concat::Fragment <<| tag == "nagios_${name}" |>> {
-      target => "${destdir}/nagios_${name}.cfg",
-      order  => '20'
-    }
     if ($server_name) {
       Concat::Fragment <<| tag == "nagios_${name}_${server_name}" |>> {
+        target => "${destdir}/nagios_${name}.cfg",
+        order  => '30'
+      }
+    } else {
+      Concat::Fragment <<| tag == "nagios_${name}" |>> {
         target => "${destdir}/nagios_${name}.cfg",
         order  => '30'
       }
