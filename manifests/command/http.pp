@@ -33,9 +33,9 @@ class nagios::command::http(
           command_line => '$USER1$/check_http --ssl -H $ARG1$ -u $ARG2$ -e $ARG3$';
         check_https_cert:
           command_line => "\$USER1\$/check_http --ssl --sni -I \$HOSTADDRESS\$ -H \$ARG1\$ -C ${ssl_warning_delay}";
-        check_http_auth_string:
+        check_http_auth_content:
           command_line => '$USER1$/check_http -I $HOSTADDRESS$ -H $ARG1$ -u $ARG2$ -s $ARG3$ -a $ARG4$:$ARG5$ -f $ARG6$';
-        check_https_auth_string:
+        check_https_auth_content:
           command_line => '$USER1$/check_http --ssl --sni -I $HOSTADDRESS$ -H $ARG1$ -u $ARG2$ -s $ARG3$ -a $ARG4$:$ARG5$ -f $ARG6$';
     }
 }
