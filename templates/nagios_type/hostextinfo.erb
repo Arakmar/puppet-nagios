@@ -1,9 +1,6 @@
 define hostextinfo {
-<% unless @host_name.empty? -%>
-	host_name <%= @host_name.join(",") %>
-<% end -%>
-<% unless @hostgroup_name.empty? -%>
-	hostgroup_name <%= @hostgroup_name.join(",") %>
+<% if @host_name -%>
+	host_name <%= @host_name %>
 <% end -%>
 <% if @use -%>
 	use <%= @use %>

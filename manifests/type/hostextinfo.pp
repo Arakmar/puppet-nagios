@@ -1,7 +1,6 @@
  define nagios::type::hostextinfo (
 	$use = undef,
 	$host_name = undef,
-	$hostgroup_name = undef,
 	$notes = undef,
 	$icon_image = undef,
 	$icon_image_alt = undef,
