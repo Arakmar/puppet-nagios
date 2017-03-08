@@ -9,6 +9,7 @@ define nagios::type::contact (
 	$service_notification_commands = undef,
 	$host_notification_commands = undef,
 	$email = 'root@localhost',
+	$register = undef,
 )
 {
 
