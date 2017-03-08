@@ -1,5 +1,6 @@
 define nagios::type::service (
 	$host_name = undef,
+	$template_name = undef,
 	$hostgroup_name = [],
 	$check_command = undef,
 	$check_period = undef,

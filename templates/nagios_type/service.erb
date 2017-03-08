@@ -1,5 +1,8 @@
 define service {
         use <%= @use %>
+<% if @template_name -%>
+    name <%= @template_name %>
+<% end -%>
 <% if @service_description -%>
         service_description <%= @service_description %>
 <% end -%>

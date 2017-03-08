@@ -2,7 +2,12 @@ define host {
 <% if @use -%>
         use <%= @use %>
 <% end -%>
+<% if @host_name -%>
         host_name <%= @host_name %>
+<% end -%>
+<% if @template_name -%>
+        name <%= @template_name %>
+<% end -%>
 <% if @real_address -%>
         address <%= @real_address %>
 <% end -%>

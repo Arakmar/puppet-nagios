@@ -1,5 +1,6 @@
 define nagios::type::host (
 	$use = 'generic-host',
+	$template_name = undef,
 	$host_name = $::fqdn,
 	$address = undef,
 	$hostgroups = [],

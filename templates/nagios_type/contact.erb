@@ -1,5 +1,10 @@
 define contact {
+<% if @contact_name -%>
         contact_name <%= @contact_name %>
+<% end -%>
+<% if @template_name -%>
+        name <%= @template_name %>
+<% end -%>
 <% if @use -%>
         use <%= @use %>
 <% end -%>
