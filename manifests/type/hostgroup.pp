@@ -6,7 +6,7 @@ define nagios::type::hostgroup (
 )
 {
 	concat::fragment { "nagios_hostgroup_${name}_${::fqdn}":
-		target  => "${nagios::defaults::vars::int_cfgdir}/conf.d/nagios_hostgroup.cfg",
+		target  => "${nagios::params::cfg_dir}/conf.d/nagios_hostgroup.cfg",
 		content => template("nagios/nagios_type/hostgroup.erb"),
 		tag     => 'nagios_hostgroup',
 		order  => '30'

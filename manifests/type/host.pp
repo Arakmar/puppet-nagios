@@ -37,7 +37,7 @@ define nagios::type::host (
 	}
 
 	@@concat::fragment { "nagios_host_${name}_${::fqdn}":
-		target  => "${nagios::defaults::vars::int_cfgdir}/conf.d/nagios_hosts.cfg",
+		target  => "${nagios::params::cfg_dir}/conf.d/nagios_hosts.cfg",
 		content => template("nagios/nagios_type/host.erb"),
 		tag     => $tagArray
 	}

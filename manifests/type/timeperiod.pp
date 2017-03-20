@@ -11,7 +11,7 @@ define nagios::type::timeperiod (
 )
 {
 	concat::fragment { "nagios_timeperiod_${name}_${::fqdn}":
-		target  => "${nagios::defaults::vars::int_cfgdir}/conf.d/nagios_timeperiod.cfg",
+		target  => "${nagios::params::cfg_dir}/conf.d/nagios_timeperiod.cfg",
 		content => template("nagios/nagios_type/timeperiod.erb"),
 		tag     => 'nagios_timeperiod',
 		order  => '30'

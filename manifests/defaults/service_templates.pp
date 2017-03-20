@@ -5,7 +5,7 @@ class nagios::defaults::service_templates {
 
     nagios::type::service {
         'generic-service':
-            server_names => [$nagios::defaults::vars::int_server_name],
+            server_names => [$nagios::server_name],
             active_checks_enabled           => '1',
             passive_checks_enabled          => '1',
             parallelize_check               => '1',

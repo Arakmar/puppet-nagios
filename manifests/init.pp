@@ -16,18 +16,112 @@
 
 # manage nagios
 class nagios(
-  $allow_external_cmd = false,
+  $allow_external_cmd = $nagios::params::check_external_commands,
   $server_name = undef
-) {
+) inherits nagios::params {
   validate_string($server_name)
 
-  case $::osfamily {
-    'redhat': {
-      include nagios::centos
-    }
-    'debian': {
-      include nagios::debian
-    }
-    default: { fail("No such operatingsystem: ${::operatingsystem} yet defined") }
+  package { $nagios::params::package:
+    ensure => present,
+  }
+
+  file { 'nagios_cfgdir':
+    path    => $nagios::params::cfg_dir,
+    ensure  => directory,
+    recurse => true,
+    purge   => true,
+    notify  => Service[$nagios::params::service],
+    require => Package[$nagios::params::package],
+    mode    => '0755',
+    owner   => 'root',
+    group   => 'root';
+  }
+
+  file { 'nagios_main_cfg':
+    path     => "${nagios::params::cfg_dir}/nagios.cfg",
+    content  => template("nagios/nagios.cfg.erb"),
+    notify   => Service[$nagios::params::service],
+    require  => Package[$nagios::params::package],
+    mode     => '0644',
+    owner    => 'root',
+    group    => 'root';
+  }
+
+  file { 'nagios_cgi_cfg':
+    path    => "${nagios::params::cfg_dir}/cgi.cfg",
+    source  => [ "puppet:///modules/nagios/configs/${::osfamily}/${::operatingsystemmajrelease}/cgi.cfg",
+      "puppet:///modules/nagios/configs/${::osfamily}/cgi.cfg",
+      "puppet:///modules/nagios/configs/cgi.cfg" ],
+    mode    => '0644',
+    owner   => 'root',
+    group   => 'root',
+    require => Package[$nagios::params::package],
+  }
+
+  file { 'nagios_resource_cfg':
+    path    => $nagios::params::resource_file,
+    source  => [ "puppet:///modules/nagios/configs/${::osfamily}/private/resource.cfg.${::architecture}" ],
+    notify  => Service[$nagios::params::service],
+    require => Package[$nagios::params::package],
+    owner   => 'root',
+    group   => $nagios::params::group,
+    mode    => '0640';
+  }
+
+  file { 'nagios_confd':
+    path    => "${nagios::params::cfg_dir}/conf.d/",
+    ensure  => directory,
+    purge   => true,
+    recurse => true,
+    notify  => Service[$nagios::params::service],
+    require => Package[$nagios::params::package],
+    mode    => '0750',
+    owner => 'root',
+    group => $nagios::params::group;
+  }
+
+  file { 'nagios_commands_cfg':
+    path   => "${nagios::params::cfg_dir}/commands.cfg",
+    ensure => absent,
+    notify => Service[$nagios::params::service]
+  }
+
+  file { "${nagios::params::cfg_dir}/stylesheets":
+    ensure  => directory,
+    purge   => false,
+    recurse => true,
+  }
+
+  service { $nagios::params::service:
+    ensure  => running,
+    enable  => true,
+    require => Package[$nagios::params::package],
+  }
+
+  nagios::collect_type {
+    "command":
+      destdir  => "${nagios::params::cfg_dir}/conf.d",
+      exported => false;
+    "contact":
+      destdir  => "${nagios::params::cfg_dir}/conf.d",
+      exported => false;
+    "contactgroup":
+      destdir  => "${nagios::params::cfg_dir}/conf.d",
+      exported => false;
+    "hosts":
+      destdir     => "${nagios::params::cfg_dir}/conf.d",
+      server_name => $nagios::server_name;
+    "service":
+      destdir     => "${nagios::params::cfg_dir}/conf.d",
+      server_name => $nagios::server_name;
+    "hostgroup":
+      destdir  => "${nagios::params::cfg_dir}/conf.d",
+      exported => false;
+    "hostextinfo":
+      destdir     => "${nagios::params::cfg_dir}/conf.d",
+      server_name => $nagios::server_name;
+    "timeperiod":
+      destdir  => "${nagios::params::cfg_dir}/conf.d",
+      exported => false;
   }
 }

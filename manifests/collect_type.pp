@@ -1,5 +1,5 @@
 define nagios::collect_type (
-	$destdir = "${nagios::defaults::vars::int_cfgdir}/conf.d",
+	$destdir = "${nagios::params::cfg_dir}/conf.d",
 	$server_name = undef,
   $exported = true
 )
@@ -27,9 +27,9 @@ define nagios::collect_type (
 	}
   
 	concat{ "${destdir}/nagios_${name}.cfg":
-		owner => root, 
-		group => root, 
+		owner => 'root',
+		group => 'root',
 		mode => '0644',
-		notify => Service["nagios"]
+		notify => Service[$nagios::params::service]
 	}
 }

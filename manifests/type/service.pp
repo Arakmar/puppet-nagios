@@ -71,7 +71,7 @@ define nagios::type::service (
 	}
 
 	@@concat::fragment { "nagios_service_${name}_${::fqdn}":
-		target  => "${nagios::defaults::vars::int_cfgdir}/conf.d/nagios_service.cfg",
+		target  => "${nagios::params::cfg_dir}/conf.d/nagios_service.cfg",
 		content => template("nagios/nagios_type/service.erb"),
 		tag     => $tagArray,
 	}

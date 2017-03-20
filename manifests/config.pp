@@ -1,51 +1,24 @@
 define nagios::config (
     $ensure = present,
-    $source = 'absent',
-    $content = 'absent',
-    $destination = 'absent'
+    $source = undef,
+    $content = undef,
 ) {
-    
-    $real_destination = $destination ? {
-        'absent' => "${nagios::defaults::vars::int_cfgdir}/conf.d/${name}",
-        default => $destination
+    if $content and $source {
+        fail('nagios::config cannot have both content and source')
+    }
+
+    if !$content and !$source {
+        fail('nagios::config needs either of content or source')
     }
     
-    file {"nagios_${name}":
-        ensure => $ensure,
-        path => $real_destination,
-        notify => Service[nagios],
-        owner => root, group => 0, mode => '0644';
-    }
-    
-    case $ensure {
-        'absent','purged': {
-            # We want to avoid all stuff related to source and content
-        }
-        default: {
-            case $content {
-                'absent': {
-                    $real_source = $source ? {
-                        'absent' => [
-                            "puppet:///modules/site_nagios/configs/${::fqdn}/${name}",
-                            "puppet:///modules/site_nagios/configs/${::operatingsystem}.${::lsbdistcodename}/${name}",
-                            "puppet:///modules/site_nagios/configs/${::operatingsystem}/${name}",
-                            "puppet:///modules/site_nagios/configs/${name}",
-                            "puppet:///modules/nagios/configs/${::operatingsystem}.${::lsbdistcodename}/${name}",
-                            "puppet:///modules/nagios/configs/${::operatingsystem}/${name}",
-                            "puppet:///modules/nagios/configs/${name}"
-                        ],
-                        default => $source,
-                    }
-                    File["nagios_${name}"]{
-                        source => $real_source,
-                    }
-                }
-                default: {
-                    File["nagios_${name}"]{
-                        content => $content,
-                    }
-                }
-            }
-        }
+    file { "nagios_${name}":
+      ensure  => $ensure,
+      path    => "${nagios::params::cfg_dir}/conf.d/custom_${name}",
+      content => $content,
+      source  => $source,
+      notify  => Service[$nagios::params::service],
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
     }
 }

@@ -8,7 +8,7 @@ class nagios::defaults::host_templates
 
     nagios::type::host {
         'generic-host':
-            server_name => $nagios::defaults::vars::int_server_name,
+            server_name => $nagios::server_name,
             address                         => '',
             host_name                       => 'generic-host',
             notifications_enabled           => '1',
