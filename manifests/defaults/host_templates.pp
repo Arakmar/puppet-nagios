@@ -24,7 +24,7 @@ class nagios::defaults::host_templates (
       notification_options         => 'd,u,r',
       contact_groups               => $contact_groups,
       register                     => '0',
-      use                          => ""
+      use                          => '',
   }
 
 }

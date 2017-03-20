@@ -4,7 +4,7 @@ class nagios::command::imap_pop3 {
     default: {
       nagios::type::command {
         'check_imap':
-          command_line => '$USER1$/check_imap -H $ARG1$ -p $ARG2$'
+          command_line => '$USER1$/check_imap -H $ARG1$ -p $ARG2$',
       }
     }
   }

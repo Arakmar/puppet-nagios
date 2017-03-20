@@ -8,46 +8,46 @@ class nagios::defaults::commands {
     'debian': { }
     default: {
       nagios::type::command {
-        check_ping:
+        'check_ping':
           command_line => '$USER1$/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$';
-        check-host-alive:
+        'check-host-alive':
           command_line => '$USER1$/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1';
-        check_tcp:
+        'check_tcp':
           command_line => '$USER1$/check_tcp -H $HOSTADDRESS$ -p $ARG1$';
-        check_udp:
+        'check_udp':
           command_line => '$USER1$/check_udp -H $HOSTADDRESS$ -p $ARG1$';
-        check_ssh:
+        'check_ssh':
           command_line => '$USER1$/check_ssh $HOSTADDRESS$';
-        check_ssh_port:
+        'check_ssh_port':
           command_line => '$USER1$/check_ssh -p $ARG1$ $HOSTADDRESS$';
-        check_mysql:
+        'check_mysql':
           command_line => '$USER1$/check_mysql -H $ARG1$ -P $ARG2$ -u $ARG3$ -p $ARG4$';
       }
     }
   }
 
   nagios::type::command {
-    check_dummy:
+    'check_dummy':
       command_line => '$USER1$/check_dummy $ARG1$';
-    check_http_url:
+    'check_http_url':
       command_line => '$USER1$/check_http -H $ARG1$ -u $ARG2$';
-    check_http_url_regex:
+    'check_http_url_regex':
       command_line => '$USER1$/check_http -H $ARG1$ -u $ARG2$ -e $ARG3$';
-    check_https_url:
+    'check_https_url':
       command_line => '$USER1$/check_http --ssl -H $ARG1$ -u $ARG2$';
-    check_https_url_regex:
+    'check_https_url_regex':
       command_line => '$USER1$/check_http --ssl -H $ARG1$ -u $ARG2$ -e $ARG3$';
-    check_mysql_db:
+    'check_mysql_db':
       command_line => '$USER1$/check_mysql -H $ARG1$ -P $ARG2$ -u $ARG3$ -p $ARG4$ -d $ARG5$';
-    check_ntp_time:
+    'check_ntp_time':
       command_line => '$USER1$/check_ntp_time -H $HOSTADDRESS$ -w 0.5 -c 1';
-    check_silc:
+    'check_silc':
       command_line => '$USER1$/check_tcp -p 706 -H $ARG1$';
-    check_sobby:
+    'check_sobby':
       command_line => '$USER1$/check_tcp -H $ARG1$ -p $ARG2$';
-    check_git:
+    'check_git':
       command_line => '$USER1$/check_tcp -H $ARG1$ -p 9418';
-    check_ssh_port_host:
+    'check_ssh_port_host':
       command_line => '$USER1$/check_ssh -p $ARG1$ $ARG2$';
   }
 

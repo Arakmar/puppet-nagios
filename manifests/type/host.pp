@@ -30,14 +30,14 @@ define nagios::type::host (
   validate_array($server_names)
 
   if (empty($server_names)) {
-    $tagArray = ['nagios_hosts']
+    $tag_array = ['nagios_hosts']
   } else {
-    $tagArray = prefix($server_names, "nagios_hosts_")
+    $tag_array = prefix($server_names, 'nagios_hosts_')
   }
 
   @@concat::fragment { "nagios_host_${name}_${::fqdn}":
     target  => "${nagios::params::cfg_dir}/conf.d/nagios_hosts.cfg",
-    content => template("nagios/nagios_type/host.erb"),
-    tag     => $tagArray
+    content => template('nagios/nagios_type/host.erb'),
+    tag     => $tag_array,
   }
 }

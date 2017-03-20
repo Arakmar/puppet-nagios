@@ -26,8 +26,8 @@ class nagios (
   }
 
   file { 'nagios_cfgdir':
-    path    => $nagios::params::cfg_dir,
     ensure  => directory,
+    path    => $nagios::params::cfg_dir,
     recurse => true,
     purge   => true,
     notify  => Service[$nagios::params::service],
@@ -39,7 +39,7 @@ class nagios (
 
   file { 'nagios_main_cfg':
     path    => "${nagios::params::cfg_dir}/nagios.cfg",
-    content => template("nagios/nagios.cfg.erb"),
+    content => template('nagios/nagios.cfg.erb'),
     notify  => Service[$nagios::params::service],
     require => Package[$nagios::params::package],
     mode    => '0644',
@@ -51,7 +51,7 @@ class nagios (
     path    => "${nagios::params::cfg_dir}/cgi.cfg",
     source  => [ "puppet:///modules/nagios/configs/${::osfamily}/${::operatingsystemmajrelease}/cgi.cfg",
       "puppet:///modules/nagios/configs/${::osfamily}/cgi.cfg",
-      "puppet:///modules/nagios/configs/cgi.cfg" ],
+      'puppet:///modules/nagios/configs/cgi.cfg' ],
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
@@ -69,8 +69,8 @@ class nagios (
   }
 
   file { 'nagios_confd':
-    path    => "${nagios::params::cfg_dir}/conf.d/",
     ensure  => directory,
+    path    => "${nagios::params::cfg_dir}/conf.d/",
     purge   => true,
     recurse => true,
     notify  => Service[$nagios::params::service],
@@ -81,9 +81,9 @@ class nagios (
   }
 
   file { 'nagios_commands_cfg':
-    path   => "${nagios::params::cfg_dir}/commands.cfg",
     ensure => absent,
-    notify => Service[$nagios::params::service]
+    path   => "${nagios::params::cfg_dir}/commands.cfg",
+    notify => Service[$nagios::params::service],
   }
 
   file { "${nagios::params::cfg_dir}/stylesheets":
@@ -99,28 +99,28 @@ class nagios (
   }
 
   nagios::collect_type {
-    "command":
+    'command':
       destdir  => "${nagios::params::cfg_dir}/conf.d",
       exported => false;
-    "contact":
+    'contact':
       destdir  => "${nagios::params::cfg_dir}/conf.d",
       exported => false;
-    "contactgroup":
+    'contactgroup':
       destdir  => "${nagios::params::cfg_dir}/conf.d",
       exported => false;
-    "hosts":
+    'hosts':
       destdir     => "${nagios::params::cfg_dir}/conf.d",
       server_name => $nagios::server_name;
-    "service":
+    'service':
       destdir     => "${nagios::params::cfg_dir}/conf.d",
       server_name => $nagios::server_name;
-    "hostgroup":
+    'hostgroup':
       destdir  => "${nagios::params::cfg_dir}/conf.d",
       exported => false;
-    "hostextinfo":
+    'hostextinfo':
       destdir     => "${nagios::params::cfg_dir}/conf.d",
       server_name => $nagios::server_name;
-    "timeperiod":
+    'timeperiod':
       destdir  => "${nagios::params::cfg_dir}/conf.d",
       exported => false;
   }

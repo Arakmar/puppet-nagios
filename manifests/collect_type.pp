@@ -21,7 +21,7 @@ define nagios::collect_type (
 
   concat::fragment { "type_header_${name}":
     target  => "${destdir}/nagios_${name}.cfg",
-    content => template("nagios/nagios_type/type_header.erb"),
+    content => template('nagios/nagios_type/type_header.erb'),
     order   => '05',
   }
 
@@ -29,6 +29,6 @@ define nagios::collect_type (
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    notify => Service[$nagios::params::service]
+    notify => Service[$nagios::params::service],
   }
 }

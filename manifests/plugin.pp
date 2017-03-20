@@ -3,8 +3,8 @@ define nagios::plugin (
   $ensure = 'present',
 ) {
   file { $name:
-    path    => "${nagios::params::plugin_dir}/${name}",
     ensure  => $ensure,
+    path    => "${nagios::params::plugin_dir}/${name}",
     source  => $source,
     tag     => 'nagios_plugin',
     require => Package['nagios-plugins'],

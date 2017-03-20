@@ -15,8 +15,8 @@ define nagios::type::contact (
 
   concat::fragment { "nagios_contact_${name}_${::fqdn}":
     target  => "${nagios::params::cfg_dir}/conf.d/nagios_contact.cfg",
-    content => template("nagios/nagios_type/contact.erb"),
+    content => template('nagios/nagios_type/contact.erb'),
     tag     => 'nagios_contact',
-    order   => '30'
+    order   => '30',
   }
 }
