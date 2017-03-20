@@ -1,10 +1,9 @@
 define nagios::collect_type (
-	$destdir = "${nagios::params::cfg_dir}/conf.d",
-	$server_name = undef,
-  $exported = true
-)
-{
-	validate_string($server_name)
+  $destdir     = "${nagios::params::cfg_dir}/conf.d",
+  $server_name = undef,
+  $exported    = true
+) {
+  validate_string($server_name)
 
   if ($exported) {
     if ($server_name) {
@@ -19,17 +18,17 @@ define nagios::collect_type (
       }
     }
   }
-	
-	concat::fragment {"type_header_${name}":
-		target => "${destdir}/nagios_${name}.cfg",
-		content => template("nagios/nagios_type/type_header.erb"),
-		order => '05',
-	}
-  
-	concat{ "${destdir}/nagios_${name}.cfg":
-		owner => 'root',
-		group => 'root',
-		mode => '0644',
-		notify => Service[$nagios::params::service]
-	}
+
+  concat::fragment { "type_header_${name}":
+    target  => "${destdir}/nagios_${name}.cfg",
+    content => template("nagios/nagios_type/type_header.erb"),
+    order   => '05',
+  }
+
+  concat { "${destdir}/nagios_${name}.cfg":
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    notify => Service[$nagios::params::service]
+  }
 }

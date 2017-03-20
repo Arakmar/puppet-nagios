@@ -15,9 +15,9 @@
 #
 
 # manage nagios
-class nagios(
+class nagios (
   $allow_external_cmd = $nagios::params::check_external_commands,
-  $server_name = undef
+  $server_name        = undef
 ) inherits nagios::params {
   validate_string($server_name)
 
@@ -38,13 +38,13 @@ class nagios(
   }
 
   file { 'nagios_main_cfg':
-    path     => "${nagios::params::cfg_dir}/nagios.cfg",
-    content  => template("nagios/nagios.cfg.erb"),
-    notify   => Service[$nagios::params::service],
-    require  => Package[$nagios::params::package],
-    mode     => '0644',
-    owner    => 'root',
-    group    => 'root';
+    path    => "${nagios::params::cfg_dir}/nagios.cfg",
+    content => template("nagios/nagios.cfg.erb"),
+    notify  => Service[$nagios::params::service],
+    require => Package[$nagios::params::package],
+    mode    => '0644',
+    owner   => 'root',
+    group   => 'root';
   }
 
   file { 'nagios_cgi_cfg':
@@ -76,8 +76,8 @@ class nagios(
     notify  => Service[$nagios::params::service],
     require => Package[$nagios::params::package],
     mode    => '0750',
-    owner => 'root',
-    group => $nagios::params::group;
+    owner   => 'root',
+    group   => $nagios::params::group;
   }
 
   file { 'nagios_commands_cfg':

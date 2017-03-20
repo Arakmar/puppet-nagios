@@ -1,7 +1,7 @@
 class nagios::params {
   $check_external_commands = true
   $command_check_interval = '-1'
-  $temp_path='/tmp'
+  $temp_path = '/tmp'
 
   case $::osfamily {
     'redhat': {
@@ -10,7 +10,7 @@ class nagios::params {
       $user = 'nagios'
       $group = 'nagios'
       $cfg_dir = '/etc/nagios'
-      $plugin_dir           = $::architecture ? {
+      $plugin_dir = $::architecture ? {
         /x86_64/ => '/usr/lib64/nagios/plugins',
         default  => '/usr/lib/nagios/plugins',
       }

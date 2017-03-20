@@ -5,7 +5,7 @@ class nagios::defaults::commands {
   include nagios::command::imap_pop3
 
   case $::osfamily {
-    'debian': {}
+    'debian': { }
     default: {
       nagios::type::command {
         check_ping:
@@ -51,18 +51,25 @@ class nagios::defaults::commands {
       command_line => '$USER1$/check_ssh -p $ARG1$ $ARG2$';
   }
 
-    # notification commands
+  # notification commands
 
-    $mail_cmd_location = $::osfamily ? {
-      'redhat' => '/bin/mail',
-      default => '/usr/bin/mail'
-    }
+  $mail_cmd_location = $::osfamily ? {
+    'redhat' => '/bin/mail',
+    default  => '/usr/bin/mail'
+  }
 
-    nagios::type::command {
-        'notify-host-by-email':
-            command_line => "/usr/bin/printf \"%b\" \"***** Nagios *****\\n\\nNotification Type: \$NOTIFICATIONTYPE\$\\nHost: \$HOSTNAME\$\\nState: \$HOSTSTATE\$\\nAddress: \$HOSTADDRESS\$\\nInfo: \$HOSTOUTPUT\$\\n\\nDate/Time: \$LONGDATETIME\$\\n\" | ${mail_cmd_location} -s \"** \$NOTIFICATIONTYPE\$ Host Alert: \$HOSTNAME\$ is \$HOSTSTATE\$ **\" \$CONTACTEMAIL\$";
-        'notify-service-by-email':
-            command_line => "/usr/bin/printf \"%b\" \"***** Nagios *****\\n\\nNotification Type: \$NOTIFICATIONTYPE\$\\n\\nService: \$SERVICEDESC\$\\nHost: \$HOSTALIAS\$\\nAddress: \$HOSTADDRESS\$\\nState: \$SERVICESTATE\$\\n\\nDate/Time: \$LONGDATETIME\$\\n\\nAdditional Info:\\n\\n\$SERVICEOUTPUT\$\" | ${mail_cmd_location} -s \"** \$NOTIFICATIONTYPE\$ Service Alert: \$HOSTALIAS\$/\$SERVICEDESC\$ is \$SERVICESTATE\$ **\" \$CONTACTEMAIL\$";
-    }
+  nagios::type::command {
+    'notify-host-by-email':
+      command_line =>
+        "/usr/bin/printf \"%b\" \"***** Nagios *****\\n\\nNotification Type: \$NOTIFICATIONTYPE\$\\nHost: \$HOSTNAME\$\\nState: \$HOSTSTATE\$\\nAddress: \$HOSTADDRESS\$\\nInfo: \$HOSTOUTPUT\$\\n\\nDate/Time: \$LONGDATETIME\$\\n\" |
+          ${mail_cmd_location}
+           -s \"** \$NOTIFICATIONTYPE\$ Host Alert: \$HOSTNAME\$ is \$HOSTSTATE\$ **\" \$CONTACTEMAIL\$";
+    'notify-service-by-email':
+      command_line =>
+        "/usr/bin/printf \"%b\" \"***** Nagios *****\\n\\nNotification Type: \$NOTIFICATIONTYPE\$\\n\\nService: \$SERVICEDESC\$\\nHost: \$HOSTALIAS\$\\nAddress: \$HOSTADDRESS\$\\nState: \$SERVICESTATE\$\\n\\nDate/Time: \$LONGDATETIME\$\\n\\nAdditional Info:\\n\\n\$SERVICEOUTPUT\$\" |
+          ${mail_cmd_location}
+           -s \"** \$NOTIFICATIONTYPE\$ Service Alert: \$HOSTALIAS\$/\$SERVICEDESC\$ is \$SERVICESTATE\$ **\" \$CONTACTEMAIL\$"
+    ;
+  }
 
 }
