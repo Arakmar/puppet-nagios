@@ -21,9 +21,7 @@ class nagios (
 ) inherits nagios::params {
   validate_string($server_name)
 
-  package { $nagios::params::package:
-    ensure => present,
-  }
+  ensure_packages([$nagios::params::package, $nagios::params::nrpe_package])
 
   file { 'nagios_cfgdir':
     ensure  => directory,

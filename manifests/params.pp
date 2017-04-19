@@ -6,6 +6,7 @@ class nagios::params {
   case $::osfamily {
     'redhat': {
       $package = 'nagios'
+      $nrpe_package = 'nagios-plugins-nrpe'
       $service = 'nagios'
       $user = 'nagios'
       $group = 'nagios'
@@ -34,6 +35,7 @@ class nagios::params {
     }
     'debian': {
       $package = 'nagios3'
+      $nrpe_package = 'nagios-nrpe-plugin'
       $service = 'nagios3'
       $cfg_dir = '/etc/nagios3'
       $user = 'nagios'
