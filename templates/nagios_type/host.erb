@@ -23,16 +23,16 @@ define host {
 <% unless @parents.empty? -%>
         parents <%= @parents.join(",") %>
 <% end -%>
-<% if @notifications_enabled -%>
+<% unless @notifications_enabled.nil? -%>
         notifications_enabled <%= @notifications_enabled %>
 <% end -%>
-<% if @event_handler_enabled -%>
+<% unless @event_handler_enabled.nil? -%>
         event_handler_enabled <%= @event_handler_enabled %>
 <% end -%>
-<% if @flap_detection_enabled -%>
+<% unless @flap_detection_enabled.nil? -%>
         flap_detection_enabled <%= @flap_detection_enabled %>
 <% end -%>
-<% if @failure_prediction_enabled -%>
+<% unless @failure_prediction_enabled.nil? -%>
         failure_prediction_enabled <%= @failure_prediction_enabled %>
 <% end -%>
 <% if @process_perf_data -%>

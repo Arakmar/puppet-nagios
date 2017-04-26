@@ -43,10 +43,10 @@ define service {
 <% unless @contact_groups.empty? -%>
         contact_groups <%= @contact_groups.join(",") %>
 <% end -%>
-<% if @active_checks_enabled -%>
+<% unless @active_checks_enabled.nil? -%>
         active_checks_enabled <%= @active_checks_enabled %>
 <% end -%>
-<% if @passive_checks_enabled -%>
+<% unless @passive_checks_enabled.nil? -%>
         passive_checks_enabled <%= @passive_checks_enabled %>
 <% end -%>
 <% if @parallelize_check -%>
@@ -58,19 +58,19 @@ define service {
 <% if @check_freshness -%>
         check_freshness <%= @check_freshness %>
 <% end -%>
-<% if @notifications_enabled -%>
+<% unless @notifications_enabled.nil? -%>
         notifications_enabled <%= @notifications_enabled %>
 <% end -%>
-<% if @event_handler_enabled -%>
+<% unless @event_handler_enabled.nil? -%>
         event_handler_enabled <%= @event_handler_enabled %>
 <% end -%>
 <% if @event_handler -%>
         event_handler <%= @event_handler %>
 <% end -%>
-<% if @flap_detection_enabled -%>
+<% unless @flap_detection_enabled.nil? -%>
         flap_detection_enabled <%= @flap_detection_enabled %>
 <% end -%>
-<% if @failure_prediction_enabled -%>
+<% unless @failure_prediction_enabled.nil? -%>
         failure_prediction_enabled <%= @failure_prediction_enabled %>
 <% end -%>
 <% if @process_perf_data -%>
