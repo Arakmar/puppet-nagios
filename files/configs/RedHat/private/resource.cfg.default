@@ -1,6 +1,8 @@
 ###########################################################################
 #
-# RESOURCE.CFG - Resource File for Nagios 
+# RESOURCE.CFG - Sample Resource File for Nagios 2.9
+#
+# Last Modified: 09-10-2003
 #
 # You can define $USERx$ macros in this file, which can in turn be used
 # in command definitions in your host config file(s).  $USERx$ macros are
@@ -24,8 +26,9 @@
 $USER1$=/usr/lib/nagios/plugins
 
 # Sets $USER2$ to be the path to event handlers
-#$USER2$=/usr/lib/nagios/plugins/eventhandlers
+#$USER2$=/usr/lib64/nagios/plugins/eventhandlers
 
 # Store some usernames and passwords (hidden from the CGIs)
 #$USER3$=someuser
 #$USER4$=somepassword
+
