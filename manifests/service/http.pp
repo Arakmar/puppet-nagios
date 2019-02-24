@@ -10,6 +10,7 @@ define nagios::service::http (
   $use             = 'generic-service',
   $ssl_mode        = false,
   $use_auth        = false,
+  $check_cert      = true,
   $auth_name       = '',
   $auth_password   = '',
   $redirect_status = 'ok',
@@ -35,12 +36,15 @@ define nagios::service::http (
         check_command       => "check_https_url_content!${check_domain}!${check_url}!'${check_string}'!${redirect_status}",
       }
     }
-    nagios::type::service { "https_${name}_${check_string}_cert":
-      host_name           => $::fqdn,
-      use                 => $use,
-      service_description => "Check cert of ${check_domain}${check_url}",
-      server_names        => $server_names,
-      check_command       => "check_https_cert!${check_domain}!${check_url}",
+
+    if $check_cert {
+      nagios::type::service { "https_${name}_${check_string}_cert":
+        host_name           => $::fqdn,
+        use                 => $use,
+        service_description => "Check cert of ${check_domain}${check_url}",
+        server_names        => $server_names,
+        check_command       => "check_https_cert!${check_domain}!${check_url}",
+      }
     }
   } else {
     if $use_auth {
