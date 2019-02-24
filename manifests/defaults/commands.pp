@@ -27,6 +27,8 @@ class nagios::defaults::commands {
   }
 
   nagios::type::command {
+    'check_other_ping':
+      command_line => '$USER1$/check_ping -H $ARG3$ -w $ARG1$ -c $ARG2$';
     'check_dummy':
       command_line => '$USER1$/check_dummy $ARG1$';
     'check_http_url':
