@@ -7,6 +7,7 @@ class nagios::params {
     'redhat': {
       $package = 'nagios'
       $nrpe_package = 'nagios-plugins-nrpe'
+      $plugin_package = 'nagios-plugins'
       $service = 'nagios'
       $user = 'nagios'
       $group = 'nagios'
@@ -36,6 +37,7 @@ class nagios::params {
     'debian': {
       $package = 'nagios3'
       $nrpe_package = 'nagios-nrpe-plugin'
+      $plugin_package = 'monitoring-plugins'
       $service = 'nagios3'
       $cfg_dir = '/etc/nagios3'
       $user = 'nagios'

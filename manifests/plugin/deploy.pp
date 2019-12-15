@@ -2,7 +2,7 @@ define nagios::plugin::deploy (
   $source          = '',
   $ensure          = 'present',
   $config          = '',
-  $require_package = 'nagios-plugins'
+  $require_package = "${nagios::params::plugin_package}"
 ) {
   $plugin_src = $ensure ? {
     'present' => $name,

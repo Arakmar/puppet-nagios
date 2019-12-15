@@ -7,7 +7,7 @@ define nagios::plugin (
     path    => "${nagios::params::plugin_dir}/${name}",
     source  => $source,
     tag     => 'nagios_plugin',
-    require => Package['nagios-plugins'],
+    require => Package["${nagios::params::plugin_package}"],
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
