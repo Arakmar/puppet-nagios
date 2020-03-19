@@ -33,5 +33,5 @@ define nagios::plugin::deploy (
   }
 
   # register the plugin
-  nagios::plugin { $name: ensure => $ensure, require => Package['nagios-plugins'] }
+  nagios::plugin { $name: ensure => $ensure, require => Package["${nagios::params::plugin_package}"] }
 }
