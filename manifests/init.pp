@@ -47,9 +47,7 @@ class nagios (
 
   file { 'nagios_cgi_cfg':
     path    => "${nagios::params::cfg_dir}/cgi.cfg",
-    source  => [ "puppet:///modules/nagios/configs/${::osfamily}/${::operatingsystemmajrelease}/cgi.cfg",
-      "puppet:///modules/nagios/configs/${::osfamily}/cgi.cfg",
-      'puppet:///modules/nagios/configs/cgi.cfg' ],
+    content => template('nagios/cgi.cfg.erb'),
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
