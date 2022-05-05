@@ -1,0 +1,38 @@
+define servicedependency {
+<% if @host_name -%>
+    host_name <%= @host_name %>
+<% end -%>
+<% if @service_description -%>
+    service_description <%= @service_description %>
+<% end -%>
+<% if @hostgroup_name -%>
+    hostgroup_name <%= @hostgroup_name %>
+<% end -%>
+<% if @servicegroup_name -%>
+    servicegroup_name <%= @servicegroup_name %>
+<% end -%>
+<% if @dependent_host_name -%>
+    dependent_host_name <%= @dependent_host_name %>
+<% end -%>
+<% if @dependent_hostgroup_name -%>
+    dependent_hostgroup_name <%= @dependent_hostgroup_name %>
+<% end -%>
+<% if @dependent_servicegroup_name -%>
+    dependent_servicegroup_name <%= @dependent_servicegroup_name %>
+<% end -%>
+<% if @dependent_service_description -%>
+    dependent_service_description <%= @dependent_service_description %>
+<% end -%>
+<% if @inherits_parent -%>
+    inherits_parent <%= @inherits_parent %>
+<% end -%>
+<% if @execution_failure_criteria -%>
+    execution_failure_criteria <%= @execution_failure_criteria %>
+<% end -%>
+<% if @notification_failure_criteria -%>
+    notification_failure_criteria <%= @notification_failure_criteria %>
+<% end -%>
+<% if @dependency_period -%>
+    dependency_period <%= @dependency_period %>
+<% end -%>
+}

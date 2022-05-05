@@ -114,6 +114,9 @@ class nagios (
     'service':
       destdir     => "${nagios::params::cfg_dir}/conf.d",
       server_name => $nagios::server_name;
+    'servicedependency':
+      destdir     => "${nagios::params::cfg_dir}/conf.d",
+      server_name => $nagios::server_name;
     'hostgroup':
       destdir  => "${nagios::params::cfg_dir}/conf.d",
       exported => false;
