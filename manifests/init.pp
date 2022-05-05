@@ -18,6 +18,7 @@
 class nagios (
   $allow_external_cmd = $nagios::params::check_external_commands,
   $cgi_authorized_users = $nagios::params::default_user_name,
+  $soft_state_dependencies = $nagios::params::soft_state_dependencies,
   $server_name        = undef
 ) inherits nagios::params {
   validate_string($server_name)

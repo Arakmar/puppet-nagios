@@ -1,6 +1,7 @@
 class nagios::params {
   $check_external_commands = true
   $command_check_interval = '-1'
+  $soft_state_dependencies = 0
   $temp_path = '/tmp'
 
   $use_authentication = true
