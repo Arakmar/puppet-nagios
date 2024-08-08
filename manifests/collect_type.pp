@@ -3,8 +3,6 @@ define nagios::collect_type (
   $server_name = undef,
   $exported    = true
 ) {
-  validate_string($server_name)
-
   if ($exported) {
     if ($server_name) {
       Concat::Fragment <<| tag == "nagios_${name}_${server_name}" |>> {

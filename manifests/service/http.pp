@@ -24,7 +24,7 @@ define nagios::service::http (
         use                 => $use,
         service_description => "Check https of ${check_domain}${check_url} with authentification",
         server_names        => $server_names,
-        check_command       => "check_https_auth_content!${check_domain}!${check_url}!'${check_string}'!${auth_name}!${auth_password}!${redirect_status}",
+        check_command       => "check_https_auth_content!${check_domain}!${check_url}!'${check_string}'!${auth_name}!auth_password!${redirect_status}",
       }
     }
     else {
@@ -53,7 +53,7 @@ define nagios::service::http (
         use                 => $use,
         service_description => "Check http of ${check_domain}${check_url} with authentification",
         server_names        => $server_names,
-        check_command       => "check_http_auth_content!${check_domain}!${check_url}!'${check_string}'!${auth_name}!${auth_password}!${redirect_status}",
+        check_command       => "check_http_auth_content!${check_domain}!${check_url}!'${check_string}'!${auth_name}!auth_password!${redirect_status}",
       }
     }
     else {

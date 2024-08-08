@@ -21,8 +21,6 @@ class nagios (
   $soft_state_dependencies = $nagios::params::soft_state_dependencies,
   $server_name        = undef
 ) inherits nagios::params {
-  validate_string($server_name)
-
   ensure_packages([$nagios::params::package, $nagios::params::nrpe_package])
 
   file { 'nagios_cfgdir':

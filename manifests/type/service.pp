@@ -36,9 +36,8 @@ define nagios::type::service (
   $nrpe_args                    = undef,
   $nrpe_host                    = undef,
   $nrpe_timeout                 = 60,
-  $server_names                 = []
+  Array $server_names           = []
 ) {
-  validate_array($server_names)
 
   if (empty($server_names)) {
     $tag_array = ['nagios_service']

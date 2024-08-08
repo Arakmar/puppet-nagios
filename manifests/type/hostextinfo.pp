@@ -6,10 +6,8 @@ define nagios::type::hostextinfo (
   $icon_image_alt  = undef,
   $vrml_image      = undef,
   $statusmap_image = undef,
-  $server_names    = []
+  Array $server_names = []
 ) {
-  validate_array($server_names)
-
   if (empty($server_names)) {
     $tag_array = ['nagios_hostextinfo']
   } else {

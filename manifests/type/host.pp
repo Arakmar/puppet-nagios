@@ -20,14 +20,12 @@ define nagios::type::host (
   $notification_period          = undef,
   $notification_options         = undef,
   $register                     = undef,
-  $server_names                 = []
+  Array $server_names           = []
 ) {
   $real_address = $address ? {
     undef   => $host_name,
     default => $address
   }
-
-  validate_array($server_names)
 
   if (empty($server_names)) {
     $tag_array = ['nagios_hosts']

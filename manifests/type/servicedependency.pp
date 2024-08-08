@@ -11,10 +11,8 @@ define nagios::type::servicedependency (
   $execution_failure_criteria    = undef,
   $notification_failure_criteria = undef,
   $dependency_period             = undef,
-  $server_names                  = []
+  Array $server_names            = []
 ) {
-  validate_array($server_names)
-
   if (empty($server_names)) {
     $tag_array = ['nagios_servicedependency']
   } else {
