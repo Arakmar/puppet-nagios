@@ -21,7 +21,7 @@ class nagios (
   $soft_state_dependencies = $nagios::params::soft_state_dependencies,
   $server_name        = undef
 ) inherits nagios::params {
-  ensure_packages([$nagios::params::package, $nagios::params::nrpe_package])
+  ensure_packages([$nagios::params::package, $nagios::params::nrpe_package, $nagios::params::plugin_package])
 
   file { 'nagios_cfgdir':
     ensure  => directory,
