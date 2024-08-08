@@ -4,6 +4,8 @@ define nagios::plugin::deploy (
   $config          = '',
   $require_package = "${nagios::params::plugin_package}"
 ) {
+  include nagios::params
+
   $plugin_src = $ensure ? {
     'present' => $name,
     'absent'  => $name,

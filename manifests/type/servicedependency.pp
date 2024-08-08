@@ -13,6 +13,8 @@ define nagios::type::servicedependency (
   $dependency_period             = undef,
   Array $server_names            = []
 ) {
+  include nagios::params
+
   if (empty($server_names)) {
     $tag_array = ['nagios_servicedependency']
   } else {

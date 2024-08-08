@@ -3,6 +3,8 @@ define nagios::type::command (
   $command_name = $name,
   $use          = undef
 ) {
+  include nagios::params
+
   concat::fragment { "nagios_command_${name}":
     target  => "${nagios::params::cfg_dir}/conf.d/nagios_command.cfg",
     content => template('nagios/nagios_type/command.erb'),

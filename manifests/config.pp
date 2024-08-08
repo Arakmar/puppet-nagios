@@ -3,6 +3,8 @@ define nagios::config (
   $source  = undef,
   $content = undef,
 ) {
+  include nagios::params
+
   if $content and $source {
     fail('nagios::config cannot have both content and source')
   }

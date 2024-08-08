@@ -2,6 +2,8 @@ define nagios::plugin (
   $source,
   $ensure = 'present',
 ) {
+  include nagios::params
+
   file { $name:
     ensure  => $ensure,
     path    => "${nagios::params::plugin_dir}/${name}",

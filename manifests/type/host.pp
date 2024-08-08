@@ -22,6 +22,8 @@ define nagios::type::host (
   $register                     = undef,
   Array $server_names           = []
 ) {
+  include nagios::params
+
   $real_address = $address ? {
     undef   => $host_name,
     default => $address

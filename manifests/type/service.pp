@@ -38,6 +38,7 @@ define nagios::type::service (
   $nrpe_timeout                 = 60,
   Array $server_names           = []
 ) {
+  include nagios::params
 
   if (empty($server_names)) {
     $tag_array = ['nagios_service']

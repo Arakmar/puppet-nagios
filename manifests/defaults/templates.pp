@@ -1,6 +1,7 @@
 class nagios::defaults::templates(
   $source = undef,
 ) {
+  include nagios::params
 
   $real_source = $source ? {
     undef => [

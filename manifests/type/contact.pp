@@ -12,6 +12,7 @@ define nagios::type::contact (
   $email                         = 'root@localhost',
   $register                      = undef,
 ) {
+  include nagios::params
 
   concat::fragment { "nagios_contact_${name}_${facts['networking']['fqdn']}":
     target  => "${nagios::params::cfg_dir}/conf.d/nagios_contact.cfg",
