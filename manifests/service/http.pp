@@ -20,7 +20,7 @@ define nagios::service::http (
   if $ssl_mode {
     if $use_auth {
       nagios::type::service { "https_${name}_${check_string}":
-        host_name           => $::fqdn,
+        host_name           => $facts['networking']['fqdn'],
         use                 => $use,
         service_description => "Check https of ${check_domain}${check_url} with authentification",
         server_names        => $server_names,
@@ -29,7 +29,7 @@ define nagios::service::http (
     }
     else {
       nagios::type::service { "https_${name}_${check_string}":
-        host_name           => $::fqdn,
+        host_name           => $facts['networking']['fqdn'],
         use                 => $use,
         service_description => "Check https of ${check_domain}${check_url}",
         server_names        => $server_names,
@@ -39,7 +39,7 @@ define nagios::service::http (
 
     if $check_cert {
       nagios::type::service { "https_${name}_${check_string}_cert":
-        host_name           => $::fqdn,
+        host_name           => $facts['networking']['fqdn'],
         use                 => $use,
         service_description => "Check cert of ${check_domain}${check_url}",
         server_names        => $server_names,
@@ -49,7 +49,7 @@ define nagios::service::http (
   } else {
     if $use_auth {
       nagios::type::service { "http_${name}_${check_string}":
-        host_name           => $::fqdn,
+        host_name           => $facts['networking']['fqdn'],
         use                 => $use,
         service_description => "Check http of ${check_domain}${check_url} with authentification",
         server_names        => $server_names,
@@ -58,7 +58,7 @@ define nagios::service::http (
     }
     else {
       nagios::type::service { "http_${name}_${check_string}":
-        host_name           => $::fqdn,
+        host_name           => $facts['networking']['fqdn'],
         use                 => $use,
         service_description => "Check http of ${check_domain}${check_url}",
         server_names        => $server_names,

@@ -57,8 +57,8 @@ class nagios (
   file { 'nagios_resource_cfg':
     path    => $nagios::params::resource_file,
     source  => [
-      "puppet:///modules/nagios/configs/${::osfamily}/private/resource.cfg.${::architecture}",
-      "puppet:///modules/nagios/configs/${::osfamily}/private/resource.cfg.default"
+      "puppet:///modules/nagios/configs/${facts['os']['family']}/private/resource.cfg.${facts['os']['architecture']}",
+      "puppet:///modules/nagios/configs/${facts['os']['family']}/private/resource.cfg.default"
     ],
     notify  => Service[$nagios::params::service],
     require => Package[$nagios::params::package],

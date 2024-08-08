@@ -1,7 +1,7 @@
 define nagios::type::host (
   $use                          = 'generic-host',
   $template_name                = undef,
-  $host_name                    = $::fqdn,
+  $host_name                    = $facts['networking']['fqdn'],
   $address                      = undef,
   $hostgroups                   = [],
   $host_alias                   = undef,
@@ -33,7 +33,7 @@ define nagios::type::host (
     $tag_array = prefix($server_names, 'nagios_hosts_')
   }
 
-  @@concat::fragment { "nagios_host_${name}_${::fqdn}":
+  @@concat::fragment { "nagios_host_${name}_${facts['networking']['fqdn']}":
     target  => "${nagios::params::cfg_dir}/conf.d/nagios_hosts.cfg",
     content => template('nagios/nagios_type/host.erb'),
     tag     => $tag_array,

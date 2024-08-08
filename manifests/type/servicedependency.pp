@@ -19,7 +19,7 @@ define nagios::type::servicedependency (
     $tag_array = prefix($server_names, 'nagios_servicedependency_')
   }
 
-  @@concat::fragment { "nagios_servicedependency_${name}_${::fqdn}":
+  @@concat::fragment { "nagios_servicedependency_${name}_${facts['networking']['fqdn']}":
     target  => "${nagios::params::cfg_dir}/conf.d/nagios_servicedependency.cfg",
     content => template('nagios/nagios_type/servicedependency.erb'),
     tag     => $tag_array,

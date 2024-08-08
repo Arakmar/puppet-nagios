@@ -1,7 +1,7 @@
 class nagios::command::http (
   $ssl_warning_delay = '5',
 ) {
-  case $::osfamily {
+  case $facts['os']['family'] {
     'debian': { }
     default: {
       nagios::type::command {

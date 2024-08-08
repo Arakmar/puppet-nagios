@@ -65,7 +65,7 @@ define nagios::type::service (
     $real_check_command = $check_command
   }
 
-  @@concat::fragment { "nagios_service_${name}_${::fqdn}":
+  @@concat::fragment { "nagios_service_${name}_${facts['networking']['fqdn']}":
     target  => "${nagios::params::cfg_dir}/conf.d/nagios_service.cfg",
     content => template('nagios/nagios_type/service.erb'),
     tag     => $tag_array,

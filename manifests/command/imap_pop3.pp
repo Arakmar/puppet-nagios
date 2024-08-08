@@ -1,5 +1,5 @@
 class nagios::command::imap_pop3 {
-  case $::osfamily {
+  case $facts['os']['family'] {
     'debian': { }  # Debian/Ubuntu already define those checks
     default: {
       nagios::type::command {

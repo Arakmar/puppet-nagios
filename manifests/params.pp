@@ -9,7 +9,7 @@ class nagios::params {
   $ack_no_sticky = true
   $ack_no_send = true
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     'redhat': {
       $package = 'nagios'
       $nrpe_package = 'nagios-plugins-nrpe'
@@ -18,7 +18,7 @@ class nagios::params {
       $user = 'nagios'
       $group = 'nagios'
       $cfg_dir = '/etc/nagios'
-      $plugin_dir = $::architecture ? {
+      $plugin_dir = $facts['os']['architecture'] ? {
         /x86_64/ => '/usr/lib64/nagios/plugins',
         default  => '/usr/lib/nagios/plugins',
       }
@@ -46,7 +46,7 @@ class nagios::params {
     }
     'debian': {
 
-      if ($::operatingsystem == 'Debian' and versioncmp($::operatingsystemrelease, '8') <= 0) or ($::operatingsystem == 'Ubuntu' and versioncmp($::operatingsystemrelease, '18.04') <= 0) {
+      if ($facts['os']['name'] == 'Debian' and versioncmp($facts['os']['release']['major'], '8') <= 0) or ($facts['os']['name'] == 'Ubuntu' and versioncmp($facts['os']['release']['major'], '18.04') <= 0) {
         $nagios_major_release = '3'
         $object_cache_file = "/var/cache/nagios${nagios_major_release}/objects.cache"
         $status_file = "/var/cache/nagios${nagios_major_release}/status.dat"
@@ -86,6 +86,6 @@ class nagios::params {
       $physical_html_path = "/usr/share/nagios${nagios_major_release}/htdocs"
       $url_html_path = "/nagios${nagios_major_release}"
     }
-    default: { fail("No such operatingsystem: ${::osfamily} yet defined") }
+    default: { fail("No such operatingsystem: ${facts['os']['family']} yet defined") }
   }
 }

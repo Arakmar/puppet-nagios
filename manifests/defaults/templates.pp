@@ -4,7 +4,7 @@ class nagios::defaults::templates(
 
   $real_source = $source ? {
     undef => [
-      "puppet:///modules/nagios/configs/${::operatingsystem}/nagios_templates.cfg",
+      "puppet:///modules/nagios/configs/${facts['os']['name']}/nagios_templates.cfg",
       'puppet:///modules/nagios/configs/nagios_templates.cfg',
     ],
     default => $source,

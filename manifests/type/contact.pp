@@ -13,7 +13,7 @@ define nagios::type::contact (
   $register                      = undef,
 ) {
 
-  concat::fragment { "nagios_contact_${name}_${::fqdn}":
+  concat::fragment { "nagios_contact_${name}_${facts['networking']['fqdn']}":
     target  => "${nagios::params::cfg_dir}/conf.d/nagios_contact.cfg",
     content => template('nagios/nagios_type/contact.erb'),
     tag     => 'nagios_contact',

@@ -4,7 +4,7 @@ class nagios::defaults::commands {
   include nagios::command::smtp
   include nagios::command::imap_pop3
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     'debian': { }
     default: {
       nagios::type::command {
@@ -55,7 +55,7 @@ class nagios::defaults::commands {
 
   # notification commands
 
-  $mail_cmd_location = $::osfamily ? {
+  $mail_cmd_location = $facts['os']['family'] ? {
     'redhat' => '/bin/mail',
     default  => '/usr/bin/mail'
   }
