@@ -10,7 +10,7 @@ class nagios::params {
   $ack_no_send = true
 
   case $facts['os']['family'] {
-    'redhat': {
+    'RedHat': {
       $package = 'nagios'
       $nrpe_package = 'nagios-plugins-nrpe'
       $plugin_package = 'nagios-plugins'
@@ -44,7 +44,37 @@ class nagios::params {
       $physical_html_path = '/usr/share/nagios/htdocs'
       $url_html_path = '/nagios'
     }
-    'debian': {
+    'ArchLinux': {
+      $package = 'nagios'
+      $nrpe_package = 'nagios-plugins-nrpe'
+      $plugin_package = 'monitoring-plugins'
+      $service = 'nagios'
+      $user = 'nagios'
+      $group = 'nagios'
+      $cfg_dir = '/etc/nagios'
+      $plugin_dir = '/usr/lib/monitoring-plugins/'
+      $subcfg_dirs = ['/etc/nagios/conf.d']
+      $log_file = '/var/log/nagios/nagios.log'
+      $object_cache_file = '/var/spool/nagios/objects.cache'
+      $precached_object_file = '/var/spool/nagios/objects.precache'
+      $resource_file = '/etc/nagios/private/resource.cfg'
+      $status_file = '/var/spool/nagios/status.dat'
+      $command_file = '/var/spool/nagios/cmd/nagios.cmd'
+      $lock_file = '/var/run/nagios/nagios.pid'
+      $temp_file = '/var/spool/nagios/nagios.tmp'
+      $admin_email = 'nagios@localhost'
+      $admin_pager = 'pagenagios@localhost'
+      $enable_environment_macros = true
+      $log_archive_path = '/var/log/nagios/archives'
+      $check_result_path = '/var/spool/nagios/checkresults'
+      $state_retention_file = '/var/spool/nagios/retention.dat'
+      $debug_file = 'var/spool/nagios/nagios.debug'
+
+      $main_config_file = '/etc/nagios/nagios.cfg'
+      $physical_html_path = '/usr/share/nagios/htdocs'
+      $url_html_path = '/nagios'
+    }
+    'Debian': {
 
       if ($facts['os']['name'] == 'Debian' and versioncmp($facts['os']['release']['major'], '8') <= 0) or ($facts['os']['name'] == 'Ubuntu' and versioncmp($facts['os']['release']['major'], '18.04') <= 0) {
         $nagios_major_release = '3'
