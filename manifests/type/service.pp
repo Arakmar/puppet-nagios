@@ -49,9 +49,9 @@ define nagios::type::service (
   if ($use_nrpe) {
     if ($nrpe_args) {
       if ($nrpe_host) {
-        $real_check_command = "check_nrpe_timeout_port!${nrpe_timeout}!${check_command}!${nrpe_port}!\"${nrpe_args}\""
-      } else {
         $real_check_command = "check_nrpe_host_timeout_port!${nrpe_host}!${check_command}!${nrpe_port}!\"${nrpe_args}\"!${nrpe_timeout}"
+      } else {
+        $real_check_command = "check_nrpe_timeout_port!${nrpe_timeout}!${check_command}!${nrpe_port}!\"${nrpe_args}\""
       }
     }
     else {
