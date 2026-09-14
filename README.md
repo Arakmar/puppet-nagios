@@ -1,5 +1,6 @@
 # nagios
 
+[![CI](https://github.com/Arakmar/puppet-nagios/actions/workflows/ci.yml/badge.svg)](https://github.com/Arakmar/puppet-nagios/actions/workflows/ci.yml)
 [![Puppet Forge](https://img.shields.io/puppetforge/v/arakmar/nagios.svg)](https://forge.puppet.com/modules/arakmar/nagios)
 
 ## Table of contents
@@ -229,6 +230,18 @@ pdk test unit
 pdk test unit --puppet-version 7
 pdk bundle exec rake strings:generate:reference
 ```
+
+GitHub Actions run the same checks on every pull request and push to
+`master`: static validations, RuboCop, a REFERENCE.md freshness check and the
+unit tests for every Puppet version listed in `metadata.json`
+(`.github/workflows/ci.yml`, modelled on the
+[Vox Pupuli](https://github.com/voxpupuli/gha-puppet) workflows).
+
+Pushing a `v<version>` tag publishes the module to the Puppet Forge and
+creates a GitHub release through the Vox Pupuli reusable release workflow
+(`.github/workflows/release.yml`). The repository needs a `release`
+environment and the `PUPPET_FORGE_USERNAME` and `PUPPET_FORGE_API_KEY`
+secrets; bump `metadata.json` to the tagged version first.
 
 This module is licensed under the GPL-3.0-only license, see
 [LICENSE](LICENSE). It descends from the work of David Schmitt, the immerda

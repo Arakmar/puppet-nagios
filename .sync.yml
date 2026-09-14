@@ -5,4 +5,10 @@
 #
 # See https://github.com/puppetlabs/pdk-templates/blob/main/config_defaults.yml
 # for the default values.
---- {}
+---
+Gemfile:
+  optional:
+    ':development':
+      # Provides metadata2gha, which builds the CI matrix from metadata.json.
+      - gem: puppet_metadata
+        version: '~> 6.0'
