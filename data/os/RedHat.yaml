@@ -22,3 +22,4 @@ nagios::debug_file: /var/spool/nagios/nagios.debug
 nagios::main_config_file: /etc/nagios/nagios.cfg
 nagios::physical_html_path: /usr/share/nagios/htdocs
 nagios::url_html_path: /nagios
+nagios::defaults::commands::mail_command: /bin/mail

@@ -1,14 +1,13 @@
-class nagios::defaults::contacts {
-  nagios::type::contact {
-    'root':
-      contact_alias                 => 'Root',
-      service_notification_period   => '24x7',
-      host_notification_period      => '24x7',
-      service_notification_options  => 'w,u,c,r',
-      host_notification_options     => 'd,r',
-      service_notification_commands => 'notify-service-by-email',
-      host_notification_commands    => 'notify-host-by-email',
-      email                         => 'root@localhost',
+# @summary Declares the default Nagios contacts.
+#
+# @param contacts Contacts to declare, as nagios::type::contact titles mapped
+#   to their parameters. Defaults to a root contact notified by email.
+class nagios::defaults::contacts (
+  Hash[String[1], Hash] $contacts,
+) {
+  $contacts.each |String $contact, Hash $params| {
+    nagios::type::contact { $contact:
+      * => $params,
+    }
   }
-
 }

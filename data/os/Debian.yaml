@@ -27,3 +27,24 @@ nagios::url_html_path: /nagios4
 nagios::admin_email: root@localhost
 nagios::admin_pager: pageroot@localhost
 nagios::enable_environment_macros: false
+
+# Commands already declared by /etc/nagios-plugins/config on Debian and Ubuntu.
+nagios::defaults::commands::skip:
+  - check_ping
+  - check-host-alive
+  - check_tcp
+  - check_udp
+  - check_ssh
+  - check_ssh_port
+  - check_mysql
+nagios::command::http::skip:
+  - check_http
+  - check_https
+nagios::command::smtp::skip:
+  - check_smtp
+  - check_ssmtp
+nagios::command::imap_pop3::skip:
+  - check_imap
+nagios::command::nrpe::skip:
+  - check_nrpe
+  - check_nrpe_1arg

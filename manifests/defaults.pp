@@ -1,7 +1,12 @@
+# @summary Declares a usable set of default Nagios objects on the server.
+#
+# Includes the default commands, contacts, contact groups, host groups,
+# timeperiods and the generic host, service and contact templates.
+#
+# @example
+#   include nagios
+#   include nagios::defaults
 class nagios::defaults {
-
-  # include some default nagios objects
-
   include nagios::defaults::commands
   include nagios::defaults::contactgroups
   include nagios::defaults::contacts

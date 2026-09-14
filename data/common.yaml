@@ -15,3 +15,76 @@ nagios::group: nagios
 nagios::admin_email: nagios@localhost
 nagios::admin_pager: pagenagios@localhost
 nagios::enable_environment_macros: true
+
+# Default objects declared by the nagios::defaults::* classes.
+nagios::defaults::commands::mail_command: /usr/bin/mail
+
+nagios::defaults::contacts::contacts:
+  root:
+    contact_alias: Root
+    service_notification_period: 24x7
+    host_notification_period: 24x7
+    service_notification_options: w,u,c,r
+    host_notification_options: d,r
+    service_notification_commands: notify-service-by-email
+    host_notification_commands: notify-host-by-email
+    email: root@localhost
+
+nagios::defaults::contactgroups::contactgroups:
+  admins:
+    contactgroup_alias: Nagios Administrators
+    members:
+      - root
+
+nagios::defaults::hostgroups::hostgroups:
+  all:
+    hostgroup_alias: All Servers
+    members:
+      - '*'
+  debian-servers:
+    hostgroup_alias: Debian GNU/Linux Servers
+  centos-servers:
+    hostgroup_alias: CentOS GNU/Linux Servers
+  http-servers:
+    hostgroup_alias: HTTP servers
+  ftp-servers:
+    hostgroup_alias: FTP servers
+  sftp-servers:
+    hostgroup_alias: SFTP servers
+  mysql-servers:
+    hostgroup_alias: MySQL servers
+  dns-servers:
+    hostgroup_alias: DNS servers
+  mail-servers:
+    hostgroup_alias: mail servers
+  routers:
+    hostgroup_alias: Routers
+
+nagios::defaults::timeperiods::timeperiods:
+  24x7:
+    timeperiod_alias: 24 Hours A Day, 7 Days A Week
+    sunday: 00:00-24:00
+    monday: 00:00-24:00
+    tuesday: 00:00-24:00
+    wednesday: 00:00-24:00
+    thursday: 00:00-24:00
+    friday: 00:00-24:00
+    saturday: 00:00-24:00
+  workhours:
+    timeperiod_alias: Standard Work Hours
+    monday: 09:00-17:00
+    tuesday: 09:00-17:00
+    wednesday: 09:00-17:00
+    thursday: 09:00-17:00
+    friday: 09:00-17:00
+  nonworkhours:
+    timeperiod_alias: Non-Work Hours
+    sunday: 00:00-24:00
+    monday: 00:00-09:00,17:00-24:00
+    tuesday: 00:00-09:00,17:00-24:00
+    wednesday: 00:00-09:00,17:00-24:00
+    thursday: 00:00-09:00,17:00-24:00
+    friday: 00:00-09:00,17:00-24:00
+    saturday: 00:00-24:00
+  never:
+    timeperiod_alias: Never
