@@ -1,6 +1,6 @@
 {
   "name": "arakmar-nagios",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Yoann Laissus",
   "summary": "Nagios 4 server with exported concat-based object definitions",
   "license": "GPL-3.0-only",

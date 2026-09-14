@@ -11,7 +11,10 @@ describe 'nagios::command::http' do
       it { is_expected.to contain_nagios__type__command('check_http_port_code').with_command_line('$USER1$/check_http -k \'Accept: */*\' --sni -H $ARG1$ -p $ARG2$ -u $ARG3$ -e $ARG4$') }
       it { is_expected.to contain_nagios__type__command('check_https_port_cert').with_command_line('$USER1$/check_http -k \'Accept: */*\' --ssl --sni -H $ARG1$ -p $ARG2$ -C 5') }
       # Plain http checks may follow a redirection to https: SNI is sent everywhere
-      it { is_expected.to contain_nagios__type__command('check_http_port_url_content').with_command_line('$USER1$/check_http -k \'Accept: */*\' --sni -H $ARG1$ -p $ARG2$ -u $ARG3$ -s $ARG4$ -f $ARG5$') }
+      it do
+        is_expected.to contain_nagios__type__command('check_http_port_url_content')
+          .with_command_line('$USER1$/check_http -k \'Accept: */*\' --sni -H $ARG1$ -p $ARG2$ -u $ARG3$ -s $ARG4$ -f $ARG5$')
+      end
 
       context 'with ssl_warning_delay => 30 and skip' do
         let(:params) { { ssl_warning_delay: 30, skip: ['http_port'] } }
