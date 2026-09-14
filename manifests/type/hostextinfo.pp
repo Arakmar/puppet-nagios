@@ -1,24 +1,38 @@
+# @summary Exports a Nagios hostextinfo object for collection by the server.
+#
+# @param use Template to inherit from.
+# @param host_name Host the extended information applies to.
+# @param notes Free text notes.
+# @param icon_image Icon shown next to the host.
+# @param icon_image_alt Alternative text of the icon.
+# @param vrml_image Image used in the 3D status map.
+# @param statusmap_image Image used in the status map.
+# @param server_names Nagios servers that collect this object; empty means
+#   servers declared without a server_name.
 define nagios::type::hostextinfo (
-  $use             = undef,
-  $host_name       = undef,
-  $notes           = undef,
-  $icon_image      = undef,
-  $icon_image_alt  = undef,
-  $vrml_image      = undef,
-  $statusmap_image = undef,
-  Array $server_names = []
+  Optional[String[1]] $use             = undef,
+  Optional[String[1]] $host_name       = undef,
+  Optional[String[1]] $notes           = undef,
+  Optional[String[1]] $icon_image      = undef,
+  Optional[String[1]] $icon_image_alt  = undef,
+  Optional[String[1]] $vrml_image      = undef,
+  Optional[String[1]] $statusmap_image = undef,
+  Nagios::ServerNames $server_names    = [],
 ) {
   $cfg_dir = lookup('nagios::cfg_dir', Stdlib::Absolutepath)
 
-  if (empty($server_names)) {
-    $tag_array = ['nagios_hostextinfo']
-  } else {
-    $tag_array = prefix($server_names, 'nagios_hostextinfo_')
-  }
-
   @@concat::fragment { "nagios_hostextinfo_${name}_${facts['networking']['fqdn']}":
     target  => "${cfg_dir}/conf.d/nagios_hostextinfo.cfg",
-    content => template('nagios/nagios_type/hostextinfo.erb'),
-    tag     => $tag_array,
+    order   => '30',
+    tag     => nagios::tags('hostextinfo', $server_names),
+    content => nagios::object('hostextinfo', {
+        'host_name'       => $host_name,
+        'use'             => $use,
+        'notes'           => $notes,
+        'icon_image'      => $icon_image,
+        'icon_image_alt'  => $icon_image_alt,
+        'vrml_image'      => $vrml_image,
+        'statusmap_image' => $statusmap_image,
+    }),
   }
 }

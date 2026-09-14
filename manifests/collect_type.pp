@@ -22,7 +22,7 @@ define nagios::collect_type (
 
   concat::fragment { "type_header_${name}":
     target  => "${_destdir}/nagios_${name}.cfg",
-    content => template('nagios/nagios_type/type_header.erb'),
+    content => epp('nagios/type_header.epp', { 'type' => $name }),
     order   => '05',
   }
 
