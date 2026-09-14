@@ -38,7 +38,7 @@ define nagios::type::service (
   $nrpe_timeout                 = 60,
   Array $server_names           = []
 ) {
-  include nagios::params
+  $cfg_dir = lookup('nagios::cfg_dir', Stdlib::Absolutepath)
 
   if (empty($server_names)) {
     $tag_array = ['nagios_service']
@@ -67,7 +67,7 @@ define nagios::type::service (
   }
 
   @@concat::fragment { "nagios_service_${name}_${facts['networking']['fqdn']}":
-    target  => "${nagios::params::cfg_dir}/conf.d/nagios_service.cfg",
+    target  => "${cfg_dir}/conf.d/nagios_service.cfg",
     content => template('nagios/nagios_type/service.erb'),
     tag     => $tag_array,
   }

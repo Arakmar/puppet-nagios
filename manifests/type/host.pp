@@ -22,7 +22,7 @@ define nagios::type::host (
   $register                     = undef,
   Array $server_names           = []
 ) {
-  include nagios::params
+  $cfg_dir = lookup('nagios::cfg_dir', Stdlib::Absolutepath)
 
   $real_address = $address ? {
     undef   => $host_name,
@@ -36,7 +36,7 @@ define nagios::type::host (
   }
 
   @@concat::fragment { "nagios_host_${name}_${facts['networking']['fqdn']}":
-    target  => "${nagios::params::cfg_dir}/conf.d/nagios_hosts.cfg",
+    target  => "${cfg_dir}/conf.d/nagios_hosts.cfg",
     content => template('nagios/nagios_type/host.erb'),
     tag     => $tag_array,
   }

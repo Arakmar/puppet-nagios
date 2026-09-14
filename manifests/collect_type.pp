@@ -1,33 +1,35 @@
 define nagios::collect_type (
-  $destdir     = "${nagios::params::cfg_dir}/conf.d",
+  $destdir     = undef,
   $server_name = undef,
   $exported    = true
 ) {
-  include nagios::params
+  $cfg_dir = lookup('nagios::cfg_dir', Stdlib::Absolutepath)
+  $service = lookup('nagios::service', String[1])
+  $_destdir = pick($destdir, "${cfg_dir}/conf.d")
   if ($exported) {
     if ($server_name) {
       Concat::Fragment <<| tag == "nagios_${name}_${server_name}" |>> {
-        target => "${destdir}/nagios_${name}.cfg",
+        target => "${_destdir}/nagios_${name}.cfg",
         order  => '30'
       }
     } else {
       Concat::Fragment <<| tag == "nagios_${name}" |>> {
-        target => "${destdir}/nagios_${name}.cfg",
+        target => "${_destdir}/nagios_${name}.cfg",
         order  => '30'
       }
     }
   }
 
   concat::fragment { "type_header_${name}":
-    target  => "${destdir}/nagios_${name}.cfg",
+    target  => "${_destdir}/nagios_${name}.cfg",
     content => template('nagios/nagios_type/type_header.erb'),
     order   => '05',
   }
 
-  concat { "${destdir}/nagios_${name}.cfg":
+  concat { "${_destdir}/nagios_${name}.cfg":
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    notify => Service[$nagios::params::service],
+    notify => Service[$service],
   }
 }

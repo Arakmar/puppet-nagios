@@ -9,10 +9,10 @@ define nagios::type::timeperiod (
   $saturday         = undef,
   $sunday           = undef
 ) {
-  include nagios::params
+  $cfg_dir = lookup('nagios::cfg_dir', Stdlib::Absolutepath)
 
   concat::fragment { "nagios_timeperiod_${name}_${facts['networking']['fqdn']}":
-    target  => "${nagios::params::cfg_dir}/conf.d/nagios_timeperiod.cfg",
+    target  => "${cfg_dir}/conf.d/nagios_timeperiod.cfg",
     content => template('nagios/nagios_type/timeperiod.erb'),
     tag     => 'nagios_timeperiod',
     order   => '30',

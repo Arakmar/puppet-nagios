@@ -8,7 +8,7 @@ define nagios::type::hostextinfo (
   $statusmap_image = undef,
   Array $server_names = []
 ) {
-  include nagios::params
+  $cfg_dir = lookup('nagios::cfg_dir', Stdlib::Absolutepath)
 
   if (empty($server_names)) {
     $tag_array = ['nagios_hostextinfo']
@@ -17,7 +17,7 @@ define nagios::type::hostextinfo (
   }
 
   @@concat::fragment { "nagios_hostextinfo_${name}_${facts['networking']['fqdn']}":
-    target  => "${nagios::params::cfg_dir}/conf.d/nagios_hostextinfo.cfg",
+    target  => "${cfg_dir}/conf.d/nagios_hostextinfo.cfg",
     content => template('nagios/nagios_type/hostextinfo.erb'),
     tag     => $tag_array,
   }

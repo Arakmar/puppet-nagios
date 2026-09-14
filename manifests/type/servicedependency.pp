@@ -13,7 +13,7 @@ define nagios::type::servicedependency (
   $dependency_period             = undef,
   Array $server_names            = []
 ) {
-  include nagios::params
+  $cfg_dir = lookup('nagios::cfg_dir', Stdlib::Absolutepath)
 
   if (empty($server_names)) {
     $tag_array = ['nagios_servicedependency']
@@ -22,7 +22,7 @@ define nagios::type::servicedependency (
   }
 
   @@concat::fragment { "nagios_servicedependency_${name}_${facts['networking']['fqdn']}":
-    target  => "${nagios::params::cfg_dir}/conf.d/nagios_servicedependency.cfg",
+    target  => "${cfg_dir}/conf.d/nagios_servicedependency.cfg",
     content => template('nagios/nagios_type/servicedependency.erb'),
     tag     => $tag_array,
   }

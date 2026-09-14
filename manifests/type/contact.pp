@@ -12,10 +12,10 @@ define nagios::type::contact (
   $email                         = 'root@localhost',
   $register                      = undef,
 ) {
-  include nagios::params
+  $cfg_dir = lookup('nagios::cfg_dir', Stdlib::Absolutepath)
 
   concat::fragment { "nagios_contact_${name}_${facts['networking']['fqdn']}":
-    target  => "${nagios::params::cfg_dir}/conf.d/nagios_contact.cfg",
+    target  => "${cfg_dir}/conf.d/nagios_contact.cfg",
     content => template('nagios/nagios_type/contact.erb'),
     tag     => 'nagios_contact',
     order   => '30',

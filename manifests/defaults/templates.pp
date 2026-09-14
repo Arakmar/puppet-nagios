@@ -1,7 +1,8 @@
 class nagios::defaults::templates(
   $source = undef,
 ) {
-  include nagios::params
+  $cfg_dir = lookup('nagios::cfg_dir', Stdlib::Absolutepath)
+  $service = lookup('nagios::service', String[1])
 
   $real_source = $source ? {
     undef => [
@@ -12,9 +13,9 @@ class nagios::defaults::templates(
   }
 
   file { 'nagios_templates':
-    path   => "${nagios::params::cfg_dir}/conf.d/nagios_templates.cfg",
+    path   => "${cfg_dir}/conf.d/nagios_templates.cfg",
     source => $real_source,
-    notify => Service[$nagios::params::service],
+    notify => Service[$service],
     mode   => '0644',
     owner  => 'root',
     group  => 'root',

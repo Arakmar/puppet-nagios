@@ -2,9 +2,10 @@ define nagios::plugin::deploy (
   $source          = '',
   $ensure          = 'present',
   $config          = '',
-  $require_package = "${nagios::params::plugin_package}"
+  $require_package = undef
 ) {
-  include nagios::params
+  $plugin_package = lookup('nagios::plugin_package', String[1])
+  $_require_package = pick($require_package, $plugin_package)
 
   $plugin_src = $ensure ? {
     'present' => $name,
@@ -16,8 +17,8 @@ define nagios::plugin::deploy (
     default => $source
   }
 
-  if !defined(Package[$require_package]) {
-    package { $require_package:
+  if !defined(Package[$_require_package]) {
+    package { $_require_package:
       ensure => installed,
       tag    => 'nagios::plugin::deploy::package';
     }
@@ -30,10 +31,10 @@ define nagios::plugin::deploy (
     mode    => '0755',
     owner   => root,
     group   => 0,
-    require => Package[$require_package],
+    require => Package[$_require_package],
     tag     => 'nagios::plugin::deploy::file';
   }
 
   # register the plugin
-  nagios::plugin { $name: ensure => $ensure, require => Package["${nagios::params::plugin_package}"] }
+  nagios::plugin { $name: ensure => $ensure, require => Package[$plugin_package] }
 }

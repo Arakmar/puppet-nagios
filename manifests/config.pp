@@ -3,7 +3,8 @@ define nagios::config (
   $source  = undef,
   $content = undef,
 ) {
-  include nagios::params
+  $cfg_dir = lookup('nagios::cfg_dir', Stdlib::Absolutepath)
+  $service = lookup('nagios::service', String[1])
 
   if $content and $source {
     fail('nagios::config cannot have both content and source')
@@ -15,10 +16,10 @@ define nagios::config (
 
   file { "nagios_${name}":
     ensure  => $ensure,
-    path    => "${nagios::params::cfg_dir}/conf.d/custom_${name}",
+    path    => "${cfg_dir}/conf.d/custom_${name}",
     content => $content,
     source  => $source,
-    notify  => Service[$nagios::params::service],
+    notify  => Service[$service],
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
