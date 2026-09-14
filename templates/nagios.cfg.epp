@@ -1,3 +1,28 @@
+<%- |
+  Stdlib::Absolutepath        $log_file,
+  Array[Stdlib::Absolutepath] $subcfg_dirs,
+  Stdlib::Absolutepath        $object_cache_file,
+  Stdlib::Absolutepath        $precached_object_file,
+  Stdlib::Absolutepath        $resource_file,
+  Stdlib::Absolutepath        $status_file,
+  String[1]                   $user,
+  String[1]                   $group,
+  Boolean                     $check_external_commands,
+  Variant[Integer, String[1]] $command_check_interval,
+  Stdlib::Absolutepath        $command_file,
+  Stdlib::Absolutepath        $lock_file,
+  Stdlib::Absolutepath        $temp_file,
+  Stdlib::Absolutepath        $temp_path,
+  Stdlib::Absolutepath        $log_archive_path,
+  Stdlib::Absolutepath        $check_result_path,
+  Variant[Boolean, Integer[0, 1]] $soft_state_dependencies,
+  Stdlib::Absolutepath        $state_retention_file,
+  String[1]                   $admin_email,
+  String[1]                   $admin_pager,
+  Boolean                     $enable_environment_macros,
+  Stdlib::Absolutepath        $debug_file,
+| -%>
+# This file is managed by Puppet (nagios module). Local changes will be overwritten.
 # MANAGED BY PUPPET
 # DONT EDIT MANUALLY UNLESS YOU KNOW WHAT YOU ARE DOING
 
@@ -6,15 +31,15 @@
 # for historical purposes.  This should be the first option specified
 # in the config file!!!
 
-log_file=<%= @log_file %>
+log_file=<%= $log_file %>
 
 # You can also tell Nagios to process all config files (with a .cfg
 # extension) in a particular directory by using the cfg_dir
 # directive as shown below:
 
-<% @subcfg_dirs.each do |cfg_dir| -%>
-cfg_dir=<%= cfg_dir %>
-<% end -%>
+<% $subcfg_dirs.each |$dir| { -%>
+cfg_dir=<%= $dir %>
+<% } -%>
 
 
 
@@ -26,7 +51,7 @@ cfg_dir=<%= cfg_dir %>
 # directly) in order to prevent inconsistencies that can occur
 # when the config files are modified after Nagios starts.
 
-object_cache_file=<%= @object_cache_file %>
+object_cache_file=<%= $object_cache_file %>
 
 
 
@@ -42,7 +67,7 @@ object_cache_file=<%= @object_cache_file %>
 # Read the documentation section on optimizing Nagios to find our more
 # about how this feature works.
 
-precached_object_file=<%= @precached_object_file %>
+precached_object_file=<%= $precached_object_file %>
 
 
 
@@ -55,7 +80,7 @@ precached_object_file=<%= @precached_object_file %>
 # defined as macros in this file and restrictive permissions (600)
 # can be placed on this file.
 
-resource_file=<%= @resource_file %>
+resource_file=<%= $resource_file %>
 
 
 
@@ -65,7 +90,7 @@ resource_file=<%= @resource_file %>
 # The contents of the status file are deleted every time Nagios
 #  restarts.
 
-status_file=<%= @status_file %>
+status_file=<%= $status_file %>
 
 
 
@@ -82,7 +107,7 @@ status_update_interval=10
 # This determines the effective user that Nagios should run as.
 # You can either supply a username or a UID.
 
-nagios_user=<%= @user %>
+nagios_user=<%= $user %>
 
 
 
@@ -90,7 +115,7 @@ nagios_user=<%= @user %>
 # This determines the effective group that Nagios should run as.
 # You can either supply a group name or a GID.
 
-nagios_group=<%= @group %>
+nagios_group=<%= $group %>
 
 
 
@@ -102,7 +127,7 @@ nagios_group=<%= @group %>
 # you will have to enable this.
 # Values: 0 = disable commands, 1 = enable commands
 
-check_external_commands=<%= @check_external_commands ? 1 : 0 %>
+check_external_commands=<%= Integer($check_external_commands) %>
 
 
 
@@ -119,7 +144,7 @@ check_external_commands=<%= @check_external_commands ? 1 : 0 %>
 # NOTE: Setting this value to -1 causes Nagios to check the external
 # command file as often as possible.
 
-command_check_interval=<%= @command_check_interval %>
+command_check_interval=<%= $command_check_interval %>
 
 
 
@@ -133,7 +158,7 @@ command_check_interval=<%= @command_check_interval %>
 # Debian Users: In case you didn't read README.Debian yet, _NOW_ is the
 # time to do it.
 
-command_file=<%= @command_file %>
+command_file=<%= $command_file %>
 
 
 
@@ -151,7 +176,7 @@ external_command_buffer_slots=4096
 # This is the lockfile that Nagios will use to store its PID number
 # in when it is running in daemon mode.
 
-lock_file=<%= @lock_file %>
+lock_file=<%= $lock_file %>
 
 
 
@@ -161,7 +186,7 @@ lock_file=<%= @lock_file %>
 # is created, used, and deleted throughout the time that Nagios is
 # running.
 
-temp_file=<%= @temp_file %>
+temp_file=<%= $temp_file %>
 
 
 
@@ -169,7 +194,7 @@ temp_file=<%= @temp_file %>
 # This is path where Nagios can create temp files for service and
 # host check results, etc.
 
-temp_path=<%= @temp_path %>
+temp_path=<%= $temp_path %>
 
 
 
@@ -227,7 +252,7 @@ temp_path=<%= @temp_path %>
   # This is the directory where archived (rotated) log files should be
   # placed (assuming you've chosen to do log rotation).
 
-  log_archive_path=<%= @log_archive_path %>
+log_archive_path=<%= $log_archive_path %>
 
 
 
@@ -425,7 +450,7 @@ temp_path=<%= @temp_path %>
   # Note: Make sure that only one instance of Nagios has access
   # to this directory!
 
-  check_result_path=<%= @check_result_path %>
+check_result_path=<%= $check_result_path %>
 
 
 
@@ -503,7 +528,7 @@ temp_path=<%= @temp_path %>
   #  0 = Don't use soft state dependencies (default)
   #  1 = Use soft state dependencies
 
-  soft_state_dependencies=<%= @soft_state_dependencies %>
+soft_state_dependencies=<%= Integer($soft_state_dependencies) %>
 
 
 
@@ -600,7 +625,7 @@ temp_path=<%= @temp_path %>
   # This file is used only if the retain_state_information
   # variable is set to 1.
 
-  state_retention_file=<%= @state_retention_file %>
+state_retention_file=<%= $state_retention_file %>
 
 
 
@@ -1189,8 +1214,8 @@ temp_path=<%= @temp_path %>
   # using the $ADMINEMAIL$ and $ADMINPAGER$ macros in your notification
   # commands.
 
-  admin_email=<%= @admin_email %>
-  admin_pager=<%= @admin_pager %>
+admin_email=<%= $admin_email %>
+admin_pager=<%= $admin_pager %>
 
 
 
@@ -1229,7 +1254,7 @@ temp_path=<%= @temp_path %>
   # Values: 1 - Enable environment variable macros (default)
   #         0 - Disable environment variable macros
 
-  enable_environment_macros=<%= @enable_environment_macros ? 1 : 0 %>
+enable_environment_macros=<%= Integer($enable_environment_macros) %>
 
 
 
@@ -1297,7 +1322,7 @@ temp_path=<%= @temp_path %>
   # DEBUG FILE
   # This option determines where Nagios should write debugging information.
 
-  debug_file=<%= @debug_file %>
+debug_file=<%= $debug_file %>
 
 
 
