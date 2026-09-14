@@ -1,0 +1,24 @@
+---
+nagios::package: nagios
+nagios::nrpe_package: nagios-plugins-nrpe
+nagios::plugin_package: nagios-plugins
+nagios::service: nagios
+nagios::cfg_dir: /etc/nagios
+nagios::plugin_dir: /usr/lib/nagios/plugins
+nagios::subcfg_dirs:
+  - /etc/nagios/conf.d
+nagios::log_file: /var/log/nagios/nagios.log
+nagios::object_cache_file: /var/spool/nagios/objects.cache
+nagios::precached_object_file: /var/spool/nagios/objects.precache
+nagios::resource_file: /etc/nagios/private/resource.cfg
+nagios::status_file: /var/spool/nagios/status.dat
+nagios::command_file: /var/spool/nagios/cmd/nagios.cmd
+nagios::lock_file: /var/run/nagios/nagios.pid
+nagios::temp_file: /var/spool/nagios/nagios.tmp
+nagios::log_archive_path: /var/log/nagios/archives
+nagios::check_result_path: /var/spool/nagios/checkresults
+nagios::state_retention_file: /var/spool/nagios/retention.dat
+nagios::debug_file: /var/spool/nagios/nagios.debug
+nagios::main_config_file: /etc/nagios/nagios.cfg
+nagios::physical_html_path: /usr/share/nagios/htdocs
+nagios::url_html_path: /nagios

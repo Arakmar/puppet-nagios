@@ -1,1 +1,17 @@
---- {}
+---
+# OS independent defaults for the nagios class.
+# OS specific paths and package names live in data/os/*.yaml.
+nagios::allow_external_cmd: true
+nagios::command_check_interval: -1
+nagios::soft_state_dependencies: false
+nagios::temp_path: /tmp
+nagios::use_authentication: true
+nagios::default_user_name: nagiosadmin
+nagios::cgi_authorized_users: nagiosadmin
+nagios::ack_no_sticky: true
+nagios::ack_no_send: true
+nagios::user: nagios
+nagios::group: nagios
+nagios::admin_email: nagios@localhost
+nagios::admin_pager: pagenagios@localhost
+nagios::enable_environment_macros: true
