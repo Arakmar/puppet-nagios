@@ -38,7 +38,7 @@ class nagios::params {
       $log_archive_path = '/var/log/nagios/archives'
       $check_result_path = '/var/spool/nagios/checkresults'
       $state_retention_file = '/var/spool/nagios/retention.dat'
-      $debug_file = 'var/spool/nagios/nagios.debug'
+      $debug_file = '/var/spool/nagios/nagios.debug'
 
       $main_config_file = '/etc/nagios/nagios.cfg'
       $physical_html_path = '/usr/share/nagios/htdocs'
@@ -68,7 +68,7 @@ class nagios::params {
       $log_archive_path = '/var/log/nagios/archives'
       $check_result_path = '/var/spool/nagios/checkresults'
       $state_retention_file = '/var/spool/nagios/retention.dat'
-      $debug_file = 'var/spool/nagios/nagios.debug'
+      $debug_file = '/var/spool/nagios/nagios.debug'
 
       $main_config_file = '/etc/nagios/nagios.cfg'
       $physical_html_path = '/usr/share/nagios/htdocs'
