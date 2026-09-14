@@ -15,7 +15,7 @@ define nagios::service::http (
   $auth_name       = '',
   $auth_password   = '',
   $redirect_status = 'ok',
-  $server_names    = undef
+  $server_names    = []
 ) {
 
   $real_port = $port ? {
