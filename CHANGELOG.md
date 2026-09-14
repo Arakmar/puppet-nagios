@@ -12,7 +12,10 @@ master branch; this release modernises it for Puppet 7 and 8 with the PDK.
 * Puppet >= 7.0.0, puppetlabs/stdlib 9.x and puppetlabs/concat 9.x are
   required and declared in metadata.json.
 * Nagios 3 support (Debian <= 8, Ubuntu <= 18.04) is dropped. Debian and
-  Ubuntu use the `nagios4` packages unconditionally.
+  Ubuntu use the `nagios4` packages unconditionally. Supported releases are
+  EL 8, 9 and 10 (CentOS Stream, Rocky, AlmaLinux), Debian 12 and 13,
+  Ubuntu 22.04 and 24.04 and Arch Linux; Debian 11 and Ubuntu 20.04 are
+  end of life and not listed.
 * `nagios::params` is removed. Package names, paths and the service name are
   module Hiera data (`nagios::*` keys) that the defines resolve with
   `lookup()`; override them in Hiera.

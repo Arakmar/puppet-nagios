@@ -38,9 +38,11 @@ only collects the objects whose `server_names` include it.
 * [puppetlabs/stdlib](https://forge.puppet.com/modules/puppetlabs/stdlib) 9.x
   and [puppetlabs/concat](https://forge.puppet.com/modules/puppetlabs/concat)
   9.x.
-* A supported operating system: RHEL family 8 and 9, Debian 11 and 12,
-  Ubuntu 20.04 and 22.04, or Arch Linux. Debian and Ubuntu use the `nagios4`
-  packages; Nagios 3 is not supported.
+* A supported operating system: RHEL family 8, 9 and 10 (RHEL 10 itself is
+  not listed in `metadata.json` because no fact set exists yet to unit test
+  it, but it shares the Rocky and AlmaLinux 10 data), Debian 12 and 13,
+  Ubuntu 22.04 and 24.04, or Arch Linux. Debian and Ubuntu use the
+  `nagios4` packages; Nagios 3 is not supported.
 
 ## Usage
 
