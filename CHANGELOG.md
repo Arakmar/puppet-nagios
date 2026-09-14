@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 1.0.1
+
+**Bugfixes**
+
+* Every `check_http` command now passes `--sni`. The plain http checks
+  follow the redirection to https and, without SNI, land on the default
+  vhost of the server: Apache answers `421 Misdirected Request` as soon
+  as the target vhost uses another certificate.
+
 ## Release 1.0.0
 
 First versioned release. The module previously lived on an unversioned
