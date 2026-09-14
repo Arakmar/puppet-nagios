@@ -34,7 +34,7 @@ jobs:
     env:
       PUPPET_GEM_VERSION: '>= 7.0'
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -64,7 +64,7 @@ jobs:
     env:
       PUPPET_GEM_VERSION: '~> ${{ matrix.puppet }}.0'
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
