@@ -1,39 +1,26 @@
+# @summary Deploys a plugin shipped by a Puppet module.
+#
+# A thin wrapper around nagios::plugin that defaults the source to
+# puppet:///modules/nagios/plugins/<name> and installs the plugin package
+# first.
+#
+# @param source Module path of the plugin, relative to puppet:///modules/.
+# @param ensure State of the plugin file.
+# @param require_package Package to install before the plugin, defaults to the
+#   monitoring plugins package.
 define nagios::plugin::deploy (
-  $source          = '',
-  $ensure          = 'present',
-  $config          = '',
-  $require_package = "${nagios::params::plugin_package}"
+  Optional[String[1]]       $source          = undef,
+  Enum['present', 'absent'] $ensure          = 'present',
+  Optional[String[1]]       $require_package = undef,
 ) {
-  include nagios::params
+  $package = pick($require_package, lookup('nagios::plugin_package', String[1]))
+  $path    = pick($source, "nagios/plugins/${name}")
 
-  $plugin_src = $ensure ? {
-    'present' => $name,
-    'absent'  => $name,
-    default   => $ensure
-  }
-  $real_source = $source ? {
-    ''      => "nagios/plugins/${plugin_src}",
-    default => $source
-  }
+  stdlib::ensure_packages([$package])
 
-  if !defined(Package[$require_package]) {
-    package { $require_package:
-      ensure => installed,
-      tag    => 'nagios::plugin::deploy::package';
-    }
+  nagios::plugin { $name:
+    ensure  => $ensure,
+    source  => "puppet:///modules/${path}",
+    require => Package[$package],
   }
-
-  include nagios::plugin::scriptpaths
-  file { "nagios_plugin_${name}":
-    path    => "${nagios::plugin::scriptpaths::script_path}/${name}",
-    source  => "puppet:///modules/${real_source}",
-    mode    => '0755',
-    owner   => root,
-    group   => 0,
-    require => Package[$require_package],
-    tag     => 'nagios::plugin::deploy::file';
-  }
-
-  # register the plugin
-  nagios::plugin { $name: ensure => $ensure, require => Package["${nagios::params::plugin_package}"] }
 }

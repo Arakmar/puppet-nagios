@@ -1,0 +1,50 @@
+---
+# Debian 9+ and Ubuntu 20.04+ ship Nagios 4 as the nagios4 package.
+nagios::package: nagios4
+nagios::nrpe_package: nagios-nrpe-plugin
+nagios::plugin_package: monitoring-plugins
+nagios::service: nagios4
+nagios::cfg_dir: /etc/nagios4
+nagios::plugin_dir: /usr/lib/nagios/plugins
+nagios::subcfg_dirs:
+  - /etc/nagios-plugins/config
+  - /etc/nagios4/conf.d
+nagios::log_file: /var/log/nagios4/nagios.log
+nagios::object_cache_file: /var/lib/nagios4/objects.cache
+nagios::precached_object_file: /var/lib/nagios4/objects.precache
+nagios::resource_file: /etc/nagios4/resource.cfg
+nagios::status_file: /var/lib/nagios4/status.dat
+nagios::command_file: /var/lib/nagios4/rw/nagios.cmd
+nagios::lock_file: /var/run/nagios4/nagios4.pid
+nagios::temp_file: /var/lib/nagios4/nagios.tmp
+nagios::log_archive_path: /var/log/nagios4/archives
+nagios::check_result_path: /var/lib/nagios4/spool/checkresults
+nagios::state_retention_file: /var/lib/nagios4/retention.dat
+nagios::debug_file: /var/log/nagios4/nagios.debug
+nagios::main_config_file: /etc/nagios4/nagios.cfg
+nagios::physical_html_path: /usr/share/nagios4/htdocs
+nagios::url_html_path: /nagios4
+nagios::admin_email: root@localhost
+nagios::admin_pager: pageroot@localhost
+nagios::enable_environment_macros: false
+
+# Commands already declared by /etc/nagios-plugins/config on Debian and Ubuntu.
+nagios::defaults::commands::skip:
+  - check_ping
+  - check-host-alive
+  - check_tcp
+  - check_udp
+  - check_ssh
+  - check_ssh_port
+  - check_mysql
+nagios::command::http::skip:
+  - check_http
+  - check_https
+nagios::command::smtp::skip:
+  - check_smtp
+  - check_ssmtp
+nagios::command::imap_pop3::skip:
+  - check_imap
+nagios::command::nrpe::skip:
+  - check_nrpe
+  - check_nrpe_1arg

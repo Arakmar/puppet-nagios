@@ -1,0 +1,6 @@
+<%- | String[1] $type, Hash[String[1], String] $directives | -%>
+define <%= $type %> {
+<% $directives.each |$key, $value| { -%>
+  <%= $key %> <%= $value %>
+<% } -%>
+}

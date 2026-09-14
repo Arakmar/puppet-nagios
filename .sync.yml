@@ -1,0 +1,25 @@
+# This file can be used to customize the files managed by PDK.
+#
+# See https://github.com/puppetlabs/pdk-templates/blob/main/README.md
+# for more information.
+#
+# See https://github.com/puppetlabs/pdk-templates/blob/main/config_defaults.yml
+# for the default values.
+---
+Gemfile:
+  optional:
+    ':development':
+      # Provides metadata2gha, which builds the CI matrix from metadata.json.
+      # Only used by the static validation job, and it needs Ruby >= 3.2.
+      - gem: puppet_metadata
+        version: '~> 6.0'
+        condition: "Gem::Requirement.create(['>= 3.2.0']).satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))"
+  overrides:
+    # Newer fact sets than the template defaults (Debian 13, EL 10,
+    # Ubuntu 24.04). Bundler picks facterdb 3.x / rspec-puppet-facts 5.x on
+    # Ruby 2.7 (Puppet 7) and 4.x / 6.x on Ruby >= 3.2 (Puppet 8), because
+    # the newer series require Ruby 3.2.
+    - gem: facterdb
+      version: ['>= 3.10', '< 5']
+    - gem: rspec-puppet-facts
+      version: ['>= 5.4', '< 7']
