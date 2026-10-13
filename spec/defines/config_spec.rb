@@ -9,8 +9,6 @@ describe 'nagios::config' do
       let(:pre_condition) { 'include nagios' }
       let(:title) { 'extra' }
 
-      cfg_dir = (os_facts[:os]['family'] == 'Debian') ? '/etc/nagios4' : '/etc/nagios'
-
       context 'with content' do
         let(:params) { { content: "define host {\n}\n" } }
 

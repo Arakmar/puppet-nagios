@@ -9,8 +9,6 @@ describe 'nagios::type::command' do
       let(:title) { 'check_foo' }
       let(:params) { { command_line: '$USER1$/check_foo -H $HOSTADDRESS$' } }
 
-      cfg_dir = (os_facts[:os]['family'] == 'Debian') ? '/etc/nagios4' : '/etc/nagios'
-
       it { is_expected.to compile.with_all_deps }
 
       it 'declares a local command fragment' do

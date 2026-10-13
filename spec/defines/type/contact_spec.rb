@@ -8,8 +8,6 @@ describe 'nagios::type::contact' do
       let(:facts) { os_facts }
       let(:title) { 'ops' }
 
-      fqdn = os_facts[:networking]['fqdn']
-
       it { is_expected.to compile.with_all_deps }
 
       it 'declares a contact with defaults' do
@@ -23,7 +21,7 @@ describe 'nagios::type::contact' do
         let(:params) do
           {
             contact_alias: 'Operations',
-            service_notification_commands: ['notify-service-by-email', 'notify-service-by-sms'],
+            service_notification_commands: %w[notify-service-by-email notify-service-by-sms],
             host_notification_commands: 'notify-host-by-email',
             host_notification_options: 'd,r',
             email: 'ops@example.org',

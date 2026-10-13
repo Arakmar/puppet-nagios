@@ -18,9 +18,9 @@ define nagios::type::command (
     order   => '30',
     tag     => 'nagios_command',
     content => nagios::object('command', {
-        'command_name' => $command_name,
-        'command_line' => $command_line,
-        'use'          => $use,
+      'command_name' => $command_name,
+      'command_line' => $command_line,
+      'use'          => $use,
     }),
   }
 }

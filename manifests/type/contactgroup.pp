@@ -15,9 +15,9 @@ define nagios::type::contactgroup (
     order   => '30',
     tag     => 'nagios_contactgroup',
     content => nagios::object('contactgroup', {
-        'contactgroup_name' => $contactgroup_name,
-        'alias'             => $contactgroup_alias,
-        'members'           => $members,
+      'contactgroup_name' => $contactgroup_name,
+      'alias'             => $contactgroup_alias,
+      'members'           => $members,
     }),
   }
 }

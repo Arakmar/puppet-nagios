@@ -5,7 +5,7 @@
 # configuration are skipped through the skip parameter, which module data
 # fills in on Debian and Ubuntu.
 #
-# @param mail_command Path of the mail binary used by the notification commands.
+# @param mail_command Path of the mail binary used by the notification commands, `/bin/mail` on the RedHat family (module data).
 # @param skip Commands not to declare because the distribution already does.
 class nagios::defaults::commands (
   Stdlib::Absolutepath $mail_command,

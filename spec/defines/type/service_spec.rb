@@ -9,9 +9,6 @@ describe 'nagios::type::service' do
       let(:title) { 'load' }
       let(:params) { { host_name: 'web.example.org', check_command: 'check_load!5!10', service_description: 'Load' } }
 
-      fqdn = os_facts[:networking]['fqdn']
-      cfg_dir = (os_facts[:os]['family'] == 'Debian') ? '/etc/nagios4' : '/etc/nagios'
-
       it { is_expected.to compile.with_all_deps }
 
       it 'exports a service fragment' do
@@ -26,7 +23,7 @@ describe 'nagios::type::service' do
         let(:params) do
           super().merge(
             hostgroup_name: ['http-servers'],
-            contacts: ['root', 'ops'],
+            contacts: %w[root ops],
             contact_groups: ['admins'],
             check_interval: 5,
             retry_check_interval: '1',

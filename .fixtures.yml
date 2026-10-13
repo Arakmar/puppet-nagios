@@ -5,7 +5,7 @@ fixtures:
   forge_modules:
     stdlib:
       repo: "puppetlabs/stdlib"
-      ref: "9.7.0"
+      ref: "10.1.0"
     concat:
       repo: "puppetlabs/concat"
-      ref: "9.1.0"
+      ref: "10.1.0"

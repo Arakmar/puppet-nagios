@@ -26,13 +26,13 @@ define nagios::type::hostextinfo (
     order   => '30',
     tag     => nagios::tags('hostextinfo', $server_names),
     content => nagios::object('hostextinfo', {
-        'host_name'       => $host_name,
-        'use'             => $use,
-        'notes'           => $notes,
-        'icon_image'      => $icon_image,
-        'icon_image_alt'  => $icon_image_alt,
-        'vrml_image'      => $vrml_image,
-        'statusmap_image' => $statusmap_image,
+      'host_name'       => $host_name,
+      'use'             => $use,
+      'notes'           => $notes,
+      'icon_image'      => $icon_image,
+      'icon_image_alt'  => $icon_image_alt,
+      'vrml_image'      => $vrml_image,
+      'statusmap_image' => $statusmap_image,
     }),
   }
 }

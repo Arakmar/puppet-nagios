@@ -12,11 +12,11 @@ function nagios::directives(Hash[String[1], Any] $directives) >> Hash[String[1],
   }
 
   Hash($kept.map |$key, $value| {
-      $rendered = $value ? {
-        Array   => $value.join(','),
-        Boolean => String(Integer($value)),
-        default => String($value, '%s'),
-      }
-      [$key, $rendered]
+    $rendered = $value ? {
+      Array   => $value.join(','),
+      Boolean => String(Integer($value)),
+      default => String($value, '%s'),
+    }
+    [$key, $rendered]
   })
 }

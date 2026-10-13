@@ -9,8 +9,6 @@ describe 'nagios::type::hostextinfo' do
       let(:title) { 'web' }
       let(:params) { { host_name: 'web.example.org', icon_image: 'linux.png', notes: 'Web frontend' } }
 
-      fqdn = os_facts[:networking]['fqdn']
-
       it { is_expected.to compile.with_all_deps }
 
       it 'exports a hostextinfo fragment' do

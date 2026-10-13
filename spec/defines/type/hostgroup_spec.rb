@@ -9,8 +9,6 @@ describe 'nagios::type::hostgroup' do
       let(:title) { 'all' }
       let(:params) { { hostgroup_alias: 'All Servers', members: ['*'] } }
 
-      fqdn = os_facts[:networking]['fqdn']
-
       it { is_expected.to compile.with_all_deps }
 
       it 'declares a hostgroup fragment' do
