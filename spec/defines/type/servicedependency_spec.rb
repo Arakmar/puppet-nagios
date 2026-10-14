@@ -19,8 +19,6 @@ describe 'nagios::type::servicedependency' do
         }
       end
 
-      fqdn = os_facts[:networking]['fqdn']
-
       it { is_expected.to compile.with_all_deps }
 
       it 'exports a servicedependency fragment' do

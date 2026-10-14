@@ -9,8 +9,6 @@ describe 'nagios::type::timeperiod' do
       let(:title) { 'workhours' }
       let(:params) { { timeperiod_alias: 'Standard Work Hours', monday: '09:00-17:00', friday: '09:00-17:00' } }
 
-      fqdn = os_facts[:networking]['fqdn']
-
       it { is_expected.to compile.with_all_deps }
 
       it 'declares a timeperiod fragment' do

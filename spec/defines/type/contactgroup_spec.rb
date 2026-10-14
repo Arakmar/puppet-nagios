@@ -7,9 +7,7 @@ describe 'nagios::type::contactgroup' do
     context "on #{os}" do
       let(:facts) { os_facts }
       let(:title) { 'admins' }
-      let(:params) { { contactgroup_alias: 'Nagios Administrators', members: ['root', 'ops'] } }
-
-      fqdn = os_facts[:networking]['fqdn']
+      let(:params) { { contactgroup_alias: 'Nagios Administrators', members: %w[root ops] } }
 
       it { is_expected.to compile.with_all_deps }
 

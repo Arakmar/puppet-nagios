@@ -4,8 +4,11 @@ require 'spec_helper'
 require 'yaml'
 
 describe 'nagios::defaults' do
-  debian_data = YAML.safe_load(File.read(File.join(__dir__, '..', '..', 'data', 'os', 'Debian.yaml')))
-  skipped_on_debian = debian_data.select { |key, _| key.end_with?('::skip') }.values.flatten
+  # The commands the Debian module data skips
+  def skipped_on_debian
+    debian_data = YAML.safe_load(File.read(File.join(__dir__, '..', '..', 'data', 'os', 'Debian.yaml')))
+    debian_data.select { |key, _| key.end_with?('::skip') }.values.flatten
+  end
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do

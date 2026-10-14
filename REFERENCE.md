@@ -135,6 +135,8 @@ Data type: `Boolean`
 
 Whether Nagios accepts external commands (check_external_commands).
 
+Default value: `true`
+
 ##### <a name="-nagios--cgi_authorized_users"></a>`cgi_authorized_users`
 
 Data type: `Variant[String[1], Array[String[1], 1]]`
@@ -142,11 +144,15 @@ Data type: `Variant[String[1], Array[String[1], 1]]`
 Users allowed to see and act on every host and service in the CGIs. A
 string or an array of contact names, `*` for everyone.
 
+Default value: `'nagiosadmin'`
+
 ##### <a name="-nagios--soft_state_dependencies"></a>`soft_state_dependencies`
 
 Data type: `Variant[Boolean, Integer[0, 1]]`
 
 Whether dependency logic uses soft states (soft_state_dependencies).
+
+Default value: `false`
 
 ##### <a name="-nagios--package"></a>`package`
 
@@ -178,11 +184,15 @@ Data type: `String[1]`
 
 System user Nagios runs as.
 
+Default value: `'nagios'`
+
 ##### <a name="-nagios--group"></a>`group`
 
 Data type: `String[1]`
 
 System group Nagios runs as.
+
+Default value: `'nagios'`
 
 ##### <a name="-nagios--cfg_dir"></a>`cfg_dir`
 
@@ -256,6 +266,8 @@ Data type: `Stdlib::Absolutepath`
 
 Directory for temporary files.
 
+Default value: `'/tmp'`
+
 ##### <a name="-nagios--log_archive_path"></a>`log_archive_path`
 
 Data type: `Stdlib::Absolutepath`
@@ -287,23 +299,31 @@ Data type: `Variant[Integer, Pattern[/\A-?\d+s?\z/]]`
 How often external commands are checked, in seconds, `-1` for as often
 as possible, or a value suffixed with `s`.
 
+Default value: `-1`
+
 ##### <a name="-nagios--admin_email"></a>`admin_email`
 
 Data type: `String[1]`
 
-Value of the $ADMINEMAIL$ macro.
+Value of the $ADMINEMAIL$ macro, `root@localhost` on Debian (module data).
+
+Default value: `'nagios@localhost'`
 
 ##### <a name="-nagios--admin_pager"></a>`admin_pager`
 
 Data type: `String[1]`
 
-Value of the $ADMINPAGER$ macro.
+Value of the $ADMINPAGER$ macro, `pageroot@localhost` on Debian (module data).
+
+Default value: `'pagenagios@localhost'`
 
 ##### <a name="-nagios--enable_environment_macros"></a>`enable_environment_macros`
 
 Data type: `Boolean`
 
-Whether macros are exported as environment variables.
+Whether macros are exported as environment variables, not on Debian (module data).
+
+Default value: `true`
 
 ##### <a name="-nagios--main_config_file"></a>`main_config_file`
 
@@ -329,11 +349,15 @@ Data type: `Boolean`
 
 Whether the CGIs require authentication.
 
+Default value: `true`
+
 ##### <a name="-nagios--default_user_name"></a>`default_user_name`
 
 Data type: `String[1]`
 
 User name assumed by the CGIs when unauthenticated.
+
+Default value: `'nagiosadmin'`
 
 ##### <a name="-nagios--ack_no_sticky"></a>`ack_no_sticky`
 
@@ -341,11 +365,15 @@ Data type: `Boolean`
 
 Whether acknowledgements default to non-sticky.
 
+Default value: `true`
+
 ##### <a name="-nagios--ack_no_send"></a>`ack_no_send`
 
 Data type: `Boolean`
 
 Whether acknowledgements default to not sending notifications.
+
+Default value: `true`
 
 ### <a name="nagios--command--http"></a>`nagios::command::http`
 
@@ -474,7 +502,7 @@ timeperiods and the generic host, service and contact templates.
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 include nagios
@@ -499,7 +527,9 @@ The following parameters are available in the `nagios::defaults::commands` class
 
 Data type: `Stdlib::Absolutepath`
 
-Path of the mail binary used by the notification commands.
+Path of the mail binary used by the notification commands, `/bin/mail` on the RedHat family (module data).
+
+Default value: `'/usr/bin/mail'`
 
 ##### <a name="-nagios--defaults--commands--skip"></a>`skip`
 
@@ -526,6 +556,8 @@ Data type: `Hash[String[1], Hash]`
 Contact groups to declare, as nagios::type::contactgroup
 titles mapped to their parameters. Defaults to an admins group.
 
+Default value: `{ 'admins' => { 'contactgroup_alias' => 'Nagios Administrators', 'members' => ['root'] } }`
+
 ### <a name="nagios--defaults--contacts"></a>`nagios::defaults::contacts`
 
 Declares the default Nagios contacts.
@@ -543,6 +575,8 @@ Data type: `Hash[String[1], Hash]`
 Contacts to declare, as nagios::type::contact titles mapped
 to their parameters. Defaults to a root contact notified by email.
 
+Default value: `{ 'root' => { 'contact_alias' => 'Root', 'service_notification_period' => '24x7', 'host_notification_period' => '24x7', 'service_notification_options' => 'w,u,c,r', 'host_notification_options' => 'd,r', 'service_notification_commands' => 'notify-service-by-email', 'host_notification_commands' => 'notify-host-by-email', 'email' => 'root@localhost' } }`
+
 ### <a name="nagios--defaults--hostgroups"></a>`nagios::defaults::hostgroups`
 
 Declares the default Nagios host groups.
@@ -559,6 +593,8 @@ Data type: `Hash[String[1], Hash]`
 
 Host groups to declare, as nagios::type::hostgroup titles
 mapped to their parameters.
+
+Default value: `{ 'all' => { 'hostgroup_alias' => 'All Servers', 'members' => ['*'] }, 'debian-servers' => { 'hostgroup_alias' => 'Debian GNU/Linux Servers' }, 'centos-servers' => { 'hostgroup_alias' => 'CentOS GNU/Linux Servers' }, 'http-servers' => { 'hostgroup_alias' => 'HTTP servers' }, 'ftp-servers' => { 'hostgroup_alias' => 'FTP servers' }, 'sftp-servers' => { 'hostgroup_alias' => 'SFTP servers' }, 'mysql-servers' => { 'hostgroup_alias' => 'MySQL servers' }, 'dns-servers' => { 'hostgroup_alias' => 'DNS servers' }, 'mail-servers' => { 'hostgroup_alias' => 'mail servers' }, 'routers' => { 'hostgroup_alias' => 'Routers' } }`
 
 ### <a name="nagios--defaults--templates"></a>`nagios::defaults::templates`
 
@@ -596,6 +632,8 @@ Data type: `Hash[String[1], Hash]`
 Timeperiods to declare, as nagios::type::timeperiod titles
 mapped to their parameters. Defaults to 24x7, workhours, nonworkhours
 and never.
+
+Default value: `{ '24x7' => { 'timeperiod_alias' => '24 Hours A Day, 7 Days A Week', 'sunday' => '00:00-24:00', 'monday' => '00:00-24:00', 'tuesday' => '00:00-24:00', 'wednesday' => '00:00-24:00', 'thursday' => '00:00-24:00', 'friday' => '00:00-24:00', 'saturday' => '00:00-24:00' }, 'workhours' => { 'timeperiod_alias' => 'Standard Work Hours', 'monday' => '09:00-17:00', 'tuesday' => '09:00-17:00', 'wednesday' => '09:00-17:00', 'thursday' => '09:00-17:00', 'friday' => '09:00-17:00' }, 'nonworkhours' => { 'timeperiod_alias' => 'Non-Work Hours', 'sunday' => '00:00-24:00', 'monday' => '00:00-09:00,17:00-24:00', 'tuesday' => '00:00-09:00,17:00-24:00', 'wednesday' => '00:00-09:00,17:00-24:00', 'thursday' => '00:00-09:00,17:00-24:00', 'friday' => '00:00-09:00,17:00-24:00', 'saturday' => '00:00-24:00' }, 'never' => { 'timeperiod_alias' => 'Never' } }`
 
 ## Defined types
 
@@ -2120,4 +2158,3 @@ Alias of `Array[String[1]]`
 - `only`: check https only
 
 Alias of `Variant[Boolean, Enum['force', 'only']]`
-

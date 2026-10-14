@@ -34,13 +34,13 @@ only collects the objects whose `server_names` include it.
 
 ### Requirements
 
-* Puppet 7 or 8 with PuppetDB, since the module relies on exported resources.
+* OpenVox 8 or 9 with PuppetDB, since the module relies on exported resources.
+  Perforce Puppet 8 is no longer tested, Puppet 7 no longer supported.
 * [puppetlabs/stdlib](https://forge.puppet.com/modules/puppetlabs/stdlib) 9.x
-  and [puppetlabs/concat](https://forge.puppet.com/modules/puppetlabs/concat)
-  9.x.
-* A supported operating system: RHEL family 8, 9 and 10 (RHEL 10 itself is
-  not listed in `metadata.json` because no fact set exists yet to unit test
-  it, but it shares the Rocky and AlmaLinux 10 data), Debian 12 and 13,
+  or 10.x and [puppetlabs/concat](https://forge.puppet.com/modules/puppetlabs/concat)
+  9.x or 10.x, 10.1.0 or later for both on OpenVox 9, the first releases
+  declaring it.
+* A supported operating system: RHEL family 8, 9 and 10, Debian 12 and 13,
   Ubuntu 22.04 and 24.04, or Arch Linux. Debian and Ubuntu use the
   `nagios4` packages; Nagios 3 is not supported.
 
@@ -226,24 +226,32 @@ alias and parameter.
 
 ## Development
 
+The tooling is the one of Vox Pupuli
+([voxpupuli-test](https://github.com/voxpupuli/voxpupuli-test) and
+[voxpupuli-release](https://github.com/voxpupuli/voxpupuli-release)) and runs
+on OpenVox, set `OPENVOX_GEM_VERSION` to pick its version:
+
 ```
-pdk validate
-pdk test unit
-pdk test unit --puppet-version 7
-pdk bundle exec rake strings:generate:reference
+bundle install
+bundle exec rake validate lint check rubocop
+bundle exec rake parallel_spec
+bundle exec rake strings:generate:reference
+bundle exec rake module:build
 ```
 
 GitHub Actions run the same checks on every pull request and push to
-`master`: static validations, RuboCop, a REFERENCE.md freshness check and the
-unit tests for every Puppet version listed in `metadata.json`
-(`.github/workflows/ci.yml`, modelled on the
-[Vox Pupuli](https://github.com/voxpupuli/gha-puppet) workflows).
+`master` through the [Vox Pupuli](https://github.com/voxpupuli/gha-puppet)
+reusable workflow: static validations, RuboCop, a REFERENCE.md freshness check
+and the unit tests on OpenVox 8 (Ruby 3.2) and 9 (Ruby 4.0)
+(`.github/workflows/ci.yml`).
 
-Pushing a `v<version>` tag publishes the module to the Puppet Forge and
-creates a GitHub release through the Vox Pupuli reusable release workflow
-(`.github/workflows/release.yml`). The repository needs a `release`
-environment and the `PUPPET_FORGE_USERNAME` and `PUPPET_FORGE_API_KEY`
-secrets; bump `metadata.json` to the tagged version first.
+Pushing a `v<version>` tag runs the same CI on the tagged commit, checks that
+the tag matches the version of `metadata.json`, then publishes the module to
+the Puppet Forge and creates a GitHub release through the Vox Pupuli reusable
+release workflow (`.github/workflows/release.yml`). The repository needs a
+`release` environment and the `PUPPET_FORGE_USERNAME` and
+`PUPPET_FORGE_API_KEY` secrets; bump `metadata.json` to the tagged version
+first.
 
 This module is licensed under the GPL-3.0-only license, see
 [LICENSE](LICENSE). It descends from the work of David Schmitt, the immerda

@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+**Breaking changes**
+
+* OpenVox 8 or 9 is required. Puppet 7, end of life, is no longer supported:
+  the Vox Pupuli test tooling needs Ruby 3.2 while OpenVox 7 runs on Ruby 2.7.
+  Perforce Puppet 8 is no longer tested.
+
+**Features**
+
+* OpenVox 9 support. puppetlabs/stdlib and puppetlabs/concat 10.x are
+  accepted, 10.1.0 being the first releases declaring OpenVox 9.
+* RHEL 10 is declared in metadata.json, now that it has fact sets to unit
+  test it.
+
+**Other**
+
+* The tooling moves from the PDK to the one of Vox Pupuli (voxpupuli-test,
+  voxpupuli-release), which runs on OpenVox: the PDK cannot install
+  OpenVox 9. GitHub Actions run the Vox Pupuli reusable workflow with the
+  unit tests on OpenVox 8 (Ruby 3.2) and 9 (Ruby 4.0).
+* The release workflow runs the CI on the tagged commit and checks that the
+  tag matches the version of metadata.json before publishing.
+
 ## Release 1.0.2
 
 **Bugfixes**

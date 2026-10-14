@@ -8,9 +8,6 @@ describe 'nagios::type::host' do
       let(:facts) { os_facts }
       let(:title) { 'web' }
 
-      fqdn = os_facts[:networking]['fqdn']
-      cfg_dir = (os_facts[:os]['family'] == 'Debian') ? '/etc/nagios4' : '/etc/nagios'
-
       it { is_expected.to compile.with_all_deps }
       it { is_expected.not_to contain_concat__fragment("nagios_host_web_#{fqdn}") }
 
@@ -28,7 +25,7 @@ describe 'nagios::type::host' do
             host_name: 'web.example.org',
             address: '10.0.0.1',
             host_alias: 'Web',
-            hostgroups: ['http-servers', 'all'],
+            hostgroups: %w[http-servers all],
             parents: ['router01'],
             contact_groups: [],
             notifications_enabled: false,
@@ -39,13 +36,13 @@ describe 'nagios::type::host' do
             notification_interval: '30',
             notification_options: 'd,u,r',
             register: 1,
-            server_names: ['mon1', 'mon2'],
+            server_names: %w[mon1 mon2],
           }
         end
 
         it 'renders them in Nagios syntax' do
           expect(exported_resources).to contain_concat__fragment("nagios_host_web_#{fqdn}")
-            .with_tag(['nagios_hosts_mon1', 'nagios_hosts_mon2'])
+            .with_tag(%w[nagios_hosts_mon1 nagios_hosts_mon2])
             .with_content(<<~NAGIOS)
               define host {
                 use generic-host

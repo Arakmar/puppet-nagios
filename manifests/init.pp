@@ -52,9 +52,9 @@
 # @param command_check_interval
 #   How often external commands are checked, in seconds, `-1` for as often
 #   as possible, or a value suffixed with `s`.
-# @param admin_email Value of the $ADMINEMAIL$ macro.
-# @param admin_pager Value of the $ADMINPAGER$ macro.
-# @param enable_environment_macros Whether macros are exported as environment variables.
+# @param admin_email Value of the $ADMINEMAIL$ macro, `root@localhost` on Debian (module data).
+# @param admin_pager Value of the $ADMINPAGER$ macro, `pageroot@localhost` on Debian (module data).
+# @param enable_environment_macros Whether macros are exported as environment variables, not on Debian (module data).
 # @param main_config_file Path of nagios.cfg as seen by the CGIs.
 # @param physical_html_path Filesystem path of the web interface files.
 # @param url_html_path URL path of the web interface.
@@ -124,28 +124,28 @@ class nagios (
     group   => 'root',
     mode    => '0644',
     content => epp('nagios/nagios.cfg.epp', {
-        'log_file'                  => $log_file,
-        'subcfg_dirs'               => $subcfg_dirs,
-        'object_cache_file'         => $object_cache_file,
-        'precached_object_file'     => $precached_object_file,
-        'resource_file'             => $resource_file,
-        'status_file'               => $status_file,
-        'user'                      => $user,
-        'group'                     => $group,
-        'check_external_commands'   => $allow_external_cmd,
-        'command_check_interval'    => $command_check_interval,
-        'command_file'              => $command_file,
-        'lock_file'                 => $lock_file,
-        'temp_file'                 => $temp_file,
-        'temp_path'                 => $temp_path,
-        'log_archive_path'          => $log_archive_path,
-        'check_result_path'         => $check_result_path,
-        'soft_state_dependencies'   => $soft_state_dependencies,
-        'state_retention_file'      => $state_retention_file,
-        'admin_email'               => $admin_email,
-        'admin_pager'               => $admin_pager,
-        'enable_environment_macros' => $enable_environment_macros,
-        'debug_file'                => $debug_file,
+      'log_file'                  => $log_file,
+      'subcfg_dirs'               => $subcfg_dirs,
+      'object_cache_file'         => $object_cache_file,
+      'precached_object_file'     => $precached_object_file,
+      'resource_file'             => $resource_file,
+      'status_file'               => $status_file,
+      'user'                      => $user,
+      'group'                     => $group,
+      'check_external_commands'   => $allow_external_cmd,
+      'command_check_interval'    => $command_check_interval,
+      'command_file'              => $command_file,
+      'lock_file'                 => $lock_file,
+      'temp_file'                 => $temp_file,
+      'temp_path'                 => $temp_path,
+      'log_archive_path'          => $log_archive_path,
+      'check_result_path'         => $check_result_path,
+      'soft_state_dependencies'   => $soft_state_dependencies,
+      'state_retention_file'      => $state_retention_file,
+      'admin_email'               => $admin_email,
+      'admin_pager'               => $admin_pager,
+      'enable_environment_macros' => $enable_environment_macros,
+      'debug_file'                => $debug_file,
     }),
     require => Package[$package],
     notify  => Service[$service],
@@ -158,14 +158,14 @@ class nagios (
     group   => 'root',
     mode    => '0644',
     content => epp('nagios/cgi.cfg.epp', {
-        'main_config_file'   => $main_config_file,
-        'physical_html_path' => $physical_html_path,
-        'url_html_path'      => $url_html_path,
-        'use_authentication' => $use_authentication,
-        'default_user_name'  => $default_user_name,
-        'authorized_users'   => join(Array($cgi_authorized_users, true), ','),
-        'ack_no_sticky'      => $ack_no_sticky,
-        'ack_no_send'        => $ack_no_send,
+      'main_config_file'   => $main_config_file,
+      'physical_html_path' => $physical_html_path,
+      'url_html_path'      => $url_html_path,
+      'use_authentication' => $use_authentication,
+      'default_user_name'  => $default_user_name,
+      'authorized_users'   => join(Array($cgi_authorized_users, true), ','),
+      'ack_no_sticky'      => $ack_no_sticky,
+      'ack_no_send'        => $ack_no_send,
     }),
     require => Package[$package],
   }

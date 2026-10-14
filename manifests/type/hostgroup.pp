@@ -17,10 +17,10 @@ define nagios::type::hostgroup (
     order   => '30',
     tag     => 'nagios_hostgroup',
     content => nagios::object('hostgroup', {
-        'hostgroup_name' => $hostgroup_name,
-        'alias'          => $hostgroup_alias,
-        'use'            => $use,
-        'members'        => $members,
+      'hostgroup_name' => $hostgroup_name,
+      'alias'          => $hostgroup_alias,
+      'use'            => $use,
+      'members'        => $members,
     }),
   }
 }

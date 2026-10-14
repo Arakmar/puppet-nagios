@@ -8,8 +8,6 @@ describe 'nagios::service::http' do
       let(:facts) { os_facts }
       let(:title) { 'www' }
 
-      fqdn = os_facts[:networking]['fqdn']
-
       context 'with defaults (http only)' do
         it { is_expected.to compile.with_all_deps }
 
@@ -37,6 +35,7 @@ describe 'nagios::service::http' do
         end
 
         it { is_expected.to contain_nagios__type__service('https_www_Welcome').with_check_command("check_https_port_url_content!www.example.org!443!/login!'Welcome'!ok") }
+
         it 'checks the certificate' do
           is_expected.to contain_nagios__type__service('https_www_Welcome_cert')
             .with_check_command('check_https_port_cert!www.example.org!443!/login')
@@ -52,6 +51,7 @@ describe 'nagios::service::http' do
         it { is_expected.not_to contain_nagios__type__service('http_www_') }
         it { is_expected.to contain_nagios__type__service('https_www_').with_check_command("check_https_port_url_content!www!8443!/!''!ok") }
         it { is_expected.to contain_nagios__type__service('https_www__cert') }
+
         it 'checks the redirect' do
           is_expected.to contain_nagios__type__service('http_www_redirect')
             .with_check_command('check_http_port_code!www!8443!/!301')

@@ -6,7 +6,7 @@
 # @return [String] The `define <type> { ... }` block.
 function nagios::object(String[1] $type, Hash[String[1], Any] $directives) >> String {
   epp('nagios/object.epp', {
-      'type'       => $type,
-      'directives' => nagios::directives($directives),
+    'type'       => $type,
+    'directives' => nagios::directives($directives),
   })
 }

@@ -9,15 +9,12 @@ describe 'nagios::collect_type' do
       let(:pre_condition) { 'include nagios' }
       let(:title) { 'custom' }
 
-      cfg_dir = (os_facts[:os]['family'] == 'Debian') ? '/etc/nagios4' : '/etc/nagios'
-      service = (os_facts[:os]['family'] == 'Debian') ? 'nagios4' : 'nagios'
-
       it { is_expected.to compile.with_all_deps }
 
       it 'assembles the file under conf.d by default' do
         is_expected.to contain_concat("#{cfg_dir}/conf.d/nagios_custom.cfg")
           .with_owner('root').with_mode('0644')
-          .that_notifies("Service[#{service}]")
+          .that_notifies("Service[#{nagios_package}]")
       end
 
       it 'writes a header fragment' do

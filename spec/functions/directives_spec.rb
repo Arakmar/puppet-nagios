@@ -7,12 +7,12 @@ describe 'nagios::directives' do
 
   it 'drops undef values and empty arrays, joins arrays, maps booleans and stringifies the rest' do
     is_expected.to run
-      .with_params({ 'a' => nil, 'b' => [], 'c' => ['x', 'y'], 'd' => true, 'e' => false, 'f' => 0, 'g' => 'str', 'h' => 2.5 })
+      .with_params({ 'a' => nil, 'b' => [], 'c' => %w[x y], 'd' => true, 'e' => false, 'f' => 0, 'g' => 'str', 'h' => 2.5 })
       .and_return({ 'c' => 'x,y', 'd' => '1', 'e' => '0', 'f' => '0', 'g' => 'str', 'h' => '2.5' })
   end
 
   it 'preserves insertion order' do
-    expect(call_function('nagios::directives', { 'z' => 1, 'a' => 2 }).keys).to eq(['z', 'a'])
+    expect(call_function('nagios::directives', { 'z' => 1, 'a' => 2 }).keys).to eq(%w[z a])
   end
 
   it { is_expected.to run.with_params({}).and_return({}) }

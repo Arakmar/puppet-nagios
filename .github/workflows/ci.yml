@@ -1,8 +1,11 @@
 ---
-# Modelled on the Vox Pupuli reusable workflow
-# (https://github.com/voxpupuli/gha-puppet, basic.yml). It is inlined rather
-# than reused because gha-puppet installs the bundle without the development
-# group, which is where the PDK Gemfile keeps every test dependency.
+# The static validations and the unit tests come from the Vox Pupuli
+# reusable workflow (https://github.com/voxpupuli/gha-puppet, basic.yml):
+# rake validate (syntax, metadata, REFERENCE.md freshness), lint and check,
+# RuboCop, then the unit tests on every OpenVox major version of
+# metadata.json, each with the Ruby its packages ship.
+#
+# release.yml calls it before publishing a tag.
 
 name: CI
 
@@ -12,6 +15,7 @@ on:
   push:
     branches:
       - master
+  workflow_call: {}
   workflow_dispatch: {}
 
 concurrency:
@@ -21,64 +25,16 @@ concurrency:
 permissions:
   contents: read
 
-env:
-  BUNDLE_WITHOUT: system_tests:release_prep
-
 jobs:
-  setup_matrix:
-    name: Static validations
-    runs-on: ubuntu-24.04
-    timeout-minutes: 30
-    outputs:
-      puppet_unit_test_matrix: ${{ steps.get-outputs.outputs.puppet_unit_test_matrix }}
-    env:
-      PUPPET_GEM_VERSION: '>= 7.0'
-    steps:
-      - uses: actions/checkout@v7
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
-          bundler-cache: true
-      - name: Display Ruby environment
-        run: bundle env
-      - name: Run static validations
-        run: bundle exec rake validate lint check
-      - name: Run RuboCop
-        run: bundle exec rake rubocop
-      - name: Check that REFERENCE.md is up to date
-        run: bundle exec rake strings:validate:reference
-      - name: Setup test matrix
-        id: get-outputs
-        run: bundle exec metadata2gha
-
-  unit:
-    name: Puppet ${{ matrix.puppet }} (Ruby ${{ matrix.ruby }})
-    needs: setup_matrix
-    runs-on: ubuntu-24.04
-    timeout-minutes: 45
-    strategy:
-      fail-fast: false
-      matrix:
-        include: ${{ fromJson(needs.setup_matrix.outputs.puppet_unit_test_matrix) }}
-    env:
-      PUPPET_GEM_VERSION: '~> ${{ matrix.puppet }}.0'
-    steps:
-      - uses: actions/checkout@v7
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-          bundler-cache: true
-      - name: Display Ruby environment
-        run: bundle env
-      - name: Run unit tests
-        run: bundle exec rake parallel_spec
+  puppet:
+    name: Puppet
+    uses: voxpupuli/gha-puppet/.github/workflows/basic.yml@v4
 
   tests:
     name: Test suite
     if: always()
-    needs: unit
+    needs:
+      - puppet
     runs-on: ubuntu-24.04
     steps:
       - name: Decide whether the needed jobs succeeded or failed
